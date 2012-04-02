@@ -1,6 +1,5 @@
 siamo rimasti sul carousel..... se premi refrash senza fare make non funge
 
-
  da chiedere a fab
 
 - bisognorebbe chiedere a fab se ci fa un event listener per il change rotation .... fatto questo bisognerebbe che al change rotation se c'è uno srollere dinamico gli va invocato refresh scrollable
