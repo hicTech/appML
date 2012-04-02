@@ -10,8 +10,6 @@ siamo rimasti sul carousel..... se premi refrash senza fare make non funge
 
 
 
-
-
 MARCO:
 
 	todo:
