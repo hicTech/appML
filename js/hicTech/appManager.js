@@ -4134,7 +4134,8 @@
         });
         jQT.init();
         
-        appML.start();
+        
+        setTimeout(function(){appML.start()},300)
        
     }
     
