@@ -58,9 +58,7 @@
 
 (function($) {
 
-
 	
-
 
 
 
@@ -4134,8 +4132,9 @@
         });
         jQT.init();
         
-        
-        setTimeout(function(){appML.start()},300)
+       setTimeout(function(){
+       	 appML.start();
+       },300);
        
     }
     
