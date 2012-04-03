@@ -39,21 +39,27 @@
 
 function appMLReady() {
 	
-	
-	
-	$(".appML_page").each(function(){
-		var page_id = $(this).attr("id");
-		if($(this).is(":visible"))	// calcolo lo srollable della prima pagina visualizzat al lancio dell'app.
-			automaticScroll(page_id);
-		appML.onPage(page_id, function () {
-			automaticScroll(page_id);
-		});
-	});
+	$("li").click(function(){
+		appML.appManagerShowLoading();
+		var id = $(this).attr("data-page-link")
+		
+		setTimeout(function(){
+			automaticScroll(id);
+		},250);	
+	})
+
 	
 	function automaticScroll(page_id){
-			var $dynamic_scroll_container = $("#"+page_id).find(".dynamic_scroll_container");
-			appML.scrollable($dynamic_scroll_container , "null", appML.getPageWidth(), appML.getPageHeight());
+		var $dynamic_scroll_container = $("#"+page_id).find(".dynamic_scroll_container");
+		appML.scrollable($dynamic_scroll_container ,"null", appML.getPageWidth(), appML.getPageHeight());
+		setTimeout(function(){
+			appML.goTo("#"+page_id);
+		},150);
+		setTimeout(function(){
+			appML.appManagerHideLoading();
+		},1000);
 	}
+	
 	
 	
 	//appML.onPage("page2", function () {

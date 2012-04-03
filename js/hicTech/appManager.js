@@ -374,7 +374,6 @@
         function goTo(toPage, animation, backwards) {
             
             
-            
             var fromPage = hist[0].page;
                 
             if (typeof(toPage) === 'string') {
@@ -775,6 +774,10 @@
 				location.href=href;
 				return false;
 			}
+			if(href.indexOf("@") != -1){
+				appML.goTo("#home_pagina_2","slide")
+				return false;
+			}
             if (href != '#')
             {
             appML.appManagerShowLoading();
@@ -783,7 +786,7 @@
                     data: settings.data,
                     type: settings.method,
                     success: function (data, textStatus) {
-                appML.appManagerHideLoading();
+                		appML.appManagerHideLoading();
                         var firstPage = insertPages(data, settings.animation);
                         if (firstPage)
                         {
