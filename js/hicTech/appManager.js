@@ -3309,7 +3309,7 @@
             appml.find(class_prefix+"scrollable").each(replaceScrollable);
             appml.find(class_prefix+"carousel").each(replaceCarousel);
             
-            var loading_html=getAppMLDiv(prefix+"loading",null,null,'<div class="overlay_loading"><div style="width:308px; margin:0px auto"><img src="logo_appML.png"></div><div style="width:32px; margin:0px auto" class="spinning_loading_container"><div class="spinning_loading"></div></div></div>');
+            var loading_html=getAppMLDiv(prefix+"loading",null,null,'<div class="overlay_loading"><div style="width:308px; margin:13px auto"><img src="logo_appML.png"></div><div id="spin_loading"></div></div>');
             var top_html=getAppMLDiv(prefix+"top");
             var left_html=getAppMLDiv(prefix+"left");
             var right_html=getAppMLDiv(prefix+"right");
@@ -3320,8 +3320,35 @@
                 
             var body_html=$("<div class='appml_root_div'></div>");
             body_html.append($("<div id='appML_size_tester' style='position:absolute; z-index:-1; opacity:0;filter:alpha(opacity=0);'></div>"));
-            if(loading_html!=null)
-               body_html.append(loading_html);
+            if(loading_html!=null){
+              body_html.append(loading_html);
+			  var spin_opts = {
+					  lines: 11, // The number of lines to draw
+					  length: 1, // The length of each line
+					  width: 3, // The line thickness
+					  radius: 7, // The radius of the inner circle
+					  rotate: 0, // The rotation offset
+					  color: '#fff', // #rgb or #rrggbb
+					  speed: 1, // Rounds per second
+					  trail: 38, // Afterglow percentage
+					  shadow: false, // Whether to render a shadow
+					  hwaccel: false, // Whether to use hardware acceleration
+					  className: 'spinner', // The CSS class to assign to the spinner
+					  zIndex: 2e9, // The z-index (defaults to 2000000000)
+					  top: 'auto', // Top position relative to parent in px
+					  left: 'auto' // Left position relative to parent in px
+				};
+              
+              
+           		setTimeout(function(){
+            	 var spin_target = $(".overlay_loading").spin(spin_opts);
+            	},600);
+            	
+            	
+            	
+            }
+            
+            
     
             var body_div=$("<div id='appML_body_div' style='position:absolute; z-index:1;'></div>");
 
@@ -3533,6 +3560,7 @@
         };
         
         this.start = function(){
+  
             $(".scrollable").livequery(printScrollable);
             
             //refreshDimensions("appML.startEnd();");
@@ -4137,7 +4165,7 @@
         
        setTimeout(function(){
        	 appML.start();
-       },300);
+       },3000);
        
     }
     
