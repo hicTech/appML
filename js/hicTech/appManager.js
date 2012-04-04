@@ -3322,26 +3322,10 @@
             body_html.append($("<div id='appML_size_tester' style='position:absolute; z-index:-1; opacity:0;filter:alpha(opacity=0);'></div>"));
             if(loading_html!=null){
               body_html.append(loading_html);
-			  var spin_opts = {
-					  lines: 11, // The number of lines to draw
-					  length: 1, // The length of each line
-					  width: 3, // The line thickness
-					  radius: 7, // The radius of the inner circle
-					  rotate: 0, // The rotation offset
-					  color: '#fff', // #rgb or #rrggbb
-					  speed: 1, // Rounds per second
-					  trail: 38, // Afterglow percentage
-					  shadow: false, // Whether to render a shadow
-					  hwaccel: false, // Whether to use hardware acceleration
-					  className: 'spinner', // The CSS class to assign to the spinner
-					  zIndex: 2e9, // The z-index (defaults to 2000000000)
-					  top: 'auto', // Top position relative to parent in px
-					  left: 'auto' // Left position relative to parent in px
-				};
               
               
            		setTimeout(function(){
-            	 var spin_target = $(".overlay_loading").spin(spin_opts);
+            	 var spin_target = $(".overlay_loading").spin(appMLconf.spinning_loading_options);
             	},600);
             	
             	

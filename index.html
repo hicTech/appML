@@ -6,69 +6,40 @@
 <title>appML 1.0</title>
 
 <link href="packaging/favicon.ico" rel="shortcut icon">
-        <meta content="yes" name="apple-mobile-web-app-capable">
+<meta content="yes" name="apple-mobile-web-app-capable">
 
-        <!-- iPhone ICON -->
-        <link href="packaging/apple-touch-icon-57x57.png"
-              sizes="57x57"
-              rel="apple-touch-icon">
-        <!-- iPad ICON-->
-        <link href="packaging/apple-touch-icon-72x72.png"
-              sizes="72x72"
-              rel="apple-touch-icon">
-        <!-- iPhone (Retina) ICON-->
-        <link href="packaging/apple-touch-icon-114x114.png"
-              sizes="114x114"
-              rel="apple-touch-icon">
-        <!-- iPad (Retina) ICON-->
-        <link href="packaging/apple-touch-icon-144x144.png"
-              sizes="144x144"
-              rel="apple-touch-icon">
+<!-- iPhone ICON -->
+<link href="packaging/apple-touch-icon-57x57.png" sizes="57x57" rel="apple-touch-icon">
+<!-- iPad ICON-->
+<link href="packaging/apple-touch-icon-72x72.png" sizes="72x72" rel="apple-touch-icon">
+<!-- iPhone (Retina) ICON-->
+<link href="packaging/apple-touch-icon-114x114.png" sizes="114x114" rel="apple-touch-icon">
+<!-- iPad (Retina) ICON-->
+<link href="packaging/apple-touch-icon-144x144.png" sizes="144x144" rel="apple-touch-icon">
 
-        <!-- iPhone SPLASHSCREEN-->
-        <link href="packaging/apple-touch-startup-image-320x460.png"
-              media="(device-width: 320px)"
-              rel="apple-touch-startup-image">
-        <!-- iPhone (Retina) SPLASHSCREEN-->
-        <link href="packaging/apple-touch-startup-image-640x920.png"
-              media="(device-width: 320px)
-                 and (-webkit-device-pixel-ratio: 2)"
-              rel="apple-touch-startup-image">
-        <!-- iPad (portrait) SPLASHSCREEN-->
-        <link href="packaging/apple-touch-startup-image-768x1004.png"
-              media="(device-width: 768px)
-                 and (orientation: portrait)"
-              rel="apple-touch-startup-image">
-        <!-- iPad (landscape) SPLASHSCREEN-->
-        <link href="packaging/apple-touch-startup-image-748x1024.png"
-              media="(device-width: 768px)
-                 and (orientation: landscape)"
-              rel="apple-touch-startup-image">
-        <!-- iPad (Retina, portrait) SPLASHSCREEN-->
-        <link href="packaging/apple-touch-startup-image-1536x2008.png"
-              media="(device-width: 1536px)
-                 and (orientation: portrait)
-                 and (-webkit-device-pixel-ratio: 2)"
-              rel="apple-touch-startup-image">
-        <!-- iPad (Retina, landscape) SPLASHSCREEN-->
-        <link href="packaging/apple-touch-startup-image-1496x2048.png"
-              media="(device-width: 1536px)
-                 and (orientation: landscape)
-                 and (-webkit-device-pixel-ratio: 2)"
-              rel="apple-touch-startup-image">
-
+<!-- iPhone SPLASHSCREEN-->
+<link href="packaging/apple-touch-startup-image-320x460.png" media="(device-width: 320px)" rel="apple-touch-startup-image">
+<!-- iPhone (Retina) SPLASHSCREEN-->
+<link href="packaging/apple-touch-startup-image-640x920.png" media="(device-width: 320px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image">
+<!-- iPad (portrait) SPLASHSCREEN-->
+<link href="packaging/apple-touch-startup-image-768x1004.png" media="(device-width: 768px) and (orientation: portrait)" rel="apple-touch-startup-image">
+<!-- iPad (landscape) SPLASHSCREEN-->
+<link href="packaging/apple-touch-startup-image-748x1024.png" media="(device-width: 768px) and (orientation: landscape)" rel="apple-touch-startup-image">
+<!-- iPad (Retina, portrait) SPLASHSCREEN-->
+<link href="packaging/apple-touch-startup-image-1536x2008.png" media="(device-width: 1536px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image">
+<!-- iPad (Retina, landscape) SPLASHSCREEN-->
+<link href="packaging/apple-touch-startup-image-1496x2048.png" media="(device-width: 1536px)  and (orientation: landscape) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image">
 
 
 <link rel="stylesheet" href="css/hicTech/appML.css"/>
 <style type="text/css" media="all">@import "themes/ht/theme.css";</style>
 
-
 <script type="text/javascript" charset="utf-8" src="js/jquery/jquery-1.7.1-appMLversion.js"></script>
 <script type="text/javascript" charset="utf-8" src="js/plugins/livequery/jquery.livequery-1.0.3.js"></script>
 
-
 <script type="text/javascript" charset="utf-8" src="js/hicTech/dati.js"></script>
 <script type="text/javascript" charset="utf-8" src="js/hicTech/mio.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/hicTech/appMLconf.js"></script>
 
 <script type="text/javascript" charset="utf-8" src="js/plugins/add2home/add2home.js"></script>
 <script type="text/javascript" charset="utf-8" src="js/plugins/_.js"></script>
@@ -87,18 +58,7 @@
 <script>
 
 function appMLReady() {
-	
-	/*
-	if(appML.getEnviroment().isIPad){
-		$("head").append('<link rel="apple-touch-startup-image" href="packaging/iPad_splashScreen_landscape.png"  media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)" />')
-		$("head").append('<link rel="apple-touch-startup-image" href="packaging/iPad_splashScreen.png"  media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)" />')	
-	}
-	else{
-		$("head").append('<link rel="apple-touch-startup-image" href="packaging/iPhone_spalshScreen.png"  />')	
-	}
-	*/
-	
-	
+
 	
 	$("li").click(function(){
 		appML.appManagerShowLoading();
