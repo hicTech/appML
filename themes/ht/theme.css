@@ -1,9 +1,109 @@
 /*
 jqt style
 */
-.appML_panel > *, body {
-    background: rgb(0,0,0) url(img/pinstripes.png);
+
+
+/* iPhone (portrait and landscape) ----------- */
+@media only screen
+and (min-device-width : 320px)
+and (max-device-width : 480px) {
+/* Styles */
 }
+
+/* iPhone (landscape) ----------- */
+@media only screen
+and (min-width : 321px) {
+/* Styles */
+}
+
+/* iPhone (portrait) ----------- */
+@media only screen
+and (max-width : 320px) {
+	.appML_panel > *, body {
+	    background: rgb(0,0,0) url(../../packaging/iPhone/apple-touch-startup-image-320x460.png);
+	}
+	.overlay_loading{
+		position: fixed;
+		width: 100%;
+		height: 100%;
+		background: rgb(0,0,0) url(../../packaging/iPhone/apple-touch-startup-image-320x460.png);
+	}
+}
+
+/* iPhone 4 ----------- */
+@media
+only screen and (-webkit-min-device-pixel-ratio : 1.5),
+only screen and (min-device-pixel-ratio : 1.5) {
+	.appML_panel > *, body {
+	    background: rgb(0,0,0) url(../../packaging/iPhone-retina/apple-touch-startup-image-320x460.png);
+	}
+	.overlay_loading{
+		position: fixed;
+		width: 100%;
+		height: 100%;
+		background: rgb(0,0,0) url(../../packaging/iPhone-retina/apple-touch-startup-image-320x460.png);
+	}
+}
+
+
+/* iPads (landscape) ----------- */
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) {
+	.appML_panel > *, body {
+	    background: rgb(0,0,0) url(../../packaging/iPad-landscape/apple-touch-startup-image-748x1024_flipped.png);
+	}
+	.overlay_loading{
+		position: fixed;
+		width: 100%;
+		height: 100%;
+		background: rgb(0,0,0) url(../../packaging/iPad-landscape/apple-touch-startup-image-748x1024_flipped.png);
+	}
+}
+
+/* iPads (portrait) ----------- */
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) {
+	.appML_panel > *, body {
+	    background: rgb(0,0,0) url(../../packaging/iPad-portrait/apple-touch-startup-image-768x1004.png);
+	}
+	.overlay_loading{
+		position: fixed;
+		width: 100%;
+		height: 100%;
+		 background: rgb(0,0,0) url(../../packaging/iPad-portrait/apple-touch-startup-image-768x1004.png);
+	}
+}
+
+
+
+/* iPads retina (landscape) ----------- */
+@media only screen and (min-device-width : 1536px) and (max-device-width : 2048px) and (orientation : landscape) {
+	.appML_panel > *, body {
+	    background: rgb(0,0,0) url(../../packaging/iPad-retina-landscape/apple-touch-startup-image-1496x2048.png);
+	}
+	.overlay_loading{
+		position: fixed;
+		width: 100%;
+		height: 100%;
+		 background: rgb(0,0,0) url(../../packaging/iPad-retina-landscape/apple-touch-startup-image-1496x2048.png);
+	}
+}
+
+/* iPads retina (portrait) ----------- */
+@media only screen and (min-device-width : 1536px) and (max-device-width : 2048px) and (orientation : portrait) {
+	.appML_panel > *, body {
+	    background: rgb(0,0,0) url(../../packaging/iPad-retina-portrait/apple-touch-startup-image-1536x2008.png);
+	}
+	.overlay_loading{
+		position: fixed;
+		width: 100%;
+		height: 100%;
+		 background: rgb(0,0,0) url(../../packaging/iPad-retina-portrait/apple-touch-startup-image-1536x2008.png);
+	}
+}
+
+.bodyApp{
+	 background: rgb(0,0,0) url(img/pinstripes.png);
+}
+
 
 h1, h2 {
     font: bold 18px Helvetica;
@@ -18,9 +118,6 @@ h1, h2 {
 	border:none
 }
 
-.appML_panel > *, body {
-    background: rgb(0,0,0) url(img/pinstripes.png);
-}
 
 h1, h2 {
     font: bold 18px Helvetica;

@@ -17,5 +17,5 @@ var appMLconf = {
 	},
 	data_json_path:'http://www.hictech.com/hostatiDaHicTech/appMLproxy/deckmatisData.js',
 	loading_timeout : 15000, // milliseconds after force overlay hidding
-	initial_loading_fake_delay:1800
+	initial_loading_fake_delay:2200
 }

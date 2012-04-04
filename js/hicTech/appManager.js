@@ -180,16 +180,11 @@
             
             // Preload images
             if (jQTSettings.preloadImages) {
-                for (var i = jQTSettings.preloadImages.length - 1; i >= 0; i--){
-                    (new Image()).src = jQTSettings.preloadImages[i];
-                };
+                //for (var i = jQTSettings.preloadImages.length - 1; i >= 0; i--){
+                  //  (new Image()).src = jQTSettings.preloadImages[i];
+                //};
             }
             
-             // Set icon
-            if (jQTSettings.icon) {
-                var precomposed = (jQTSettings.addGlossToIcon) ? '' : '-precomposed';
-                hairextensions += '<link rel="apple-touch-icon' + precomposed + '" href="' + jQTSettings.icon + '" />';
-            }
 
             // Set viewport
             if (jQTSettings.fixedViewport) {
@@ -199,7 +194,7 @@
             if (jQTSettings.fullScreen) {
                 hairextensions += '<meta name="apple-mobile-web-app-capable" content="yes" />';
                 if (jQTSettings.statusBar) {
-                    hairextensions += '<meta name="apple-mobile-web-app-status-bar-style" content="' + jQTSettings.statusBar + '" />';
+                    //hairextensions += '<meta name="apple-mobile-web-app-status-bar-style" content="' + jQTSettings.statusBar + '" />';
                 }
             }
             if (hairextensions) $head.append(hairextensions);
@@ -3326,7 +3321,7 @@
             appml.find(class_prefix+"scrollable").each(replaceScrollable);
             appml.find(class_prefix+"carousel").each(replaceCarousel);
             
-            var loading_html=getAppMLDiv(prefix+"loading",null,null,'<div class="overlay_loading"><div style="width:308px; margin:13px auto"><img src="logo_appML.png"></div><div id="spin_loading"></div></div>');
+            var loading_html=getAppMLDiv(prefix+"loading",null,null,'<div class="overlay_loading"><div id="spin_loading"></div></div>');
             
             var top_html=getAppMLDiv(prefix+"top");
             var left_html=getAppMLDiv(prefix+"left");
@@ -3460,10 +3455,15 @@
         });
         jQT.init();
         
+       
+       $(".appML_panel > *, body").addClass("bodyApp")
+        
         setTimeout(function(){
         	appML.start();
-        },appMLconf.initial_loading_fake_delay)
+        	},appMLconf.initial_loading_fake_delay)
 		}
+		
+		
 		
         // init functions
         
