@@ -2933,9 +2933,9 @@
 		function showLoading(){
         	var overlay=$('#overlay');
         	overlay.addClass('overlay_on');
-        	overlay.find(".spinning_loading").addClass("rotate");
-        	st=setTimeout(function(){
-        		clearInterval(st);
+        	overlay.spin(appMLconf.spinning_loading_options);
+        	setTimeout(function(){
+
         		if($('#overlay').is(".overlay_on")){
         			$('#overlay').removeClass('overlay_on');
         			appML.appManagerShowDialog({
@@ -2945,15 +2945,15 @@
 					});
 					return false;
         		}
-        	},31000)
+        	},appMLconf.loading_timeout)
 		}
 
         
         function hideLoading(){
            clearInterval(st);
 	       var overlay=$('#overlay');
+	       overlay.spin(false);
            overlay.removeClass('overlay_on');
-	       overlay.find(".spinning_loading").removeClass("rotate")
         }
         
         function showSearchBar(){
@@ -3283,8 +3283,25 @@
         }
         
         function translateAppML(){
-            
-            var prefix="";
+        
+	        if(!! appMLconf.data_json_path ){
+		        $.ajax({
+					url: appMLconf.data_json_path,
+					dataType:'script',
+					success: function(data) {
+						$("content").html( getSiteMap(appMLjson) );
+						realAppMLtranslation();
+					}
+				});
+	        }
+	        else{
+	        	realAppMLtranslation();
+	        }
+			
+        }
+        
+		function realAppMLtranslation(){
+			var prefix="";
             appml=$("appml");
             if(appml.length==0){
                 appml=$("#appml");
@@ -3310,6 +3327,7 @@
             appml.find(class_prefix+"carousel").each(replaceCarousel);
             
             var loading_html=getAppMLDiv(prefix+"loading",null,null,'<div class="overlay_loading"><div style="width:308px; margin:13px auto"><img src="logo_appML.png"></div><div id="spin_loading"></div></div>');
+            
             var top_html=getAppMLDiv(prefix+"top");
             var left_html=getAppMLDiv(prefix+"left");
             var right_html=getAppMLDiv(prefix+"right");
@@ -3325,8 +3343,8 @@
               
               
            		setTimeout(function(){
-            	 var spin_target = $(".overlay_loading").spin(appMLconf.spinning_loading_options);
-            	},600);
+            	 $(".overlay_loading").spin(appMLconf.spinning_loading_options);
+            	},200);
             	
             	
             	
@@ -3368,9 +3386,85 @@
             appml.remove();
             appml=null;
             $('body').append(body_html);
-        }
-        
+            
+            setLoadingAppML(true);
+            
+            
+            
+            // adds a page listener to manage onPage calls...
+            appML.addPageListener(function(p_id, previous_page){
+	        	var listeners = off_page[previous_page];
+	        	if(listeners!=null && listeners.length>0)
+	        		for(var i=0;i<listeners.length;i++)
+	        			try{
+	        				listeners[i].call(null,previous_page,p_id);
+	        			}catch(err){
+	        				console.log("err: "+err);
+	        			}
+	        	
+	        	listeners = on_page[p_id];
+	        	if(listeners!=null && listeners.length>0)
+	        		for(var i=0;i<listeners.length;i++)
+	        			try{
+	        				listeners[i].call(null,p_id,previous_page);
+	        			}catch(err){
+	        				console.log("err: "+err);
+	        			}
+	        });
+	        
+            
+            $(".expand_width").each(function(){ this.style.width="100%"; });
+            $(".expand_height").each(function(){ this.style.height="100%"; });
 
+            //setPanelsDimensions();
+            
+            initHtmlBody();
+
+            pages_number=$(options.selector).children().length;
+            if(pages_number==1)
+                $("#appML_toolbar").hide();
+            if(settings.start_page>pages_number-1){
+                settings.start_page=pages_number-1;
+            }
+            
+            $(options.selector).children().each(function(index,child){  
+                injectTitlePage($(this).attr("data-title"),$(this).attr("data-loginPanel"),index);
+                var menu_url = ($(this).attr("data-loginPanel")=="true") ? "logout" : "#"+$(this).find(":first-child").attr("id");
+                injectMenuItems($(this).attr("data-title"),$(this).attr("data-icon"),menu_url,index);
+                pages_array.push($(this));
+                if(index!=settings.start_page)
+                    $(this).hide();
+                $(this).css("position","absolute","overflow","hidden");
+                $(this).css("width","100%");
+                $(this).html("<div class='AppManagerPage'>"+$(this).html()+"</div>");
+            });
+            
+            setElementAsSelected(current_page);
+
+            initHtmlElements();
+
+            //setHeight();  
+            if(settings.login) $('#appML_toolbar').hide();
+            
+            initSearchbar();
+            
+            	 
+        var screen_sizes=screen.width+','+screen.height;
+        var home_icon;
+        (location.pathname.indexOf("iPhone")!=-1)? home_icon="packaging/iPhone_icon.png" : home_icon="packaging/iPad_icon.png";
+        jQT = new $.jQTouch({
+            icon: home_icon,
+            addGlossToIcon: false,
+            statusBar: 'black',
+            preloadImages: []
+        });
+        jQT.init();
+        
+        setTimeout(function(){
+        	appML.start();
+        },appMLconf.initial_loading_fake_delay)
+		}
+		
         // init functions
         
         function initHtmlBody(){
@@ -3478,68 +3572,8 @@
         }
         
         this.init = function() {
-            
-            translateAppML();
-            
-            setLoadingAppML(true);
-            
-            // adds a page listener to manage onPage calls...
-            this.addPageListener(function(p_id, previous_page){
-	        	var listeners = off_page[previous_page];
-	        	if(listeners!=null && listeners.length>0)
-	        		for(var i=0;i<listeners.length;i++)
-	        			try{
-	        				listeners[i].call(null,previous_page,p_id);
-	        			}catch(err){
-	        				console.log("err: "+err);
-	        			}
-	        	
-	        	listeners = on_page[p_id];
-	        	if(listeners!=null && listeners.length>0)
-	        		for(var i=0;i<listeners.length;i++)
-	        			try{
-	        				listeners[i].call(null,p_id,previous_page);
-	        			}catch(err){
-	        				console.log("err: "+err);
-	        			}
-	        });
-	        
-            
-            $(".expand_width").each(function(){ this.style.width="100%"; });
-            $(".expand_height").each(function(){ this.style.height="100%"; });
-
-            //setPanelsDimensions();
-            
-            initHtmlBody();
-
-            pages_number=$(options.selector).children().length;
-            if(pages_number==1)
-                $("#appML_toolbar").hide();
-            if(settings.start_page>pages_number-1){
-                settings.start_page=pages_number-1;
-            }
-            
-            $(options.selector).children().each(function(index,child){  
-                injectTitlePage($(this).attr("data-title"),$(this).attr("data-loginPanel"),index);
-                var menu_url = ($(this).attr("data-loginPanel")=="true") ? "logout" : "#"+$(this).find(":first-child").attr("id");
-                injectMenuItems($(this).attr("data-title"),$(this).attr("data-icon"),menu_url,index);
-                pages_array.push($(this));
-                if(index!=settings.start_page)
-                    $(this).hide();
-                $(this).css("position","absolute","overflow","hidden");
-                $(this).css("width","100%");
-                $(this).html("<div class='AppManagerPage'>"+$(this).html()+"</div>");
-            });
-            
-            setElementAsSelected(current_page);
-
-            initHtmlElements();
-
-            //setHeight();  
-            if(settings.login) $('#appML_toolbar').hide();
-            
-            initSearchbar();
         	
+            translateAppML();
             
         };
         
@@ -3569,7 +3603,7 @@
 		}
 		
 		function inizializeLoading(){
-			$("body").append("<div id='overlay' class='overlay'><div style='width:32px; margin:0px auto' class='spinning_loading_container'><div class='spinning_loading'></div></div></div>")
+			$("body").append("<div id='overlay' class='overlay'></div>")
 		}
         
         
@@ -4119,6 +4153,9 @@
     }
     
     function terminateStarting(){
+    	
+    	
+    	
         appML=new $.appManager({ 
             selector:"#appML_content",
             transaction_duration     : 200,
@@ -4134,22 +4171,12 @@
             banner                   : false,
             login                    : false
         });
-        appML.init(); 
         
-        var screen_sizes=screen.width+','+screen.height;
-        var home_icon;
-        (location.pathname.indexOf("iPhone")!=-1)? home_icon="packaging/iPhone_icon.png" : home_icon="packaging/iPad_icon.png";
-        jQT = new $.jQTouch({
-            icon: home_icon,
-            addGlossToIcon: false,
-            statusBar: 'black',
-            preloadImages: []
-        });
-        jQT.init();
+       	appML.init(); 
+
         
-       setTimeout(function(){
-       	 appML.start();
-       },3000);
+       
+
        
     }
     

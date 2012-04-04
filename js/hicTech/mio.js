@@ -1,4 +1,8 @@
-$(document).ready(function(){
+
+	
+	
+	
+	
 	
 	function getSiteMap(obj){
 		//if(! wellFormattedData(obj) )
@@ -101,7 +105,7 @@ $(document).ready(function(){
 		return '<div class="info" style="text-align:justify">'+ obj.text +'</div>';	
 	}
 	
-	
+	/*
 	for(var i=0;i<200;i++){
 		dati.panels[0].pages[1].contents[1].items.push({
 										className:"arrow",
@@ -120,9 +124,6 @@ $(document).ready(function(){
 						]
 				});
 	}	
+	*/
 
 
-	$("content").html( getSiteMap(dati) );
-	
-	
-})
