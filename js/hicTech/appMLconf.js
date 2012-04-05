@@ -1,3 +1,13 @@
+/* url parameters request*/
+var urlParameters = [], hash;
+var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+for(var i = 0; i < hashes.length; i++){
+    hash = hashes[i].split('=');
+    urlParameters.push(hash[0]);
+    urlParameters[hash[0]] = hash[1];
+}
+    
+/* default options */
 var appMLconf = {
 	spinning_loading_options : {
 			  lines: 11, // The number of lines to draw
@@ -15,7 +25,12 @@ var appMLconf = {
 			  top: 'auto', // Top position relative to parent in px
 			  left: 'auto' // Left position relative to parent in px
 	},
-	data_json_path:'http://www.hictech.com/hostatiDaHicTech/appMLproxy/deckmatisData.js',
-	loading_timeout : 15000, // milliseconds after force overlay hidding
-	initial_loading_fake_delay:2200
+	data_json_path:"js/hicTech/data.js",//'http://www.hictech.com/hostatiDaHicTech/appMLproxy/deckmatisData.js',
+	loading_timeout : 25000, // milliseconds after force overlay hidding
+	initial_loading_fake_delay:(!! urlParameters.initial_loading_fake_delay) ? urlParameters.initial_loading_fake_delay : 2200,
+	sidebar:(!! urlParameters.sidebar) ? urlParameters.sidebar : "32%",
+	sidebarScrollable:false,
+	add2HomeTooltip: false,
+	forcedStartingPage: (!! urlParameters.forcedStartingPage) ? urlParameters.forcedStartingPage : null
 }
+

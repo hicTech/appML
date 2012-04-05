@@ -2933,11 +2933,12 @@
 
         		if($('#overlay').is(".overlay_on")){
         			$('#overlay').removeClass('overlay_on');
-        			appML.appManagerShowDialog({
+        			/*appML.appManagerShowDialog({
 						type        : "alert", //confirm, select
 			  			title		: "Attenzione",
 			  			message	    : "Some problems occurred!"
 					});
+					*/
 					return false;
         		}
         	},appMLconf.loading_timeout)
@@ -3117,7 +3118,7 @@
                 (its_class.length>0 ? " "+its_class : "")+(has_class ? " "+outer_div_class+"'" : "'")+
                 (div_width.length>0 ? " data-appml-width='"+div_width+"'" : "")+ (div_height.length>0 ? " data-appml-height='"+div_height+"'" : "")+
                 ((appml_tag=="left" || appml_tag=="right") ? " style='float:"+appml_tag+";'" : "")+"></div>";
-            
+           
             var html=$(html_str);
             if(tag.html().length>0)
                 copyContent(tag,html);
@@ -3147,9 +3148,9 @@
             title = (title!=null) ? " data-appml-title='"+title+"'" : "";
             var attr=getAppmlAttribute($page,"scrollable");
             if(attr=="true")
-            	return "<div  "+id+title+" class='appML_page scrollable' data-appml-width='100%' data-appml-height='100%'>"+$page.html()+"</div>";  //  class='scrollable'
+            	return "<div "+id+title+" class='appML_page scrollable' data-appml-width='100%' data-appml-height='100%'>"+$page.html()+"</div>";  //  class='scrollable'
             else
-            	return "<div  "+id+title+" class='appML_page' data-appml-width='100%' data-appml-height='100%'><div>"+$page.html()+"</div></div>"
+            	return "<div "+id+title+" class='appML_page' data-appml-width='100%' data-appml-height='100%'><div>"+$page.html()+"</div></div>"
         }
 
         function getPanelHtml($panel, standard_tags){
@@ -3284,7 +3285,34 @@
 					url: appMLconf.data_json_path,
 					dataType:'script',
 					success: function(data) {
+						
+						
+						for(var i=0;i<20;i++){
+							appMLjson.panels[0].pages[1].contents[1].items.push({
+															className:"arrow",
+															linked_page_id:"home_pagina_"+i,
+															label:"vai a pag "+i
+													});
+													
+							appMLjson.panels[0].pages.push({
+											id:"home_pagina_"+i,
+											title:"vai a pag"+i,
+											contents:[
+												{
+													type: "paragraph",
+													text: "<b>Ben venuto a pag "+i+"</b><br>I'm wait for you!!!!Some text long, very long... too long!<b>Titolo pag 2</b><br>Some text long,Some text long, very long... too long!<b>Titolo pag 2</b><br>Some text long,Some text long, very long... too long!<b>Titolo pag 2</b><br>Some text long,Some text long, very long... too long!<b>Titolo pag 2</b><br>Some text long,"
+												}
+											]
+									});
+						}
+						
+						
+						
+						
+						
+						
 						$("content").html( getSiteMap(appMLjson) );
+						( !! appMLconf.sidebar && appML.getEnviroment().isIPad) ? $("appml").append("<left width='"+appMLconf.sidebar+"' scrollable='"+appMLconf.sidebarScrollable+"'/>") : $("appml").append("<toolbar/>")
 						realAppMLtranslation();
 					}
 				});
@@ -3456,10 +3484,11 @@
         jQT.init();
         
        
-       $(".appML_panel > *, body").addClass("bodyApp")
+       	$(".appML_panel > *, body").addClass("bodyApp")
         
         setTimeout(function(){
         	appML.start();
+        	
         	},appMLconf.initial_loading_fake_delay)
 		}
 		
@@ -3578,7 +3607,11 @@
         };
         
         this.start = function(){
-  
+  			
+  			if(!!appMLconf.forcedStartingPage)
+				appML.goTo("#"+appMLconf.forcedStartingPage);
+				
+			
             $(".scrollable").livequery(printScrollable);
             
             //refreshDimensions("appML.startEnd();");
@@ -3595,6 +3628,8 @@
         };
         
         function ifYouCanShowAdd2Home(){
+        	if(!appMLconf.add2HomeTooltip)
+        		return false;
 			$("script").each(function(){
 				if($(this).attr("src"))
 					if($(this).attr("src").indexOf("add2home.js")!=-1)
@@ -3645,13 +3680,26 @@
         };
         
         this.screenResize = function(){
-            this.appMLResize();
+            //this.appMLResize();
+            location.href="index.html?initial_loading_fake_delay=20&forcedStartingPage="+this.getCurrentPageId();
         };
         
         this.appMLResize = function(){
         	refreshDimensions(null,true);
             this.adjustToScreen();
         };
+        
+        this.getUrlVars = function(){
+		    var vars = [], hash;
+		    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+		    for(var i = 0; i < hashes.length; i++)
+		    {
+		        hash = hashes[i].split('=');
+		        vars.push(hash[0]);
+		        vars[hash[0]] = hash[1];
+		    }
+		    return vars;
+		}
         
         this.getEnviroment = function(){
         	
@@ -3694,6 +3742,11 @@
         
         this.getCurrentWidth = function(){
         	return this.getEnviroment().windowWidth;
+        }
+        
+         this.getCurrentPageId = function(){
+         	var target = getCurrentPanel();
+            return target.find(".current").attr("id");
         }
         
         this.getCurrentHeight = function(){
@@ -3852,6 +3905,7 @@
 				elem_id=generateId();
 				$(elem).attr("id",elem_id);
 			}
+			
 			if(width)
 				$(elem).attr("data-appml-width",""+width);
 			if(height)

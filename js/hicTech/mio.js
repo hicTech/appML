@@ -10,7 +10,6 @@
 		var html = '<navigation height="44px"></navigation>';
 				for(i in obj.panels)
 					html += getPanel(obj.panels[i]);
-			html += '<toolbar></toolbar>';
 		return html;
 	}
 	
@@ -105,25 +104,6 @@
 		return '<div class="info" style="text-align:justify">'+ obj.text +'</div>';	
 	}
 	
-	/*
-	for(var i=0;i<200;i++){
-		dati.panels[0].pages[1].contents[1].items.push({
-										className:"arrow",
-										linked_page_id:"home_pagina_"+i,
-										label:"vai a pag "+i
-								});
-								
-		dati.panels[0].pages.push({
-						id:"home_pagina_"+i,
-						title:"vai a pag"+i,
-						contents:[
-							{
-								type: "paragraph",
-								text: "<b>Ben venuto a pag "+i+"</b><br>I'm wait for you!!!!Some text long, very long... too long!<b>Titolo pag 2</b><br>Some text long,Some text long, very long... too long!<b>Titolo pag 2</b><br>Some text long,Some text long, very long... too long!<b>Titolo pag 2</b><br>Some text long,Some text long, very long... too long!<b>Titolo pag 2</b><br>Some text long,"
-							}
-						]
-				});
-	}	
-	*/
+	
 
 
