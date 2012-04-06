@@ -1,23 +1,16 @@
-siamo rimasti sul carousel..... se premi refrash senza fare make non funge
-
- da chiedere a fab
-
-- bisognorebbe chiedere a fab se ci fa un event listener per il change rotation .... fatto questo bisognerebbe che al change rotation se c'è uno srollere dinamico gli va invocato refresh scrollable
-- anche onPanel listener
-
-
-
-
+TODO:
+- i carousel debbono essere calcolati solo quando uno di loro e visibile
+- per ora l'oreintationChange è gestito un po a cazzi (refresh il tutto passando come parametro nell'url la pagina corrente
+  al momento della rotazione del device....in futuro andrebbe fatta meglio)
 
 
 MARCO:
 
 	todo:
-		- pare che mettendo foto nei carousel il carousel non funge :\
+
 		- se mettiamo le mappe mettiamo il marker "mia posizione"
-		- il template di renault è molto fico (sfondo, headerbar, e font + piccolo) includiamolo!
 		- esternalizza onOrientationChange che mi pare che non c'è
-		- inibitore di orinetazioni chiedi a fab come catturare l'evento di onOrientationChange
+		- inibitore di orinetazioni
 		- convertitore base64
 		
 			<script type="text/javascript">
@@ -47,35 +40,8 @@ MARCO:
 			
 			</script>
 
-		- al loading in overlay sarebbe bene mettere un setTimeout che dopo x sec. lo spegne tipo:
+		
 
-		var st;
-		function showLoading(){
-        	var overlay=$('#overlay');
-        	overlay.addClass('overlay_on');
-        	overlay.find(".spinning_loading").addClass("rotate");
-        	var st=setTimeout(function(){
-        		 clearInterval(st);
-        		if($('#overlay').is(".overlay_on")){
-        			$('#overlay').removeClass('overlay_on');
-        			appML.appManagerShowDialog({
-						type        : "alert", //confirm, select
-			  			title		: "Attenzione",
-			  			message	    : "Some problems occurred!"
-					});
-					return false;
-        		}
-        	},31000)
-		}
-
-        function hideLoading(){
-           clearInterval(st);
-	       var overlay=$('#overlay');
-           overlay.removeClass('overlay_on');
-	       overlay.find(".spinning_loading").removeClass("rotate")
-        }
-
-		- rimappa hide() e show() che altrimenti ci mettono troppo tempo
 		- le callback dei makeScrollable, refreshCarousel ecc sono funzioni interne ad appML? se si famole globali co
 		- risolvere il problema di mettere HTML nei carousel senza che questi ereditino tutti gli style
 		- si sono rotti i due tasti affiancati in "customized button"
@@ -83,10 +49,12 @@ MARCO:
 		- sembra che gli onclick="" siano fottuti.... sarà il prevent default
 	
 	features:
-		- nascondere adressbar
+		- adressbar
 		- input hook
 		- enviroment
 		- integrazione _.js
+		- l'intera app viene creata dal json
+		
 
 	cambiamenti:
 		- di default le page sono non scrolabili
