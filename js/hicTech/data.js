@@ -1,3 +1,12 @@
+/*
+ * ################# DATI APP ###################
+ * ################# DATI APP ###################
+ * ################# DATI APP ###################
+ * ################# DATI APP ###################
+ * ################# DATI APP ###################
+ */
+
+				
 appMLjson={
 	panels:[
 		{
@@ -9,10 +18,7 @@ appMLjson={
 					id:"home_pagina_1",
 					title:"Titolo pag1",
 					contents:[
-						{
-							type: "paragraph",
-							text: "<b>Titolo pag 2</b><br>Some text "
-						},
+						
 						{
 							type:"menu",
 							className:"arrow_list",
@@ -27,6 +33,51 @@ appMLjson={
 									className:"arrow",
 									linked_page_id:"home_pagina_finta_3",
 									label:"vai a pag 3"
+								}
+							]
+						},
+						{
+							type:"carousel",
+							items_type:"foto",
+							prePath : "immGallery",
+							sizes : {
+								tablet:{
+									width : 580,
+									height : 386
+								},
+								desktop:{
+									width : 700,
+									height : 465
+								},
+								smartphone:{
+									width : 310,
+									height : 206
+								}
+							},
+							items:[
+								{
+									url:"1.jpg",
+									caption : "Relax Chair"
+								},
+								{
+									url:"2.jpg",
+									caption : "Stool"
+								},
+								{
+									url:"3.jpg",
+									caption : "Glass Table"
+								},
+								{
+									url:"4.jpg",
+									caption : "Chair 1"
+								},
+								{
+									url:"5.jpg",
+									caption : "Chair 2"
+								},
+								{
+									url:"6.jpg",
+									caption : "Little table"
 								}
 							]
 						}
@@ -156,3 +207,47 @@ appMLjson={
 		}
 	]
 }
+
+
+
+
+
+
+
+
+
+
+/*
+ * ################# OPTIONS APP ###################
+ * ################# OPTIONS APP ###################
+ * ################# OPTIONS APP ###################
+ * ################# OPTIONS APP ###################
+ * ################# OPTIONS APP ###################
+ */
+var options = { 
+		spinning_loading_options : {
+				  lines: 11, // The number of lines to draw
+				  length: 3, // The length of each line
+				  width: 3, // The line thickness
+				  radius: 7, // The radius of the inner circle
+				  rotate: 0, // The rotation offset
+				  color: '#fff', // #rgb or #rrggbb
+				  speed: 1, // Rounds per second
+				  trail: 38, // Afterglow percentage
+				  shadow: false, // Whether to render a shadow
+				  hwaccel: false, // Whether to use hardware acceleration
+				  className: 'spinner', // The CSS class to assign to the spinner
+				  zIndex: 2e9, // The z-index (defaults to 2000000000)
+				  top: 'auto', // Top position relative to parent in px
+				  left: 'auto' // Left position relative to parent in px
+		},
+		loading_timeout : 25000, // milliseconds after force overlay hidding
+		initial_loading_fake_delay:(!! urlParameters.initial_loading_fake_delay) ? urlParameters.initial_loading_fake_delay : 200,
+		sidebar:(!! urlParameters.sidebar) ? urlParameters.sidebar : "26%",
+		sidebarScrollable:false,
+		add2HomeTooltip: true,
+		forcedStartingPage: (!! urlParameters.forcedStartingPage) ? urlParameters.forcedStartingPage : null
+	};
+
+/* merge defaults and options, without modifying defaults */
+var appMLconf = $.extend({}, appMLconf, options);

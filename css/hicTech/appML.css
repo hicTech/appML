@@ -1091,6 +1091,7 @@ a {
 	position:relative;	/* On older OS versions "position" and "z-index" must be defined, */
 	z-index:1;			/* it seems that recent webkit is less picky and works anyway. */
 	overflow:hidden;
+	margin:0px 0px 6px 0px
 	
 /*	background:#aaa url(wrapper-bg.png);*/
 }
@@ -1123,18 +1124,27 @@ a {
 	border:none;
 	text-align:center;
 	background-color:#fff;
-	font-family:georgia;
-	font-size:18px;
-	line-height:140%;
+	font-family:Helvetica;
+	padding:0px; 
+	border-radius: 5px;	
 }
+
+.carousel_scroller li div {
+	background-color: #222;
+	color: white;
+	font-size: 13px;
+	padding: 1px 0px 1px 0px;
+	font-weight: normal;
+}
+
 
 .carousel_nav {
 	float:left;
 	margin:0px auto;
+	
 }
 
 .carousel_prev, .carousel_next {
-	display:none;
 	float:left;
 	font-weight:bold;
 	font-size:14px;
@@ -1148,43 +1158,44 @@ a {
 }
 
 .carousel_indicator{
-	 margin:-3px 0px 0px 0px;
+	 margin:-2px 0px 0px 0px;
 	 border:none;
 	 overflow:auto;
 	 -webkit-border-radius:0px;
-	 padding:3px 3px 3px 90px;
 }
 
 .carousel_indicator > li {
 	border:none;
-	background-color:none;
+	background:#a1a1a1;
 	display:block; float:left;
 	list-style:none;
-	padding:0; margin:0;
+	padding:0; margin:0px 0px 0px 0px
 	
 }
 
 .carousel_indicator > li {
 	text-indent:-9999em;
-	width:8px; height:8px;
-	-webkit-border-radius:4px;
-	background:#a1a1a1;
+	width:6px; height:6px;
+	-webkit-border-radius:3px;
+	background:#999;
 	overflow:hidden;
 	margin-right:4px;
 }
 
 .carousel_indicator > li.selected {
-	background:#555;
+	background:#444;
 }
 
+
+
 .carousel_indicator > li:last-child {
-	margin:0;
-	-webkit-border-radius:4px;
+	
+	-webkit-border-radius:3px;
 }
 .carousel_indicator > li:first-child {
 	text-indent:-9999em;
-	width:8px; height:8px;
-	-webkit-border-radius:4px;
+	width:6px; height:6px;
+	-webkit-border-radius:3px;
 	overflow:hidden;
 	margin-right:4px;
-}
+	margin-left:10px

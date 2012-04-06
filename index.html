@@ -31,8 +31,10 @@
 <link rel="stylesheet" href="css/hicTech/appML.css"/>
 <style type="text/css" media="all">@import "themes/ht/theme.css";</style>
 
+
 <script type="text/javascript" charset="utf-8" src="js/jquery/jquery-1.7.1-appMLversion.js"></script>
 <script type="text/javascript" charset="utf-8" src="js/plugins/livequery/jquery.livequery-1.0.3.js"></script>
+
 
 <script type="text/javascript" charset="utf-8" src="js/hicTech/mio.js"></script>
 <script type="text/javascript" charset="utf-8" src="js/hicTech/appMLconf.js"></script>
@@ -55,12 +57,16 @@
 
 function appMLReady() {
 
+	
+
 	var scrollableRegister = new Array();
 	
 	$("#appML_content").find(".appML_page:visible").livequery(function(){
 		var id = $(this).attr("id");
 		if(appMLconf.forcedStartingPage){
-			executeAutomaticScroll(id);
+			setTimeout(function(){
+				executeAutomaticScroll(id);
+			},1300)
 		}
 		else{
 			automaticScroll(id);
@@ -69,13 +75,13 @@ function appMLReady() {
 	
 	
 	if(appML.getEnviroment().isIDevice){
-		$("li").bind("tap",function(){
+		$("ul.arrow_list li").bind("tap",function(){
 			var id = $(this).attr("data-page-link");
 			automaticScroll(id);
 		})
 	}
 	else{
-		$("li").click(function(){
+		$("ul.arrow_list li").click(function(){
 			var id = $(this).attr("data-page-link");
 			automaticScroll(id);
 		})
@@ -88,28 +94,18 @@ function appMLReady() {
 		if ( !_.include(scrollableRegister, page_id) ){
 			appML.appManagerShowLoading();
 			setTimeout(function(){
-				
-					
-					executeAutomaticScroll(page_id)
-				
+				executeAutomaticScroll(page_id)
 				setTimeout(function(){
 					appML.goTo("#"+page_id);
 				},150);
 				setTimeout(function(){
 					appML.appManagerHideLoading();
-				},850);
-	
+				},800);
 			},350);	
 		}
 		else{
 			appML.goTo("#"+page_id);
 		}
-		
-		
-		
-		
-		
-		
 	}
 	
 	function executeAutomaticScroll(page_id){
@@ -119,163 +115,11 @@ function appMLReady() {
 	}
 	
 	/*clear url from parameters*/
-	window.history.pushState("", "", "index.html");
-	
-	
-	//appML.onPage("page2", function () {
-		//appML.scrollable($("#page2").find(".dynamic_scroll_container"), "null", appML.getPageWidth(), appML.getPageHeight())
-	//});
+	if(window.history.pushState != undefined)
+		window.history.pushState("", "", "index.html");
 	
 	
 	
-	/*
-	// overlay demo
-	$('#overlay_alert').bind('click', function (e, data) {
-		appML.appManagerShowDialog({
-			message: "<div style='padding:3px 10px 3px 10px'>This is a custom scrollable alert box!<br/><font style='font-size:17px'>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</font></div>",
-			title: "Alert"
-		});
-	});
-	
-	$('#overlay_confirm').bind('click', function (e, data) {
-		appML.appManagerShowDialog({
-			message: "<div style='text-align:center'>This is a custom confirm box with callbacks and scroll area</div>",
-			type: "confirm",
-			denyCallback: function () {
-				alert("denyCallback")
-			},
-			confirmCallback: function () {
-				alert("confirmCallback")
-			},
-			title: "Confirm"
-		});
-	});
-	
-	$("#mapContainer:visible").livequery(function () {
-		$('#map').css("width", appML.getPageWidth());
-		$('#map').css("height", appML.getPageHeight())
-		$('#map').css("top", "0px");
-		$('#map').css("left", "0px");
-		$('#map').jMapping({
-			map_config: {
-				navigationControlOptions: {
-					style: google.maps.NavigationControlStyle.DEFAULT
-				},
-				mapTypeId: google.maps.MapTypeId.HYBRID,
-				zoom: 8,
-				streetViewControl: false,
-				scaleControl: false,
-				panControl: false,
-				zoomControl: false
-			}
-		});
-	});
-	
-	$('#load_indicator').bind('click', function (e, data) {
-		appML.appManagerShowLoading();
-		setTimeout(function () {
-			appML.appManagerHideLoading();
-		}, 5000)
-	});
-
-	function printEnviromentData() {
-		var env = appML.getEnviroment();
-		var enviroment_html = "<div id='enviroment_page' style='padding:10px 8px'>" + "<ul class='plastic'>" + "<li><div>orientation</div><div>" + appML.getOrientation() + "</div></li>" + "<li><div>is apple device</div><div>" + env.isIDevice + "</div></li>" + "<li><div>is iPad</div><div>" + env.isIPad + "</div></li>" + "<li><div>has retina display</div><div>" + env.isRetina + "</div></li>" + "<li><div>is stand alone</div><div>" + env.isStandalone + "</div></li>" + "<li><div>iOS version</div><div>" + env.OSVersion + "</div></li>" + "<li><div>has homescreen</div><div>" + env.hasHomescreen + "</div></li>" + "<li><div>platform</div><div>" + env.platform + "</div></li>" + "<li><div>language</div><div>" + env.language + "</div></li>" + "<li><div>Current width</div><div>" + env.windowWidth + "</div></li>" + "<li><div>Current height</div><div>" + env.windowHeight + "</div></li>" + "<li><div>Has consolebar</div><div>" + env.hasConsolebar + "</div></li>" + "<li><div>Accelerometer X</div><div><span id=accelerationX></span></div></li>" + "<li><div>Accelerometer Y</div><div><span id=accelerationY></span></div></li>" + "<li><div>Accelerometer Z</div><div><span id=accelerationZ></span></div></li>" + "</ul>" + "</div>";
-		$("#enviroment_data_c").html(enviroment_html);
-		$("#refreshData").click(function () {
-			printEnviromentData();
-		});
-		if (window.DeviceMotionEvent != undefined) {
-			var x_display = $("#accelerationX");
-			var y_display = $("#accelerationY");
-			var z_display = $("#accelerationZ");
-			window.ondevicemotion = function (e) {
-				x_display.html(e.accelerationIncludingGravity.x)
-				y_display.html(e.accelerationIncludingGravity.y)
-				z_display.html(e.accelerationIncludingGravity.z)
-				//console.log("we")
-			}
-		}
-	}
-	
-	appML.onPage("enviroment", function () {
-		printEnviromentData();
-		appML.scrollable($("#enviroment_page"), "null", appML.getPageWidth(), appML.getPageHeight())
-	});
-	
-	appML.onPage("page_listener", function (page_id) {
-		alert("this is an onPage listener");
-	});
-	
-	appML.offPage("page_listener", function (page_id) {
-		alert("this is a offPage listener");
-	});
-	
-	$('#dyn_page_button').bind('click', function () {
-		appML.appManagerShowLoading();
-		// here you can call ajax and add these commands to its callback
-		// timeouts are just to show you all the steps
-		setTimeout(function () {
-			var ajax_result_simulation = ""
-			$.ajax({
-				url: 'LICENSE.txt',
-				success: function (data) {
-					//$('.result').html(data);
-					ajax_result_simulation = "This is a local txt file loaded with an ajax call </br></br>" + data;
-					for (i = 0; i < 30; i++)(i % 2 == 0) ? ajax_result_simulation += "some text result...</br>" : ajax_result_simulation += " ------------ </br>"
-					$("#dyn_page").find("code").append(ajax_result_simulation);
-					appML.goTo("#dyn_page");
-					setTimeout(function () {
-						appML.scrollable($("#dyn_page_content"), 'appML.appManagerHideLoading()', appML.getPageWidth(), appML.getPageHeight())
-					}, 1500)
-				}
-			});
-		}, 2500)
-	});
-	
-	appML.makeScrollable($("#pull_down_container"), 'appML.appManagerHideLoading()', appML.getPageWidth(), appML.getPageHeight());
-	
-	appML.addPullListener("pull_down_container", function () {
-		alert("pulldown")
-	}, true, null, 100);
-	
-	$('#searchbar_button').bind('click', function (e, data) {
-		appML.appManagerShowSearchBar();
-	});
-	
-	$("#ok_search").click(function (event) {
-		alert("implement you search function for '" + $("#search").val() + "'")
-	});
-	
-	$("#make_carousel").click(function (event) {
-		appML.makeCarousel($("#dynamic_carousel"), "console.log('fatto carousel!')", 260, 130, false);
-		appML.addCarouselListener(function (id, position, selected_elem, horizontal, other_position) {
-			if (id == "dynamic_carousel") {
-				var mess = "Carousel " + id + " snapped to position " + position;
-				if (horizontal) mess += " (horizontally)";
-				else mess += " (vertically)";
-				console.log(mess);
-			}
-		});
-	});
-	
-	$("#add_item").click(function (event) {
-		$("#dynamic_carousel").find("ul").append($("<li>new item</li>"));
-		appML.refreshCarousel("#dynamic_carousel", "console.log('refreshato carousel!');");
-	});
-	
-	$("#snapNext").click(function (event) {
-		appML.snapToNext("dynamic_carousel")
-	});
-	
-	$("#snapPrev").click(function (event) {
-		appML.snapToPrev("dynamic_carousel");
-	});
-	
-	$("#snapTo3").click(function (event) {
-		appML.snapTo("dynamic_carousel", 2, 0);
-	})
-	*/
 }
 
 </script>
@@ -300,27 +144,11 @@ function appMLReady() {
 			
 			<page id="list" title="homeTitle" scrollable="true" >
 				<ul class="arrow_list">
-					<li class="box_title">appML features</li>
+					<li class="box_title">Index menu</li>
 					<li class="arrow"><a href="#" id="load_indicator">Loading (5 sec.)</a></li>
 					<li class="arrow"><a href="#" id="overlay_alert">Alert dialog</a></li>
-					<li class="arrow"><a href="#" id="overlay_confirm">Confirm dialog</a></li>
-					<li class="arrow"><a href="#form">Form<br/></a></li>
-					<li class="arrow"><a href="#effects">Fixed effects on iPad<br/></a></li>
-					<li class="arrow"><a href="#buttons">Customized buttons<br/></a></li>
-					<li class="forward"><a href="#">Forward element<br/></a></li>
-					
 				</ul>
 				
-				<ul class="arrow_list">
-					<li class="box_title">New Features</li>
-					<li class="arrow"><a href="#form2">Input Hook</a></li>
-					<li class="arrow"><a href="#enviroment">Enviroment detection</a></li>
-					<li class="arrow"><a href="#page_listener">Page Listener (on/off)</a></li>
-					<li class="arrow"><a href="#dyn_carousel">Dynamic carousel</a></li>
-					<li class="arrow"><a href="#" id="dyn_page_button">Dynamic page</a></li>
-					<li class="arrow"><a href="#pull_down_page" >Pull down</a></li>	
-					<li class="arrow"><a href="#" data-input-hook='search' id="searchbar_button">Search bar</a></li>			
-				</ul>
 				
 								
 			</page>
@@ -356,169 +184,12 @@ function appMLReady() {
 				</div>
 			</page>
 			
-			<page id="page_listener" title="Page listener">
-				<ul class="arrow_list">
-					<div class="info" style='text-align:left'>
-						<code>
-							appML.onPage("page_listener",function(page_id){</br>
-	 							&nbsp;&nbsp;&nbsp;&nbsp; alert("this is an onPage listener")</br>
-							});</br></br>
-							appML.onPage("page_listener",function(page_id){</br>
-	 							&nbsp;&nbsp;&nbsp;&nbsp; alert("this is an offPage listener")</br>
-							});
-						</code>
-					</div>
-				</ul>		
-			</page>
-			
-			<page id="dyn_page" title="Dynamic Page">
-				<div id="dyn_page_content">
-				<ul class="arrow_list">
-					<div class="info" style='text-align:left'>
-						<b>You can dynamically append content to HTML element and create an iScroll with a specific width and height and callback </br></br></b>
-						<code style='font-size:10px'>
-							
-							
-							
-							$.ajax({</br>
-			  					&nbsp;url: 'LICENSE.txt',</br>
-			  					&nbsp;success: function(data) {</br>
-			    					&nbsp;ajax_result="This is a local txt file"+data;</br>	 		
-							 		&nbsp;$("#dyn_page").find("code").append(ajax_result);</br>
-							 		&nbsp;appML.goTo("#dyn_page");</br>
-		 							&nbsp;appML.makeScrollable( // make an HTML element scrollable </br> 
-		 							&nbsp;&nbsp;&nbsp;$("#dyn_page_content"),</br>
-		 							&nbsp;&nbsp;&nbsp;'appML.appManagerHideLoading()',</br>
-		 							&nbsp;&nbsp;&nbsp; appML.getPageWidth(),</br>
-		 							&nbsp;&nbsp;&nbsp; appML.getPageHeight()</br>
-		 						&nbsp;&nbsp;);</br>
-								}</br>
-							});</br></br>
-						</code>
-					</div>
-				</ul>					
-				</div>
-		
-			</page>
-			
-			<page id="enviroment" title="Enviroment info">
-				<div id='enviroment_data_c'></div>
-			</page>
-			
-			<page id="pull_down_page" title="">
-				<div class="info" style='text-align:left' id="pull_down_container">
-					<b>Pull down this element for more then 100px</b></br>
-					<code>
-						appML.addPullListener(</br>
-						&nbsp;&nbsp;&nbsp; "pull_down_container",  // container's id</br>
-						&nbsp;&nbsp;&nbsp; function(){alert("pulldown")}, // callback function</br>
-						&nbsp;&nbsp;&nbsp; true,  // true = vertical , false = horizontal</br>
-						&nbsp;&nbsp;&nbsp; null,  // begin</br>
-						&nbsp;&nbsp;&nbsp; 100 // threshold pixel</br>
-						);
-					</code>
-				</div>
-			</page>
-			
 			
 	
-			
-			
-			<page id="buttons" title="Buttons" scrollable="true">
-				<h2>Buttons</h2>
-				<ul class="individual">
-                	<li><a href="" target="_blank">Button</a></li>
-					<li><a href="" target="_blank">Button</a></li>
-	            </ul>
-				<p><br /><a href="#" class="grayButton">Button</a></p>
-				<p><br /><a href="#" class="whiteButton">Button</a></p>
-				<p><br /><a href="#" class="blueButton">Button</a></p>
-				<p><br /><a href="#" class="greenButton">Button</a></p>
-				<p><br /><a href="#" class="redButton">Button</a></p>
-				<p><br /><a href="#" class="purpleButton">Button</a></p>
-				<p><br /><a href="#" class="orangeButton">Button</a></p>
-				<p><br /><a href="#" class="azureButton">Button</a></p>
-			</page>
-			
-			<page id="form"  title="Form" scrollable="true">
-				<ul class="form arrow_list">
-                	<li class="box_title">Form</li>
-                    <li>
-                        <div>
-                            <div>E-mail:</div>
-                            <div><input value="" type="email" name="input_test" placeholder="examples@site.com" /></div>
-                        </div>
-                    </li>
-                    
-                    
-                    
-                    <li class="arrow">
-                        <div>
-                            <div>Text:</div>
-                            <div><textarea></textarea></div>
-                        </div>
-                    </li>
-					
-                    <li><input type="checkbox" name="some_name" value="Hello" id="some_name"  data-appml-label="Title"/></li>      
-					
-                    <li>
-    					<div>
-                            <div>Animals:</div>
-                            <div>
-                            	<select data-appml-title="Animals">
-                               		<option value="dog">Dog</option>
-                                    <option value="cat">Cat</option>
-                                    <option value="fish" selected>Fish</option>
-                                    <option value="lion">Lion</option>
-									<option value="leopard">Leopard</option>
-									<option value="bird">Bird</option>
-									<option value="snake">Snake</option>
-                                </select>
-                            </div>
-                        </div>
-                   </li>
-				</ul>   
-           		<a style="color:rgba(0,0,0,.9);" href="#" class="whiteButton">Send</a>
-			</page>
-			
-			<page id="form2"  title="Form">
-				<ul class="form arrow_list">
-                	<li class="box_title">Form</li>
-                    <li>
-                        <div>
-                            <div>Email:</div>
-                            <div><input value="" type="email" name="input_test" placeholder="examples@site.com" id="input_hook"/></div>
-                        </div>
-                    </li>
-                    
-				</ul>   
-				<p><br /><a href="#" class="azureButton" data-input-hook='input_hook'>input hook</a></p>
-			</page>
-			
-			
-		
-			<page id="effects"  title="Effects" scrollable="true">
-				<ul class="arrow_list" >
-	                <li class="arrow"><a href="#animdemo">Slide</a></li>
-	                <li class="arrow"><a class="slideup" href="#animdemo">Slide Up</a></li>
-	                <li class="arrow"><a class="dissolve" href="#animdemo">Dissolve</a></li>
-	                <li class="arrow"><a class="fade" href="#animdemo">Fade</a></li>
-	                <li class="arrow"><a class="flip" href="#animdemo">Flip</a></li>
-	                <li class="arrow"><a class="pop" href="#animdemo">Pop</a></li>
-	                <li class="arrow"><a class="swap" href="#animdemo">Swap (not fixed)</a></li>
-	                <li class="arrow"><a class="cube" href="#animdemo">Cube (not fixed)</a></li>
-	            </ul>
-			</page>
-
-			<page id="animdemo">
-				<div style="font-size: 1.5em; text-align: center; margin: 160px 0 160px; font-family: Marker felt;">
-   					Pretty smooth, eh?            
-				</div>
-			</page>
 		
 		</panel>
 		
-		<panel id="mappa" title="Map" icon="map.png" >
+			<panel id="mappa" title="Map" icon="map.png" >
 				<page id="map_page" title="map"> 
 					<div id="mapContainer" >
 						<div style="position:absolute; top:0px;  width:160px; background-color:#000; opacity:0.75;z-index:50000">

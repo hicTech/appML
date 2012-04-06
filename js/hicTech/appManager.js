@@ -3223,19 +3223,24 @@
         }
 
         function getCarouselNavigatorDiv(elems){
-            var nav_div="<div class='carousel_nav'>";
-                nav_div+="<div class='carousel_prev'>&larr; prev</div>";
-                
-                nav_div+="<ul class='carousel_indicator'>";
-                var sel_index=1;
-                for(i=1;i<=elems.length;i++)
-                    nav_div+="<li"+((i==sel_index) ? " class='selected'" : "")+">"+i+"</li>";
-                nav_div+="</ul>";
-                
-                nav_div+="<div class='carousel_next'>&rarr; next</div>";
-            nav_div+="</div>";
-            return nav_div;
-        }
+	    	var nav_div=""//"<div class='carousel_nav'>";
+	    		nav_div+=""//"<div class='carousel_prev'>&larr; prev</div>";
+	    		
+		    	if(elems.length<18){
+		    		nav_div+="<ul class='carousel_indicator white' style='margin: 0px auto;width: "+elems.length*15+"px'>";
+		    	}
+		    	else{
+		    		nav_div+="<ul class='carousel_indicator white' style='margin: 0px auto;width: "+elems.length*7+"px'>";
+		    	}
+		    	var sel_index=1;
+		    	for(i=1;i<=elems.length;i++)
+		    		nav_div+="<li"+((i==sel_index) ? " class='selected'" : "")+">"+i+"</li>";
+		    	nav_div+="</ul>";
+		    	
+		    	nav_div+="<div class='carousel_next'>&rarr; next</div>";
+	    	nav_div+="</div>";
+	    	return nav_div;
+	    }
         
         function replaceCarousel(){
             var $this=$(this);
@@ -3312,7 +3317,7 @@
 						
 						
 						$("content").html( getSiteMap(appMLjson) );
-						( !! appMLconf.sidebar && appML.getEnviroment().isIPad) ? $("appml").append("<left width='"+appMLconf.sidebar+"' scrollable='"+appMLconf.sidebarScrollable+"'/>") : $("appml").append("<toolbar/>")
+						( !! appMLconf.sidebar && appML.getEnviroment().isTablet && appML.getOrientation()=="Landscape") ? $("appml").append("<left width='"+appMLconf.sidebar+"' scrollable='"+appMLconf.sidebarScrollable+"'/>") : $("appml").append("<toolbar/>")
 						realAppMLtranslation();
 					}
 				});
@@ -3681,7 +3686,12 @@
         
         this.screenResize = function(){
             //this.appMLResize();
-            location.href="index.html?initial_loading_fake_delay=20&forcedStartingPage="+this.getCurrentPageId();
+           
+            if(window.history.pushState != undefined) 
+            	location.href="index.html?initial_loading_fake_delay=20&forcedStartingPage="+this.getCurrentPageId();
+            else{
+            	location.href="index.html";
+            }
         };
         
         this.appMLResize = function(){
@@ -3710,8 +3720,13 @@
         	var hei_por=win_dim.portrait.height;
         	var nav = navigator,
 			isIDevice = (/iphone|ipod|ipad/gi).test(nav.platform),
+			isAndroid = (nav.userAgent).indexOf("Android") != -1,
+			isAndroidTablet = ((nav.userAgent).indexOf("Android") != -1 && nav.userAgent.indexOf("Mobile") == -1),
 			isIPad = (/ipad/gi).test(nav.platform),
+			isTablet = isAndroidTablet || isIPad,
 			isRetina = 'devicePixelRatio' in window && window.devicePixelRatio > 1,
+			isSmartphone = ((isIDevice || isAndroid) && !isTablet),
+			isDesktop = (!isSmartphone && !isTablet ),
 			isSafari = nav.appVersion.match(/Safari/gi),
 			hasHomescreen = 'standalone' in nav && isIDevice,
 			isStandalone = hasHomescreen && nav.standalone,
@@ -3722,8 +3737,13 @@
 
 			var enviroment={
 				isIDevice : isIDevice,
+				isAndroid : isAndroid,
+				isAndroidTablet : isAndroidTablet,
 				isIPad : isIPad,
+				isTablet : isTablet,
 				isRetina : isRetina,
+				isSmartphone : isSmartphone,
+				isDesktop : isDesktop,
 				isSafari : isSafari,
 				hasHomescreen : hasHomescreen,
 				isStandalone : isStandalone,
