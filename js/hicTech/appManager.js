@@ -2928,6 +2928,8 @@
 		function showLoading(){
         	var overlay=$('#overlay');
         	overlay.addClass('overlay_on');
+        	if(appML.getEnviroment().isDesktop)
+        		overlay.addClass('desktop');
         	overlay.spin(appMLconf.spinning_loading_options);
         	setTimeout(function(){
 
