@@ -1,7 +1,7 @@
 
 function getSiteMap(obj){
-	//if(! wellFormattedData(obj) )
-		//return false
+	if(! wellFormattedData(obj) )
+		return false
 	var html = '<navigation height="44px"></navigation>';
 			for(i in obj.panels)
 				html += getPanel(obj.panels[i]);

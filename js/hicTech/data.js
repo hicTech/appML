@@ -98,7 +98,7 @@ appMLjson={
 							items:[
 								{
 									className:"arrow",
-									linked_page_id:"home_pagina_3",
+									linked_page_id:"home_pagina_finta_3",
 									label:"vai a pag 3"
 								}
 							]
@@ -142,7 +142,7 @@ appMLjson={
 								},
 								{
 									className:"arrow",
-									linked_page_id:"home_pagina_3",
+									linked_page_id:"home_pagina_finta_3",
 									label:"vai a pag 3"
 								}
 							]
@@ -207,12 +207,6 @@ appMLjson={
 		}
 	]
 }
-
-
-
-
-
-
 
 
 

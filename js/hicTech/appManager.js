@@ -3293,31 +3293,6 @@
 					dataType:'script',
 					success: function(data) {
 						
-						
-						for(var i=0;i<20;i++){
-							appMLjson.panels[0].pages[1].contents[1].items.push({
-															className:"arrow",
-															linked_page_id:"home_pagina_"+i,
-															label:"vai a pag "+i
-													});
-													
-							appMLjson.panels[0].pages.push({
-											id:"home_pagina_"+i,
-											title:"vai a pag"+i,
-											contents:[
-												{
-													type: "paragraph",
-													text: "<b>Ben venuto a pag "+i+"</b><br>I'm wait for you!!!!Some text long, very long... too long!<b>Titolo pag 2</b><br>Some text long,Some text long, very long... too long!<b>Titolo pag 2</b><br>Some text long,Some text long, very long... too long!<b>Titolo pag 2</b><br>Some text long,Some text long, very long... too long!<b>Titolo pag 2</b><br>Some text long,"
-												}
-											]
-									});
-						}
-						
-						
-						
-						
-						
-						
 						$("content").html( getSiteMap(appMLjson) );
 						( !! appMLconf.sidebar && appML.getEnviroment().isTablet && appML.getOrientation()=="Landscape") ? $("appml").append("<left width='"+appMLconf.sidebar+"' scrollable='"+appMLconf.sidebarScrollable+"'/>") : $("appml").append("<toolbar/>")
 						realAppMLtranslation();
