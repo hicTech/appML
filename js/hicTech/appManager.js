@@ -3290,7 +3290,16 @@
 					url: appMLconf.data_json_path,
 					dataType:'script',
 					success: function(data) {
-						$("content").html( getSiteMap(appMLjson) );
+						
+						if(appML.getEnviroment().language.indexOf("it") != -1){
+							$("content").html( getSiteMap(appMLjson) );
+						}
+						
+						if(appML.getEnviroment().language.indexOf("en") != -1){
+							$("content").html( getSiteMap(appMLjson_en) );
+						}
+						
+						
 						( !! appMLconf.sidebar && appML.getEnviroment().isTablet && appML.getOrientation()=="Landscape") ? $("appml").append("<left width='"+appMLconf.sidebar+"' scrollable='"+appMLconf.sidebarScrollable+"'/>") : $("appml").append("<toolbar/>")
 						realAppMLtranslation();
 					}

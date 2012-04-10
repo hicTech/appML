@@ -18,8 +18,9 @@ function getPanel(obj){
 }
 
 function getPage(obj){
+	var scrollable = (obj.scrollable == false ) ? "not_scrollable" : "";
 	var html = '<page id="'+ obj.id +'" title="'+ obj.title +'" >';
-			   html += '<div class="dynamic_scroll_container">';
+			   html += '<div class="dynamic_scroll_container '+scrollable+'">';
 					for (i in obj.contents){
 						html += getGenericContent(obj.contents[i]);
 					}
@@ -35,6 +36,8 @@ function getGenericContent(obj){
 		return getParagraph(obj);
 	if(obj.type == "carousel")
 		return getCarousel(obj);
+	if(obj.type == "map")
+		return getMap(obj);
 }
 
 
@@ -141,6 +144,30 @@ function getCarousel(obj){
 				'</div>';
 	return html;
 	
+}
+
+function getMap(obj){
+	var points_menu_visibility = (obj.points_menu == false) ? "display:none" : "display:block";
+	var html = '<div >'+
+						'<div style="position:absolute; top:0px;  width:160px; background-color:#000; opacity:0.75;z-index:50000">'+
+								'<div id="map-side-bar" style="'+points_menu_visibility+'">';
+								
+									for(i in obj.points){
+										var point = obj.points[i];
+										html += '<div class="map-location" data-jmapping="{id:'+i+', point: {lng: '+point.lon+', lat: '+point.lat+'}}"> '+
+											'<a href="#" class="map-link" style="font-size:18px;color:#fff">'+point.label+'</a> '+
+											'<div class="info-box"> '+
+												'<p>'+point.description+'</p>'+ 
+											'</div> '+
+										'</div>';
+									
+									}
+								
+								html += '</div> '+
+						'</div>'+
+						'<div class="automatic_mapContainer"></div>'+ 
+					'</div> ';
+	return html;
 }
 
 
