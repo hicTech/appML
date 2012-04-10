@@ -94,9 +94,11 @@ function appMLReady() {
 		if ( !_.include(scrollableRegister, page_id) ){
 			appML.appManagerShowLoading();
 			setTimeout(function(){
+				
 				executeAutomaticScroll(page_id)
 				setTimeout(function(){
 					appML.goTo("#"+page_id);
+					executeAutomaticCarousel(appML.getCurrentPage());
 				},150);
 				setTimeout(function(){
 					appML.appManagerHideLoading();
@@ -112,6 +114,12 @@ function appMLReady() {
 		var $dynamic_scroll_container = $("#"+page_id).find(".dynamic_scroll_container");
 		appML.scrollable($dynamic_scroll_container ,"null", appML.getPageWidth(), appML.getPageHeight());
 		scrollableRegister.push(page_id);
+	}
+	
+	function executeAutomaticCarousel($elem){
+		alert("calcolo carousle")
+		var caros = $elem.find(".auto_Carousel");
+		appML.makeCarousel(caros);
 	}
 	
 	/*clear url from parameters*/

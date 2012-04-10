@@ -2928,8 +2928,6 @@
 		function showLoading(){
         	var overlay=$('#overlay');
         	overlay.addClass('overlay_on');
-        	if(appML.getEnviroment().isDesktop)
-        		overlay.addClass('desktop');
         	overlay.spin(appMLconf.spinning_loading_options);
         	setTimeout(function(){
 
@@ -3292,7 +3290,6 @@
 					url: appMLconf.data_json_path,
 					dataType:'script',
 					success: function(data) {
-						
 						$("content").html( getSiteMap(appMLjson) );
 						( !! appMLconf.sidebar && appML.getEnviroment().isTablet && appML.getOrientation()=="Landscape") ? $("appml").append("<left width='"+appMLconf.sidebar+"' scrollable='"+appMLconf.sidebarScrollable+"'/>") : $("appml").append("<toolbar/>")
 						realAppMLtranslation();
@@ -3741,7 +3738,11 @@
         	return this.getEnviroment().windowWidth;
         }
         
-         this.getCurrentPageId = function(){
+        this.getCurrentPage = function(){
+            return getCurrentPanel().find(".current");
+        }
+        
+        this.getCurrentPageId = function(){
          	var target = getCurrentPanel();
             return target.find(".current").attr("id");
         }
