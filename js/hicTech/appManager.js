@@ -3703,6 +3703,7 @@
         	var hei_por=win_dim.portrait.height;
         	var nav = navigator,
 			isIDevice = (/iphone|ipod|ipad/gi).test(nav.platform),
+			isIPhone = (/iphone|iPhone/gi).test(nav.platform),
 			isAndroid = (nav.userAgent).indexOf("Android") != -1,
 			isAndroidTablet = ((nav.userAgent).indexOf("Android") != -1 && nav.userAgent.indexOf("Mobile") == -1),
 			isIPad = (/ipad/gi).test(nav.platform),
@@ -3720,6 +3721,7 @@
 
 			var enviroment={
 				isIDevice : isIDevice,
+				isIPhone:isIPhone,
 				isAndroid : isAndroid,
 				isAndroidTablet : isAndroidTablet,
 				isIPad : isIPad,

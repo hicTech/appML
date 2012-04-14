@@ -49,7 +49,7 @@ appMLjson={
 						{
 							type:"carousel",
 							items_type:"foto",
-							prePath : "immGallery/interior",
+							prePath : "http://www.fishinitaly.eu/app/immGallery/interior",
 							sizes : {
 								tablet:{
 									width : 580,

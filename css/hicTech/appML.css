@@ -69,10 +69,9 @@ background: -webkit-linear-gradient(top, rgba(246,248,249,1) 0%,rgba(229,235,238
 #appML_navigation_bar div {
 	width:100%;
 	margin:0px auto;
-	color:#f3f3f3;
+	color:#0b72b5;
 	text-decoration:none;
 	font-weight:bold;
-	text-shadow:0 -1px 1px #254F7A;
 }
 
 #appML_navigation_bar div div {

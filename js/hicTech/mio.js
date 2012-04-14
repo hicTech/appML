@@ -132,15 +132,16 @@ function getCarousel(obj){
 	
 	var width = size[device].width;
 	var height = size[device].height;
-	var html = '<div style="margin:0px auto; width:'+ width +'px">'+
+	var html = '<div style="margin:0px auto; width:'+ width +'px;">'+
 					'<div class="auto_Carousel" width="'+ width +'" height="'+ height +'">'+
-						'<ul style="display:none">';
+						'<ul style=" height:'+ height +'px">';
 						for(i in obj.items){
 							var caption = ( !! obj.items[i].caption ) ? "<div>"+obj.items[i].caption+"</div>" : "";
-							html += '<li>'+ caption +'<img style="width:'+ width +'px; height:'+ height +'px" src="'+obj.prePath+'/'+deviceFolder+'/'+obj.items[i].url+'"/></li>';
+							html += '<li style="display:none;">'+ caption +'<img style="width:'+ width +'px; height:'+ height +'px" src="'+obj.prePath+'/'+deviceFolder+'/'+obj.items[i].url+'"/></li>';
 						}
 		  				html += '</ul>'+
 					'</div>'+
+					'<div style="height:10px">&nbsp;</div>'+
 				'</div>';
 	return html;
 	

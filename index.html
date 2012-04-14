@@ -29,7 +29,7 @@
 
 
 <link rel="stylesheet" href="css/hicTech/appML.css"/>
-<style type="text/css" media="all">@import "themes/ht/theme.css";</style>
+<style type="text/css" media="all">@import "themes/fishInItaly/theme.css";</style>
 
 <script type="text/javascript" charset="utf-8" src="js/jquery/jquery-1.7.1-appMLversion.js"></script>
 <script type="text/javascript" charset="utf-8" src="js/plugins/livequery/jquery.livequery-1.0.3.js"></script>
@@ -56,8 +56,16 @@
 <script>
 
 function appMLReady() {
-
-
+	
+	
+	if(appML.getEnviroment().isIPad){
+		$("#appML_navigation_bar").append("<div style='position:absolute; top:3px; left:340px'><img src='css/hicTech/img/loghetto.png'></div></div>");
+	}
+	if(appML.getEnviroment().isIPhone){
+		$("#appML_navigation_bar").append("<div style='position:absolute; top:3px; left:118px'><img src='css/hicTech/img/loghetto.png'></div></div>");
+	}
+	
+	
 	var scrollableRegister = new Array();
 	
 	$("#appML_content").find(".appML_page:visible").livequery(function(){
@@ -122,7 +130,7 @@ function appMLReady() {
 	function executeAutomaticCarousel($elem){
 		var caros = $elem.find(".auto_Carousel");
 		appML.makeCarousel(caros);
-		$elem.find("ul").show();
+		$elem.find("li").show();
 	}
 	
 	
