@@ -89,7 +89,6 @@ function wellFormattedData(obj){
  * MODULI
  */
 
-
 function getMenu(obj){
 	var html = '<ul class="arrow_list">'+
 				'<li class="box_title">'+ obj.title +'</li>';
