@@ -26,7 +26,7 @@ var appMLconf = {
 			  left: 'auto' // Left position relative to parent in px
 	},
 	data_json_path:"js/hicTech/data.js",//'http://www.hictech.com/hostatiDaHicTech/appMLproxy/deckmatisData.js',
-	loading_timeout : 25000, // milliseconds after force overlay hidding
+	loading_timeout : 65000, // milliseconds after force overlay hidding
 	initial_loading_fake_delay:2200,
 	sidebar:"32%",
 	sidebarScrollable:false,

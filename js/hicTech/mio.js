@@ -134,7 +134,7 @@ function getCarousel(obj){
 	var height = size[device].height;
 	var html = '<div style="margin:0px auto; width:'+ width +'px">'+
 					'<div class="auto_Carousel" width="'+ width +'" height="'+ height +'">'+
-						'<ul >';
+						'<ul style="display:none">';
 						for(i in obj.items){
 							var caption = ( !! obj.items[i].caption ) ? "<div>"+obj.items[i].caption+"</div>" : "";
 							html += '<li>'+ caption +'<img style="width:'+ width +'px; height:'+ height +'px" src="'+obj.prePath+'/'+deviceFolder+'/'+obj.items[i].url+'"/></li>';
@@ -146,16 +146,31 @@ function getCarousel(obj){
 	
 }
 
+
+
+var user_lat=50.897834; //bruxelles expo
+var user_lon=4.339727;
+
 function getMap(obj){
 	var points_menu_visibility = (obj.points_menu == false) ? "display:none" : "display:block";
+	var id = obj.points[0].lat+'_'+obj.points[0].lon;
+	var id = id.replace(".","").replace(".","").replace(".","").replace(".","");
 	var html = '<div >'+
-						'<div style="position:absolute; top:0px;  width:160px; background-color:#000; opacity:0.75;z-index:50000">'+
-								'<div id="map-side-bar" style="'+points_menu_visibility+'">';
+						'<div style="position:absolute; top:5px; right:-40px;  width:160px; z-index:50000">'+
+								'<div id="side-bar-map-risultati_'+id+'" style="'+points_menu_visibility+'">';
+								
+									// user position (bruxelles expo)
+									html += '<div class="map-location" data-jmapping="{id:200, point: {lng: '+user_lon+', lat: '+user_lat+'},category:\'expo\'}"> '+
+											'<a href="#" class="map-link" style="font-size:16px; margin:5px;color:#fff"><div class="pure_button" style="width:100px">Brussels EXPO</div> </a> '+
+											'<div class="info-box"> '+
+												'<p> BRUSSELS EXPO</p>'+ 
+											'</div> '+
+										'</div>';
 								
 									for(i in obj.points){
 										var point = obj.points[i];
-										html += '<div class="map-location" data-jmapping="{id:'+i+', point: {lng: '+point.lon+', lat: '+point.lat+'}}"> '+
-											'<a href="#" class="map-link" style="font-size:18px;color:#fff">'+point.label+'</a> '+
+										html += '<div class="map-location" data-jmapping="{id:'+Math.floor(Math.random()*1001)+', point: {lng: '+point.lon+', lat: '+point.lat+'},category:\'point\'}"> '+
+											'<a href="#" class="map-link" style="font-size:16px; margin:5px;color:#fff"><div class="pure_button" style="width:100px">'+point.label+'</div> </a> '+
 											'<div class="info-box"> '+
 												'<p>'+point.description+'</p>'+ 
 											'</div> '+
@@ -165,7 +180,7 @@ function getMap(obj){
 								
 								html += '</div> '+
 						'</div>'+
-						'<div class="automatic_mapContainer"></div>'+ 
+						'<div class="automatic_mapContainer" data-id="'+id+'"></div>'+ 
 					'</div> ';
 	return html;
 }

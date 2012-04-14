@@ -209,7 +209,7 @@
           settings.link_selector
         ].join(' ');
         
-        $(location_link_selector).livequery('click', function(e){
+        $(location_link_selector).livequery('tap', function(e){
           e.preventDefault();
           var marker_index = parseInt($(this).attr('href').split('#')[1], 10);
           google.maps.event.trigger(gmarkers[marker_index], "click");
@@ -241,6 +241,7 @@
         getPlacesData: getPlacesData,
         getPlaces: getPlaces,
         update: function(){
+        	
           if ($(document).trigger('beforeUpdate.jMapping', [this])  != false){
             
             init(true);

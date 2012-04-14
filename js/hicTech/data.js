@@ -94,7 +94,7 @@ appMLjson={
 					]
 				},
 				{
-					id:"page_mappa",
+					id:"page_mappa2",
 					title:"Titolo pag1",
 					scrollable:false,
 					contents:[
@@ -106,13 +106,13 @@ appMLjson={
 								{
 									label:"Primo punto",
 									description:"Informazioni primo punto",
-									lat: 4.8574888,
-									lon: 9.2678847
+									lat: 44.8574888,
+									lon: 19.2678847
 								},
 								{
-									label:"Primo punto",
+									label:"Secondo punto",
 									description:"Informazioni primo punto",
-									lat: 44.7574888,
+									lat: 4.7574888,
 									lon: 9.378847
 								}
 							]
@@ -121,7 +121,7 @@ appMLjson={
 					]
 				},
 				{
-					id:"page_mappa2",
+					id:"page_mappa",
 					title:"Titolo pag2",
 					scrollable:false,
 					contents:[
@@ -131,16 +131,10 @@ appMLjson={
 							points_menu:false,
 							points:[
 								{
-									label:"Primo punto",
+									label:"Terzo punto",
 									description:"Informazioni primo punto",
 									lat: 43.8574888,
 									lon: 9.2678847
-								},
-								{
-									label:"Primo punto",
-									description:"Informazioni primo punto",
-									lat: 4.7574888,
-									lon: 9.378847
 								}
 							]
 						},
