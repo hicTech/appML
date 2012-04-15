@@ -25,7 +25,7 @@ var appMLconf = {
 			  top: 'auto', // Top position relative to parent in px
 			  left: 'auto' // Left position relative to parent in px
 	},
-	data_json_path:"js/hicTech/data.js",//'http://www.hictech.com/hostatiDaHicTech/appMLproxy/deckmatisData.js',
+	data_json_path:'http://www.fishinitaly.eu/app/js/hicTech/data.js',
 	loading_timeout : 65000, // milliseconds after force overlay hidding
 	initial_loading_fake_delay:2200,
 	sidebar:"32%",

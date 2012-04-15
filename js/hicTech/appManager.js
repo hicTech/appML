@@ -3291,12 +3291,13 @@
 					dataType:'script',
 					success: function(data) {
 						
-						if(appML.getEnviroment().language.indexOf("it") != -1){
-							$("content").html( getSiteMap(appMLjson) );
-						}
+						
 						
 						if(appML.getEnviroment().language.indexOf("en") != -1){
 							$("content").html( getSiteMap(appMLjson_en) );
+						}
+						else{
+							$("content").html( getSiteMap(appMLjson) );
 						}
 						
 						

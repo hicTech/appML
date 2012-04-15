@@ -1,0 +1,421 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<!--
+
+@file index.html
+
+@brief 
+JsonEditor is an editor to display and edit JSON data in a treeview. 
+
+Supported browsers: Chrome, Firefox, Safari, Opera, Internet Explorer 8+ 
+
+@license
+This json editor is open sourced with the intention to use the editor as 
+a component in your own application. Not to just copy and monetize the editor
+as it is.
+
+Licensed under the Apache License, Version 2.0 (the "License"); you may not
+use this file except in compliance with the License. You may obtain a copy 
+of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+License for the specific language governing permissions and limitations under
+the License.
+
+Copyright (C) 2011-2012 Jos de Jong, http://jsoneditoronline.org
+
+@author   Jos de Jong, <wjosdejong@gmail.com>
+@date     2012-01-30
+-->
+
+<html>
+<head>
+  <title>JSON Editor Offline - Edit and format JSON data offline</title>
+  
+	<script src="../_.js"></script>
+	<script src="../jquery-1.7.1.min.js"></script>
+	<script src="../json_creator.js"></script>
+	<script src="../json_objects.js"></script>
+
+  <meta name="description" content="JSON Editor Online is a tool to easily edit and format JSON online. JSON is displayed in a clear, editable treeview and in formatted plain text.">
+  <meta name="keywords" content="json, editor, formatter, online, format, parser, json editor, json editor online, online json editor, javascript, javascript object notation, treeview, open source, free, json parser, json parser online, json formatter, json formatter online, online json formatter, online json parser, format json online">
+  <meta name="author" content="Jos de Jong">
+  
+  <link rel="shortcut icon" href="favicon.ico">
+  
+  <link rel="stylesheet" type="text/css" href="jsoneditor.css">
+  <script type="text/javascript" src="jsoneditor.js"></script>
+
+  <style type="text/css">
+    body, html {
+      font-family: arial, sans;
+      font-size: 11pt;
+
+      width: 100%;
+      height: 100%;
+      margin: 0px;
+      padding: 0px;
+
+      overflow: hidden;
+    }
+    
+    h1 {
+      font-size: 18px;
+      padding: 10px 15px;
+      margin: 0px;
+    }
+    
+    span.header-light {
+      color: gray;
+    }
+    
+    #header {
+      width: 100%;
+      height: 40px;
+      overflow: hidden;
+      
+      background-color: #4D4D4D;
+      color: white;
+    }
+    
+    #auto {
+      width: 100%;
+      height: 100%;
+      
+      margin: -40px 0px -24px 0px;
+      padding: 40px 0px  24px 0px;
+     
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      -ms-box-sizing: border-box;
+      box-sizing: border-box;
+
+      overflow: hidden;
+    }
+    
+    #contents {
+      width: 100%;
+      height: 100%;
+
+      overflow: hidden;
+    }
+    
+    #jsonformatter, #jsoneditor {
+      float: left;
+      height: 100%;
+      width: 400px;
+      
+      padding: 15px;
+      
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      -ms-box-sizing: border-box;
+      box-sizing: border-box;
+    }
+    
+    #splitter {
+      float: left;
+      height: 100%;
+      cursor: col-resize;
+    }
+
+    #footer {
+      width: 100%;
+      height: 23px;
+
+      overflow: hidden;
+      color: #BFBFBF;
+      border-top: 1px solid lightgray;
+      text-align: center;
+      background-color: #F5F5F5;
+    }
+    #footer-inner {
+      margin: 4px;
+    }
+    
+    a.footer {
+      color: #BFBFBF;
+      text-decoration: none;
+    }
+    a.footer:hover {
+      color: red;
+      text-decoration: underline;
+    }
+    
+    #ad {
+      float: left;
+      padding: 15px 15px 15px 0px;
+    }
+
+  </style>
+
+<script>
+	function getJsOnObjects(){
+		jsOn.readObjects();
+		var json_current_objects = jsOn.root(); 
+		if(!json_current_objects)
+			json_current_objects = {};
+		return json_current_objects;
+	}
+	
+	function saveJSOnObjects(){
+		main.editorToFormatter();
+		var objs = $(".jsonformatter-textarea").val();
+		jsOn.objects = JSON.parse(objs);
+		jsOn.writeObjects();
+	}
+</script>
+
+  <script type="text/javascript">
+    var editor = null;
+    var formatter = null;
+
+    var main = {};
+
+    main.formatterToEditor = function() {
+      try {
+        editor.set(formatter.get());
+      }
+      catch (err) {
+        alert(err);
+      }
+    }
+    
+    main.editorToFormatter = function () {
+      try {
+        formatter.set(editor.get());
+      }
+      catch (err) {
+        alert(err);
+      }
+    }
+
+    main.eventParams = {};
+    main.onMouseDown = function (event) {
+      var leftButtonDown = event.which ? (event.which == 1) : (event.button == 1);
+      if (!leftButtonDown) {
+        return;
+      }
+
+      if (!main.eventParams.mousedown) {
+        main.eventParams.mousedown = true;
+        main.eventParams.mousemove = 
+          JSONEditor.Events.addEventListener(document, 'mousemove', main.onMouseMove);
+        main.eventParams.mouseup = 
+          JSONEditor.Events.addEventListener(document, 'mouseup', main.onMouseUp);        
+        main.eventParams.screenX = event.screenX;
+        main.eventParams.splitterFraction = main.splitterFraction; 
+      }
+      JSONEditor.Events.preventDefault(event);
+    }
+
+    main.onMouseMove = function (event) {
+      var width = (window.innerWidth || document.body.offsetWidth || 
+        document.documentElement.offsetWidth);
+
+      var diff = event.screenX - main.eventParams.screenX;
+
+      main.splitterFraction = main.eventParams.splitterFraction + diff / width;
+      if (main.splitterFraction < 0.1) {
+        main.splitterFraction = 0.1;
+      }
+      if (main.splitterFraction > 0.9) {
+        main.splitterFraction = 0.9;
+      }
+
+      main.resize();
+      
+      JSONEditor.Events.preventDefault(event);
+    }
+    
+    main.onMouseUp = function (event) {
+      if (main.eventParams.mousedown) {
+        JSONEditor.Events.removeEventListener(document, 'mousemove', main.eventParams.mousemove);
+        JSONEditor.Events.removeEventListener(document, 'mouseup', main.eventParams.mouseup);
+        main.eventParams.mousemove = undefined;
+        main.eventParams.mouseup = undefined;
+        main.eventParams.mousedown = false;
+      }
+      JSONEditor.Events.preventDefault(event);
+    }
+    
+    main.load = function() {
+      var domSplitter = document.getElementById('splitter');
+      JSONEditor.Events.addEventListener(domSplitter, "mousedown", main.onMouseDown);
+      
+      JSONEditor.Events.addEventListener(window, 'resize', main.resize);
+      
+      var json = getJsOnObjects();      
+      
+      try {
+        var container = document.getElementById("jsonformatter");
+        formatter = new JSONFormatter(container);
+        formatter.set(json);
+
+        var container = document.getElementById("jsoneditor");
+        editor = new JSONEditor(container);
+        editor.set(json);      
+
+        // TODO: implement a focus method
+        formatter.textarea.focus();
+        
+        // TODO: a nicer method to check for changes
+        var formatterLastContent;
+        var editorLastContent;
+        function checkChange () {
+          try {
+            // check for change in formatter
+            var formatterJSON = formatter.get();
+            var formatterContent = JSON.stringify(formatterJSON);
+            if (formatterContent != formatterLastContent) {
+              formatterLastContent = formatterContent;
+              editorLastContent = formatterContent;
+              editor.set(formatterJSON);
+            }
+            else {
+              // check for change in editor
+              var editorJSON = editor.get();
+              var editorContent = JSON.stringify(editorJSON);
+              if (editorContent != editorLastContent) {
+                editorLastContent = editorContent;
+                formatterLastContent = editorContent;
+                formatter.set(editorJSON);
+              }
+            }            
+          }
+          catch (err) {
+          }
+          
+          setTimeout(checkChange, 1000);
+        }
+        /* TODO: use checkChange
+        checkChange();
+        */
+      } catch (err) {
+        // TODO: create an error bar
+        // TODO: IE does not display errors nicely
+        var msg = err.message || err;
+        alert('Error: ' + msg);
+      }
+
+    }
+    
+    main.splitterFraction = 0.1;
+
+    main.resize = function() {
+      var domEditor = document.getElementById('jsoneditor');
+      var domFormatter = document.getElementById('jsonformatter');
+      var domSplitter = document.getElementById('splitter');
+      var domAd = document.getElementById('ad');
+      
+      var width = window.innerWidth || document.body.offsetWidth || document.documentElement.offsetWidth;
+      var height = window.innerHeight || document.body.offsetHeight || document.documentElement.offsetHeight;
+      var adWidth = domAd ? domAd.clientWidth : 0;
+      var splitterWidth = domSplitter.clientWidth;
+      width -= adWidth;
+
+      var splitterLeft = width * main.splitterFraction;
+
+      // resize formatter
+      domFormatter.style.width = (splitterLeft) + 'px'; 
+      
+      // resize editor
+      domEditor.style.left = (splitterLeft + splitterWidth) + 'px';
+      domEditor.style.width = (width - splitterLeft - splitterWidth) + 'px'; 
+    }
+
+  </script>
+</head>
+
+<body>
+  
+<div id="header">
+  <!--
+  <h1>JSON Editor Online</h1>
+  -->
+  <h1>JSON <span class="header-light">= {"</span>Editor<span class="header-light">": "</span>Offline<span class="header-light">"}</span>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <span onclick='saveJSOnObjects();' class="header-light">Save</span>
+  </h1>
+
+  <!-- TODO: info, links, faq -->
+<!--
+  <div class="info" style="display:none;">
+    JSON, or JavaScript Object Notation, is a lightweight text-based open standard 
+    designed for human-readable data interchange. It is derived from the JavaScript 
+    scripting language for representing simple data structures and associative arrays, 
+    called objects. Despite its relationship to JavaScript, it is language-independent,
+    with parsers available for most languages.
+    The JSON format was originally specified by Douglas Crockford, and is described 
+    in RFC 4627. The official Internet media type for JSON is application/json. 
+    The JSON filename extension is .json.
+    The JSON format is often used for serializing and transmitting structured data 
+    over a network connection. It is used primarily to transmit data between a server 
+    and web application, serving as an alternative to XML.
+    <br><br>
+    From <a target="_blank" href="http://en.wikipedia.org/wiki/Json">Wikipedia</a>
+  </div>
+
+  <div class="links" style="display:none;">
+    <a target="_blank" href="http://json.org/">http://json.org/</a><br>
+    <a target="_blank" href="http://en.wikipedia.org/wiki/Json">http://en.wikipedia.org/wiki/Json</a><br>
+  </div>
+
+  <div class="faq" style="display:none;"></div>
+    -->
+</div>
+
+<div id="auto">
+  <div id="contents">
+    <div id="jsonformatter"></div>
+
+    <div id="splitter">
+      <br><br><br>
+      <button id="toForm" onclick="main.formatterToEditor();" title="JSON to Editor"> &gt;&gt; </button><br>
+      <br>
+      <button id="toJSON" onclick="main.editorToFormatter();" title="Editor to JSON"> &lt;&lt; </button>
+    </div>
+
+    <div id="jsoneditor"></div>
+    
+    <script type="text/javascript">
+      main.load();
+      main.resize();
+    </script>
+
+  </div>
+</div>
+
+<div id="footer">
+  <div id="footer-inner">
+    <a href="http://jsoneditoronline.org" class="footer">JSON Editor Online ( OFFLINED :-D )</a> 
+    &bull; 
+    <a href="changelog.txt" target="_blank" class="footer">Version 0.9.9</a> 
+    &bull; 
+    <a href="NOTICE" target="_blank" class="footer">Copyright 2011-2012 Jos de Jong</a>
+    &bull; 
+    <a href="http://hictech.com" target="_blank" class="footer">Offline by HicTech</a>
+    &bull; 
+    <a href="LICENSE" target="_blank" class="footer">Released under Apache 2.0 license</a> 
+  </div>
+</div>
+
+<script type="text/javascript">
+  main.resize();
+
+  var domAd = document.getElementById('ad');
+  JSONEditor.Events.addEventListener(domAd, "click", function (event) {
+    var target = event.target || event.srcElement;
+    if (target == domAd) {
+      domAd.parentNode.removeChild(domAd);
+      main.resize();
+    }
+  });
+</script>
+
+</body>
+</html>

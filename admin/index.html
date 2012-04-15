@@ -1,0 +1,478 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title> jsOn Kit ;-)</title>
+
+	<link rel="stylesheet" href="../css/jsonEditor/jsonEditor.css">
+	<link rel="stylesheet" href="../css/button/button.css">
+	
+	<script src="htmlplus_core/lib/_.js"></script>
+	<script src="htmlplus_core/lib/_string.js"></script>
+	<script src="htmlplus_core/lib/jquery-v1.7.1.js"></script>
+	<script src="htmlplus_core/lib/yepnope.js"></script>
+	
+	<script src="htmlplus_core/_plus.js"></script>
+	<!-- <script src="htmlplus_core/json_kit.js"></script> -->
+
+	<script src="jsOn/json_creator.js"></script>
+    <!-- <script src="jsOn/json_objects.js"></script> -->
+
+	<script src="htmlplus_core/htmlplus.js"></script>
+	<script src="htmlplus_core/htmlplus_client.js"></script>  
+
+
+<script>
+	function test(){
+		testStructs();
+		console.log("Tipi testati!");
+		testSystemTypes();
+		testTemplates();
+		extractDataInfo();
+		refreshRoot();
+		console.log("Test OK!");
+	}
+	
+	function testSystemTypes(){
+		var type = H.type("array",{ type: "date" });
+		var obj = type.random();
+		console.log("Me random array: [");
+		_.each(obj, function(date){
+			console.log(_.dateStr(date));
+		});
+		console.log("]");
+		
+		type = H.type("provarr");
+		obj = type.random();
+		console.log("Guarda qui: "+_.toString(obj));
+	}
+	
+	function extractDataInfo(){
+		var obj = H.dataInfo();
+		jsOn.set("data_info",obj);
+		console.log("Estratte le informazioni sui dati");
+	}
+</script>
+
+<script>
+
+	function printJsOnObjects(){
+		var root = jsOn.root();
+		if(!!root){
+			var objs = _.keys(root);
+			var html="<div class='json_objects_listing'>";
+			for(var i=0;i<objs.length;i++){
+				if(i>0)
+					html+=", ";
+				html+="<button class='BUTTON small' onclick='editJsOn(\""+objs[i]+"\");'>"+objs[i]+"</button>";
+			}
+			html+="</div>";
+			$("#json_objects_root_div").html(html);
+			$("#object_editing_div").empty();
+			$("#editing_object_name").val("")
+		}
+	} 
+
+	function editJsOn(id){
+		try{
+			jsOn.create(id,"object_editing_div",null,true,true);
+		}catch(err){alert(err);}
+	}
+	
+	function newObject(){
+		var name = $("#editing_object_name").val();
+		if(_.isString(name) && name.length>0)
+			editJsOn(name);
+		else
+			alert("Inserisci un name per l'oggetto!");
+	}
+	
+	function importJSON(button){
+		var val = $("#json_kit_import_textarea").val();
+		try{
+			jsOn.importObjects(val);
+			jsOn.removeObjectPrinting(button);
+			printJsOnObjects();
+		}catch(err){
+			alert("Import error: "+err);
+		}
+	}
+	
+	function printJSON(){
+		var json = jsOn.exportObjects();
+		var html = "<div>Ecco il JSON dell'oggetto ROOT "+
+				"<button class='BUTTON small' onclick='jsOn.removeObjectPrinting(this);'>Rimuovi</button> "+
+				"<button class='BUTTON small' onclick='importJSON(this);'>Importa</button> : "+
+				"<textarea id='json_kit_import_textarea' cols='200' rows='10' style='width:600'>"+json+"</textarea></div>";
+		$("#json_global").after($(html));
+	}
+	
+	function refreshRoot(){
+		printJsOnObjects();
+	}
+	
+	function readStorage(){
+		jsOn.readObjects();
+		printJsOnObjects();
+	}
+	
+	function writeStorage(){
+		jsOn.writeObjects();
+		printJsOnObjects();
+	}
+	
+	function deleteStorage(){
+		jsOn.deleteObjects();
+		printJsOnObjects();
+	}
+	
+	function initJsOnKit(){
+		readStorage();
+	}
+	
+</script>
+
+
+<script>
+	function saveTMTypes(){
+		jsOn.save("types");
+		var tm_types = jsOn.get("types");
+		tm_types = jsOn.cleanObject(tm_types);
+		var types_str = _.toString(tm_types);
+		var types_file_in_webapp = "tm_types.js";
+		H.ajax("saveFile.jsp",function(data, callback_params, xhr, status){
+			if(data=="true"){
+				console.log("Tipi salvati sulla home della webapp (file: "+types_file_in_webapp+")");
+				if(_.isNotEmptyString(TM_TYPES_DEVELOPMENT_PATH)){
+					H.ajax("saveFile.jsp",function(data, callback_params, xhr, status){
+						if(data=="true"){
+							console.log("Tipi salvati anche nell'ambiente development (file: "+TM_TYPES_DEVELOPMENT_PATH+")");
+							if(_.isNotEmptyString(TM_STRUCTS_DEVELOPMENT_PATH)){
+								
+								var structs = preProcessStructs(tm_types);
+								structs_str = _.toString(structs);
+								
+								H.ajax("saveFile.jsp",function(data, callback_params, xhr, status){
+									if(data=="true"){
+										console.log("Structs salvati nell'ambiente development (file: "+TM_STRUCTS_DEVELOPMENT_PATH+")");
+										alert("Tipi e structs salvati!");
+									}
+									else
+										alert("(Salvataggio structs su "+TM_STRUCTS_DEVELOPMENT_PATH+": ) -> "+data);
+								}, function(errors, callback_params, xhr, status){
+									alert("(Salvataggio structs su "+TM_STRUCTS_DEVELOPMENT_PATH+": ) -> Errors: "+_.toString(errors));
+								}, {
+									data: {
+										file: TM_STRUCTS_DEVELOPMENT_PATH,
+										content: structs_str
+									},
+									type: "POST"
+								});
+							}
+							else
+								alert("Tipi salvati!");
+						}
+						else
+							alert("(Salvataggio su "+TM_TYPES_DEVELOPMENT_PATH+": ) -> "+data);
+					}, function(errors, callback_params, xhr, status){
+						alert("(Salvataggio su "+TM_TYPES_DEVELOPMENT_PATH+": ) -> Errors: "+_.toString(errors));
+					}, {
+						data: {
+							file: TM_TYPES_DEVELOPMENT_PATH,
+							content: types_str
+						},
+						type: "POST"
+					});
+				}
+				else
+					alert("Tipi salvati!");
+			}
+			else
+				alert(data);
+		}, function(errors, callback_params, xhr, status){
+			alert("Errors: "+_.toString(errors));
+		}, {
+			data: {
+				file: types_file_in_webapp,
+				content: types_str
+			},
+			type: "POST"
+		});
+	}
+	
+	
+	function saveTMConfig(){
+		jsOn.save("configuration");
+		var tm_conf = jsOn.get("configuration");
+		tm_conf = jsOn.cleanObject(tm_conf);
+		var conf_str = _.toString(tm_conf);
+		var conf_file_in_webapp = "tm_config.js";
+		H.ajax("saveFile.jsp",function(data, callback_params, xhr, status){
+			if(data=="true"){
+				console.log("Configurazione salvata sulla home della webapp (file: "+conf_file_in_webapp+")");
+				if(_.isNotEmptyString(TM_CONFIG_DEVELOPMENT_PATH)){
+					H.ajax("saveFile.jsp",function(data, callback_params, xhr, status){
+						alert("(Salvataggio su "+TM_CONFIG_DEVELOPMENT_PATH+": ) -> "+data);
+					}, function(errors, callback_params, xhr, status){
+						alert("(Salvataggio su "+TM_CONFIG_DEVELOPMENT_PATH+": ) -> Errors: "+_.toString(errors));
+					}, {
+						data: {
+							file: TM_CONFIG_DEVELOPMENT_PATH,
+							content: conf_str
+						},
+						type: "POST"
+					});
+				}
+				else
+					alert("Configurazione salvata!");
+			}
+			else
+				alert(data);
+		}, function(errors, callback_params, xhr, status){
+			alert("Errors: "+_.toString(errors));
+		}, {
+			data: {
+				file: conf_file_in_webapp,
+				content: conf_str
+			},
+			type: "POST"
+		});
+	}
+	
+	function preProcessStructs(types){
+		var keys = _.keys(types);
+		var ret = {};
+		_.each(keys, function(key){
+			ret[key] = H.adjustStruct(types[key]);
+		});
+		return ret;
+	}
+</script>
+
+
+<script>
+	
+	function initStructs(){
+		// Structs importing...
+		var structs = {
+			structs: H.H_structs
+		};
+		jsOn.set("system",structs);
+		console.log("Esportati gli struct!");
+	}
+	
+	function testStructs(){
+		H.defineType("address",{
+			synth: function(){
+				var sep = "; ";
+				return this.val("address")+sep+this.val("postal_code")+sep+this.val("city")+sep+this.val("province")+sep+this.val("country");
+			},
+			ciao: function(saluto){
+				this.super("OI MONKIA ("+saluto+")");
+				//console.log("WEI ZI, "+saluto+"!");
+			},
+			init: function(){
+				console.log("Initing an address object");
+			}
+		},{
+			init: function(){
+				console.log("Initing an address type");
+			}
+		});
+		var address_type = H.type("address");
+		var city_field = address_type.field("city");
+		console.log("Creato address: "+_.toString(address_type)+", fields: "+_.toString(address_type.fields())+", city: "+_.toString(city_field));
+		
+		var obj = H.new("address",{city:'Cusenza'});
+		var synth = obj.synth();
+		console.log("Me synth: "+synth);
+		
+		obj = H.type("date").random();
+		console.log("Me random date: "+obj);
+				
+		var address = {
+			H:{ type: "address" },	
+			city:"Zumpano",
+			province: "Cusenza"
+		};
+		H.data("address/gran_sole",address);
+		address = H.obj("address/gran_sole");
+		console.log("Me n'altro synth: "+address.synth());
+		var city = H.obj("address/gran_sole/city");
+		//city.hello("Gianni!");
+		console.log("Ecco la city: "+city.value()+", di tipo "+_.toString(city.type().H.types));
+		
+		//console.log("ME: "+H.path("ciuatu","i","guerra"));
+		
+		//var add_type = H.type("address", args);  var add = H.fn("address")({ indirizzo="via Puccini" });  
+		
+		
+		/*
+		testStruct("unity/creation/date");
+		testStruct("unity/initial_characterization/ASP/white_blood_cells");
+		
+		var s = H.assertStruct("unity/initial_characterization/ASP/white_blood_cells/Puffolandia",true,false);
+		s["oi"] = {
+			"brutto": "fesso!"	
+		}
+		testStruct("unity/initial_characterization");
+
+		var type = H.defineType("unity/initial_characterization/ASP/white_blood_cells/Puffolandia",{ 
+			salutami: function(person){ 
+				console.log("Salutam' a "+person);
+			}
+		},{
+			sommaSbagliata: function(primo, secondo){
+				console.log("Ecco qui: "+primo+" + "+secondo+" fa "+(primo+secondo+_.random(5,250,true))); 
+			}
+		});
+		console.log("Ecco il type: "+_.toString(type));
+		type = H.findStruct("unity/initial_characterization/ASP/white_blood_cells/Puffolandia");
+		type.functions.salutami("mammata!");
+		type.static.functions.sommaSbagliata(34,78);
+		
+		
+		H.initTypes();
+		type = H.findStruct("primitive");
+		console.log("Ecco il type: "+_.toString(type));
+		*/
+	}
+	
+	function testStruct(path){
+		var type = H.findStruct(path);
+		console.log("Ecco "+path+": "+JSON.stringify(type));
+	}
+
+	
+	
+	function testTemplates(){
+		var obj = {
+			saluto: "Ciao.... ;-)",
+			pizzillo : "davvero?!?",
+			misurata: ["MALE", "VERAMENTE", "male!"]
+		};
+		var args = {
+			msg: "a-stronzo!"	
+		}
+		
+		var tag = H.tag("provina",obj,args);
+		tag.ziomio("OI ZI!");
+		tag.$();
+		console.log("Tag provina ok");
+
+		var printed = H.print(obj,args);
+		$("#provetta").html(printed);
+
+		obj = H.new("address", {
+			city: "Amantea",
+			address: "viale Margheritas"
+		});
+
+		printed = H.print(obj,"edit",args);
+		//printed = H.print("address/gran_sole","edit",args);
+		$("#provetta").append(printed);
+		
+		console.log("oggetto stampato");
+		
+		/*
+		var $elem = H.print(obj, "H_view");
+		$("#body_div").html($elem);
+		*/
+	}
+</script>
+
+
+<script>
+
+	function goRepoRandomGo(){
+		var numbers = {};
+		var entities = _.keys(random_creator);
+		_.each(entities, function(entity){
+			numbers[entity] = $("#random_"+entity).val();
+		});
+		//console.log("RepoRandom: "+JSON.stringify(numbers));
+		_.each(numbers, function(how_many, type){
+			for(var i=0;i<how_many;i++)
+				createRandom(type);
+			console.log("Creati "+how_many+" "+type);
+		});
+		console.log("GoRepoRandomGo!!! :-D");
+	}
+	
+	function clearRepoRandom(){
+		_.each(random_creator, function(fn, key){
+			jsOn.set("repo_random",key,{});
+			console.log("Cancellati "+key);
+		});
+		console.log("Cancellato RepoRandom... :-(");
+	}
+	
+	H.onLoad(function(){
+		// init jsonKit functions 
+		initJsOnKit();
+		// init H structs 
+		initStructs();
+		// init Random rep functions
+		initRandomRep();
+		// add random creation inputs...
+		var str = "";
+		_.each(random_creator, function(fn, key){
+			str+="<div style='float:left'>"+_.capitalize(key)+": <input id='random_"+key+"' value='5'>, </div>";
+		});
+		if(str.length>0)
+			str = str.substring(0, str.lastIndexOf(','))+"</div>";
+		$("[data-json-repo-random-inputs]").html(str);
+		//$("#body_div").html(str);
+		
+		// Testing...
+		test();
+	});
+</script>
+
+	
+
+</head>
+<body>
+
+<div id='body_div'>
+	
+	<div id='json_global'> 
+		<div style='background-color:#4488FF' onclick="jsOn.toggle(this,true,'[data-json-global]')">jsOn Kit ;-)</div>
+		<div style='display:none' data-json-global='true'>
+		    <div>
+			    <span style='background-color:#AACCFF' onclick='printJSON();'> { Importa/Esporta JSON degli oggetti } </span>
+				<span style='background-color:#AACCFF' onclick='refreshRoot();'> { Aggiorna lista oggetti } </span>
+				<span style='background-color:#AACCFF' onclick='readStorage();'> { Leggi oggetti dallo storage } </span>
+				<span style='background-color:#AACCFF' onclick='writeStorage();'> { Scrivi oggetti sullo storage } </span>
+				<span style='background-color:#AACCFF' onclick='deleteStorage();'> { Cancella lo storage } </span>
+				<span style='background-color:#AACCFF' >
+					<input id='editing_object_name' type='text' value='' /><span onclick='newObject();'> { Aggiungi oggetto } </span>
+				</span>
+			</div>
+			<div>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<span style='background-color:#99BBEE' onclick='saveTMTypes();'> { Salva tipi TM } </span>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<span style='background-color:#99BBEE' onclick='saveTMConfig();'> { Salva configurazione TM } </span>
+			</div>
+			<div>			
+				<span>
+				 	<div onclick="jsOn.toggle(this,true,'[data-json-objects]')">Oggetti presenti:</div>
+				 	<div data-json-objects='true'> 
+						<div style='background-color:#AACCFF'  id='json_objects_root_div'>
+						</div>
+						<div id='object_editing_div'>
+						</div>
+					</div>
+				</span>
+			</div>
+		</div>
+	</div>
+	
+	
+	
+</div>
+
+
+</body>
+</html>
+

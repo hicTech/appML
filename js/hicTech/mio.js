@@ -1,5 +1,6 @@
 
 function getSiteMap(obj){
+	alert(obj.panels)
 	if(! wellFormattedData(obj) )
 		return false
 	var html = '<navigation height="44px"></navigation>';
@@ -18,7 +19,7 @@ function getPanel(obj){
 }
 
 function getPage(obj){
-	var scrollable = (obj.scrollable == false ) ? "not_scrollable" : "";
+	var scrollable = (obj.scrollable == "false" ) ? "not_scrollable" : "";
 	var html = '<page id="'+ obj.id +'" title="'+ obj.title +'" >';
 			   html += '<div class="dynamic_scroll_container '+scrollable+'">';
 					for (i in obj.contents){
@@ -38,6 +39,8 @@ function getGenericContent(obj){
 		return getCarousel(obj);
 	if(obj.type == "map")
 		return getMap(obj);
+	if(obj.type == "button")
+		return getButton(obj);
 }
 
 
@@ -103,6 +106,9 @@ function getParagraph(obj){
 	return '<div class="info" style="text-align:justify">'+ obj.text +'</div>';	
 }
 
+function getButton(obj){
+	return '<p><br><a href="#" data-linked_page_id="'+obj.linked_page_id+'" class="whiteButton">'+obj.label+'</a><br></p>';	
+}
 
 function getCarousel(obj){
 
@@ -131,12 +137,12 @@ function getCarousel(obj){
 	
 	var width = size[device].width;
 	var height = size[device].height;
-	var html = '<div style="margin:0px auto; width:'+ width +'px;">'+
+	var html = '<div style="margin:10px auto; width:'+ width +'px;">'+
 					'<div class="auto_Carousel" width="'+ width +'" height="'+ height +'">'+
 						'<ul style=" height:'+ height +'px">';
 						for(i in obj.items){
 							var caption = ( !! obj.items[i].caption ) ? "<div>"+obj.items[i].caption+"</div>" : "";
-							html += '<li style="display:none;">'+ caption +'<img style="width:'+ width +'px; height:'+ height +'px" src="'+obj.prePath+'/'+deviceFolder+'/'+obj.items[i].url+'"/></li>';
+							html += '<li style="display:none;">'+ caption +'<img style="width:'+ width +'px; height:'+ height +'px" data-src="'+obj.prePath+'/'+deviceFolder+'/'+obj.items[i].url+'"/></li>';
 						}
 		  				html += '</ul>'+
 					'</div>'+
@@ -156,7 +162,7 @@ function getMap(obj){
 	var id = obj.points[0].lat+'_'+obj.points[0].lon;
 	var id = id.replace(".","").replace(".","").replace(".","").replace(".","");
 	var html = '<div >'+
-						'<div style="position:absolute; top:5px; right:-40px;  width:160px; z-index:50000">'+
+						'<div style="position:absolute; top:25px; right:-40px;  width:160px; z-index:50000">'+
 								'<div id="side-bar-map-risultati_'+id+'" style="'+points_menu_visibility+'">';
 								
 									// user position (bruxelles expo)

@@ -1,0 +1,57 @@
+.json_content_marker {
+		display: none
+	}
+	.json_container {}
+	.json_container > div {
+		display: block
+	}
+	.json_object {
+		border: solid 1px #DDD;
+		padding: 7px;
+		overflow: auto;
+	}
+	.json_array {}
+	.json_primitive {}
+	.json_object_field {
+		margin-left: 12px;
+		background-color: rgba(0, 0, 0, 0.045);
+		overflow: auto;
+		padding: 2px;
+		font-size: 11px;
+		clear: both;
+	}
+	.json_array_item {
+		clear: both;
+		margin-left: 30px
+	}
+	.json_edit_box {
+		margin-left: 20px
+	}
+	.json_edit_box > div{
+		margin-left: 20px
+	}
+	.json_header > div{
+		margin-left: 20px
+	}
+	.json_edit_box_field {
+		float: left
+	}
+	.json_label {
+		float: left
+	}
+	.json_button {
+		float: left
+	}
+	.field_prefix {
+		float: left;
+		clear: both;	
+	}
+	.field_suffix {
+		float: left;
+		clear: both
+	}
+	.field_separator {
+		float: left
+	}
+	.upload_iframe_container {}
+	.upload_iframe {}

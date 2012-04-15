@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
-<title>appML 1.0</title>
+<title>FishInItaly</title>
 
 <link href="packaging/favicon.ico" rel="shortcut icon">
 <meta content="yes" name="apple-mobile-web-app-capable">
@@ -42,6 +42,7 @@
 <script type="text/javascript" charset="utf-8" src="js/plugins/_.js"></script>
 <script type="text/javascript" charset="utf-8" src="js/hicTech/appManager.js"></script>
 <script type="text/javascript" charset="utf-8" src="js/plugins/spin.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/plugins/lazyImg.js"></script>
 
 <link rel="stylesheet" href="jmap2.1/mapStyle.css" type="text/css" media="screen" /> 
 <script src="http://maps.google.com/maps/api/js?v=3.3&amp;sensor=false" type="text/javascript"></script> 
@@ -56,6 +57,7 @@
 <script>
 
 function appMLReady() {
+	
 	
 	
 	if(appML.getEnviroment().isIPad){
@@ -105,8 +107,11 @@ function appMLReady() {
 				executeAutomaticScroll(page_id)
 				setTimeout(function(){
 					appML.goTo("#"+page_id);
+					downloadImages(appML.getCurrentPage());
+					bindButtonClick(appML.getCurrentPage());
 					executeAutomaticCarousel(appML.getCurrentPage());
 					executeAutomaticMap(appML.getCurrentPage());
+					
 				},150);
 				setTimeout(function(){
 					appML.appManagerHideLoading();
@@ -167,8 +172,33 @@ function appMLReady() {
   					});
 	}
 	
+	function bindButtonClick($elem){
+		
+		$elem_button = $elem.find(".whiteButton");
+		
+		var linked_page = $elem_button.attr("data-linked_page_id");
+		if(appML.getEnviroment().isIDevice){
+			$elem_button.bind("tap",function(){
+				appML.goTo("#"+linked_page,"flip");
+			})
+		}
+		else{
+			$elem_button.click(function(){
+				appML.goTo("#"+linked_page,"slide");
+			})
+		}
+		
+	}
 
-
+	function downloadImages($elem){
+		$elem.find("img").each(function(){
+			if($(this).attr("data-src") != ""){
+				$(this).attr("src",$(this).attr("data-src"));
+				$(this).attr("data-src","");
+			}
+			
+		})
+	}
 
 	/*clear url from parameters*/
 	if(window.history.pushState != undefined)

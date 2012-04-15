@@ -748,14 +748,13 @@ ul.individual li a {
 /* @group Info */
 .info {
     background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#ccc), to(#aaa), color-stop(.6,#CCCCCC));
-    font-size: 12px;
+    font-size: 13px;
     line-height: 16px;
     text-align: center;
     text-shadow: rgba(255,255,255,.8) 0 1px 0;
     color: #444;
     padding: 15px;
     border-top: 1px solid rgba(255,255,255,.2);
-    font-weight: bold;
 }
 /* @end */
 

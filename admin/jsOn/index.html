@@ -1,0 +1,166 @@
+<html>
+<head>
+<title> jsOn Kit ;-)</title>
+<script src="_.js"></script>
+<script src="jquery-1.7.1.min.js"></script>
+<script src="json_creator.js"></script>
+<script src="json_objects.js"></script>
+<style>
+	.json_content_marker {
+		display: none
+	}
+	.json_container {}
+	.json_container > div {
+		display: block
+	}
+	.json_object {}
+	.json_array {}
+	.json_primitive {}
+	.json_object_field {
+		clear: both;
+		margin-left: 30px
+	}
+	.json_array_item {
+		clear: both;
+		margin-left: 30px
+	}
+	.json_edit_box {
+		margin-left: 20px
+	}
+	.json_edit_box > div{
+		margin-left: 20px
+	}
+	.json_header > div{
+		margin-left: 20px
+	}
+	.json_edit_box_field {
+		float: left
+	}
+	.json_label {
+		float: left
+	}
+	.json_button {
+		float: left
+	}
+	.field_prefix {
+		float: left;
+		clear: both;	
+	}
+	.field_suffix {
+		float: left;
+		clear: both
+	}
+	.field_separator {
+		float: left
+	}
+	.upload_iframe_container {}
+	.upload_iframe {}
+</style>
+
+<script>
+
+	function printJsOnObjects(){
+		var root = jsOn.root();
+		if(!!root){
+			var objs = _.keys(root);
+			var html="<div class='json_objects_listing'>";
+			for(var i=0;i<objs.length;i++){
+				if(i>0)
+					html+=", ";
+				html+="<span onclick='editJsOn(\""+objs[i]+"\");'>"+objs[i]+"</span>";
+			}
+			html+="</div>";
+			$("#json_objects_root_div").html(html);
+			$("#object_editing_div").empty();
+			$("#editing_object_name").val("")
+		}
+	} 
+
+	function editJsOn(id){
+		jsOn.create(id,"object_editing_div",null,true,true);
+	}
+	
+	function newObject(){
+		var name = $("#editing_object_name").val();
+		if(_.isString(name) && name.length>0)
+			editJsOn(name);
+		else
+			alert("Inserisci un nome per l'oggetto!");
+	}
+	
+	function importJSON(button){
+		var val = $("#json_kit_import_textarea").val();
+		try{
+			jsOn.importObjects(val);
+			jsOn.removeObjectPrinting(button);
+			printJsOnObjects();
+		}catch(err){
+			alert("Import error: "+err);
+		}
+	}
+	
+	function printJSON(){
+		var json = jsOn.exportObjects();
+		var html = "<div>Ecco il JSON dell'oggetto ROOT "+
+				"<span onclick='jsOn.removeObjectPrinting(this);'> { Rimuovi } </span> "+
+				"<span onclick='importJSON(this);'> { Importa } </span> : "+
+				"<textarea id='json_kit_import_textarea' cols='200' rows='10' style='width:600'>"+json+"</textarea></div>";
+		$("#json_global_buttons").after($(html));
+	}
+	
+	function refreshRoot(){
+		printJsOnObjects();
+	}
+	
+	function readStorage(){
+		jsOn.readObjects();
+		printJsOnObjects();
+	}
+	
+	function writeStorage(){
+		jsOn.writeObjects();
+		printJsOnObjects();
+	}
+	
+	function deleteStorage(){
+		jsOn.deleteObjects();
+		printJsOnObjects();
+	}
+	
+	function init(){
+		readStorage();
+	}
+	
+</script>
+
+</head>
+<body onload='init();'>
+
+<div id='body_div'>
+	jsOn Kit ;-)   
+	<span id='json_global_buttons'> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<span onclick='printJSON();'> { Importa/Esporta JSON degli oggetti } </span>
+		<span onclick='refreshRoot();'> { Aggiorna lista oggetti } </span>
+		<span onclick='readStorage();'> { Leggi oggetti dallo storage } </span>
+		<span onclick='writeStorage();'> { Scrivi oggetti sullo storage } </span>
+		<span onclick='deleteStorage();'> { Cancella lo storage } </span>
+	</span>
+		
+ 	<br/><br/> 
+ 	Oggetti presenti: 
+	<div id='json_objects_root_div'>
+		
+	</div>
+	<div id='json_global_buttons'>
+		<input id='editing_object_name' type='text' value='' /><span onclick='newObject();'> { Aggiungi oggetto } </span>
+	</div>
+	<br/><br/>
+	<div id='object_editing_div'>
+	</div>
+</div>
+
+<br/><br/><br/><br/><br/><br/><br/><br/>
+
+</body>
+</html>
+

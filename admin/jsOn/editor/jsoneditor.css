@@ -1,0 +1,222 @@
+
+.jsoneditor-field, .jsoneditor-value, .jsoneditor-field-readonly {
+  border: 1px solid transparent;
+  min-height: 16px;  
+  padding-right: 20px;
+}
+
+.jsoneditor-value:focus, .jsoneditor-field:focus {
+  background-color: #FFFFBF;
+  border: 1px solid lightgray;
+}
+
+.jsoneditor-value:hover, .jsoneditor-field:hover {
+  border: 1px solid lightgray;
+}
+
+.jsoneditor-field-readonly:hover {
+  border: 1px solid white;
+}
+
+.jsoneditor-readonly {
+  color: gray;
+}
+
+button.jsoneditor-collapsed {
+  background: url('img/treeRightTriangleBlack.png') no-repeat center;
+}
+
+button.jsoneditor-expanded {
+  background: url('img/treeDownTriangleBlack.png') no-repeat center;
+}
+
+button.jsoneditor-invisible {
+  visibility: hidden;
+  background: none;
+}
+
+button.jsoneditor-remove, button.jsoneditor-append, button.jsoneditor-duplicate,
+    button.jsoneditor-collapsed, button.jsoneditor-expanded, 
+    button.jsoneditor-invisible {
+  width: 24px;
+  height: 24px;
+  padding: 0px;
+  margin: 0px;
+  border: none;
+}
+
+button.jsoneditor-remove {
+  background: url('img/delete_gray.png') no-repeat center;
+}
+
+button.jsoneditor-remove:hover {
+  background: url('img/delete_red.png') no-repeat center;
+}
+
+button.jsoneditor-append {
+  background: url('img/add_gray.png') no-repeat center;
+}
+
+button.jsoneditor-append:hover {
+  background: url('img/add_green.png') no-repeat center;
+}
+
+button.jsoneditor-duplicate {
+  background: url('img/duplicate_gray.png') no-repeat center;
+}
+
+button.jsoneditor-duplicate:hover {
+  background: url('img/duplicate_blue.png') no-repeat center;
+}
+
+div.jsoneditor-frame {
+  border: 1px solid #97B0F8;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  position: relative;
+}
+
+div.jsoneditor-content {
+}
+
+table.jsoneditor-table {
+  border-collapse: collapse;
+  border-spacing: 0px;
+  width: 100%;
+}
+
+table.jsonformatter-table {
+  border-collapse: collapse;
+  border-spacing: 0px;
+  width: 100%;
+  height: 40px;
+}
+
+div.jsonformatter-content {
+  width: 100%;
+  height: 100%;
+  margin: -40px 0px 0px 0px;
+  padding: 40px 0px 0px 0px;
+
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+  
+  overflow: hidden;
+}
+
+textarea.jsonformatter-textarea {
+  width: 100%;
+  height: 100%;
+  margin: 0px;
+  
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+  
+  border: none;
+  background-color: white;
+  resize: none;
+}
+
+/* TODO
+tr.jsoneditor-tr:hover {
+  background-color: #FFFFBF;
+  border-top: 0px solid white;
+}
+*/
+
+td.jsoneditor-td-drag {
+  vertical-align: middle;
+}
+
+a.jsoneditor-drag {
+  width: 16px;
+  height: 16px;
+  /*margin: 4px 0px;*/
+  background: url('img/dots_gray.gif') top center;
+  background-repeat: repeat-y;
+  display: block;
+  cursor: move;
+}
+
+div.jsoneditor-dragimage {
+  background-color: yellow;
+  border: 1px solid black;
+  border-radius: 3px;
+  color: black;
+  
+  padding: 5px;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+}
+
+tr.jsoneditor-tr-selected {
+  background-color: #FFFFBF;
+}
+
+th.jsoneditor-th {
+  color: #1A1A1A;
+  font-weight: bold;
+  background-color: #D5DDF6;
+  border-bottom: 1px solid #97B0F8;
+  text-align: left;
+  height: 32px;
+  
+  position: relative;
+  left: 0px;
+  top: 0px;
+}
+
+tr, th, td {
+    padding: 0px;
+    margin: 0px;
+}
+
+td.jsoneditor-td {
+  color: #1A1A1A;
+  vertical-align: middle;
+}
+
+th.jsoneditor-th, td.jsoneditor-td {
+  padding: 0px 3px;
+}
+
+td.jsoneditor-td-edit {
+  background-color: #F5F5F5;
+  padding: 0px;
+}
+
+td.jsoneditor-td-tree {
+  color: #1A1A1A;
+  vertical-align: middle;
+}
+
+td.jsoneditor-droparea {
+  height: 24px;
+
+  border-top: 1px dashed gray;
+  border-bottom: 1px dashed gray;
+  background-color: #FFFF80;
+}
+
+.jsoneditor-field, .jsoneditor-value, .jsoneditor-td, .jsoneditor-th, 
+    .jsoneditor-type, .jsoneditor-button {
+  font-size: 11pt;
+}
+
+
+select.jsoneditor-type {
+  color: #4D4D4D;
+  margin: 1px;
+}
+
+/* needed for drag and drop in Safari */
+[draggable=true] {
+  -moz-user-select:none;
+  -khtml-user-drag: element;
+}
