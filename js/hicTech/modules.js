@@ -24,6 +24,7 @@ function getPage(obj){
 					for (i in obj.contents){
 						html += getGenericContent(obj.contents[i]);
 					}
+					html +=(appML.getEnviroment().isSmartphone) ? "<div style='margin-top:10px'><img src='css/hicTech/img/loghetto_iphone.png'/></div>" : "";
 				html +='</div>';
 		html +="</page>";
 	return html;		

@@ -3292,7 +3292,6 @@
 					success: function(data) {
 						
 						
-						
 						if(appML.getEnviroment().language.indexOf("en") != -1){
 							$("content").html( getSiteMap(appMLjson_en) );
 						}
