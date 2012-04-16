@@ -1,6 +1,5 @@
 
 function getSiteMap(obj){
-	alert(obj.panels)
 	if(! wellFormattedData(obj) )
 		return false
 	var html = '<navigation height="44px"></navigation>';

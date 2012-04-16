@@ -246,7 +246,7 @@ appMLjson = {
 				{
 				"type": "menu",
 				"className": "arrow_list",
-				"title": "Aziende in Calabria",
+				"title": "Aziende in Abruzzo",
 				"items": [
 					{
 					"className": "arrow",
@@ -331,7 +331,7 @@ appMLjson = {
 				{
 				"type": "menu",
 				"className": "arrow_list",
-				"title": "Aziende in Calabria",
+				"title": "Aziende in Emilia Romagna",
 				"items": [
 					{
 					"className": "arrow",
@@ -1028,7 +1028,7 @@ appMLjson = {
 				{
 				"type": "menu",
 				"className": "arrow_list",
-				"title": "Aziende in Calabria",
+				"title": "Aziende in Friuli",
 				"items": [
 					{
 					"className": "arrow",
@@ -1181,7 +1181,7 @@ appMLjson = {
 				{
 				"type": "menu",
 				"className": "arrow_list",
-				"title": "Aziende in Calabria",
+				"title": "Aziende in Lombardia",
 				"items": [
 					{
 					"className": "arrow",
@@ -2184,7 +2184,7 @@ appMLjson = {
 				{
 				"type": "menu",
 				"className": "arrow_list",
-				"title": "Aziende in Calabria",
+				"title": "Aziende in Sicilia",
 				"items": [
 					{
 					"className": "arrow",
@@ -2541,7 +2541,7 @@ appMLjson = {
 				{
 				"type": "menu",
 				"className": "arrow_list",
-				"title": "Aziende in Calabria",
+				"title": "Aziende in Toscana",
 				"items": [
 					{
 					"className": "arrow",
@@ -2762,7 +2762,7 @@ appMLjson = {
 				{
 				"type": "menu",
 				"className": "arrow_list",
-				"title": "Aziende in Calabria",
+				"title": "Aziende in Veneto",
 				"items": [
 					{
 					"className": "arrow",
@@ -3280,7 +3280,7 @@ appMLjson = {
 				{
 				"type": "menu",
 				"className": "arrow_list",
-				"title": "Aziende in Calabria",
+				"title": "Atro",
 				"items": [
 					{
 					"className": "arrow",
@@ -3393,7 +3393,7 @@ var options = {
 				  width: 3, // The line thickness
 				  radius: 7, // The radius of the inner circle
 				  rotate: 0, // The rotation offset
-				  color: '#00acef', // #rgb or #rrggbb
+				  color: '#fff', // #rgb or #rrggbb
 				  speed: 1, // Rounds per second
 				  trail: 38, // Afterglow percentage
 				  shadow: false, // Whether to render a shadow
@@ -3404,7 +3404,7 @@ var options = {
 				  left: 'auto' // Left position relative to parent in px
 		},
 		loading_timeout : 25000, // milliseconds after force overlay hidding
-		initial_loading_fake_delay:(!! urlParameters.initial_loading_fake_delay) ? urlParameters.initial_loading_fake_delay : 200,
+		initial_loading_fake_delay:(!! urlParameters.initial_loading_fake_delay) ? urlParameters.initial_loading_fake_delay : 2400,
 		sidebar:(!! urlParameters.sidebar) ? urlParameters.sidebar : "26%",
 		sidebarScrollable:false,
 		add2HomeTooltip: true,
