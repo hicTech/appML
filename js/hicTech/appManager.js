@@ -3290,7 +3290,16 @@
 					url: appMLconf.data_json_path,
 					dataType:'script',
 					success: function(data) {
-						$("content").html( getSiteMap(appMLjson) );
+						
+						
+						if(appML.getEnviroment().language.indexOf("en") != -1){
+							$("content").html( getSiteMap(appMLjson_en) );
+						}
+						else{
+							$("content").html( getSiteMap(appMLjson) );
+						}
+						
+						
 						( !! appMLconf.sidebar && appML.getEnviroment().isTablet && appML.getOrientation()=="Landscape") ? $("appml").append("<left width='"+appMLconf.sidebar+"' scrollable='"+appMLconf.sidebarScrollable+"'/>") : $("appml").append("<toolbar/>")
 						realAppMLtranslation();
 					}
@@ -3694,6 +3703,7 @@
         	var hei_por=win_dim.portrait.height;
         	var nav = navigator,
 			isIDevice = (/iphone|ipod|ipad/gi).test(nav.platform),
+			isIPhone = (/iphone|iPhone/gi).test(nav.platform),
 			isAndroid = (nav.userAgent).indexOf("Android") != -1,
 			isAndroidTablet = ((nav.userAgent).indexOf("Android") != -1 && nav.userAgent.indexOf("Mobile") == -1),
 			isIPad = (/ipad/gi).test(nav.platform),
@@ -3711,6 +3721,7 @@
 
 			var enviroment={
 				isIDevice : isIDevice,
+				isIPhone:isIPhone,
 				isAndroid : isAndroid,
 				isAndroidTablet : isAndroidTablet,
 				isIPad : isIPad,
