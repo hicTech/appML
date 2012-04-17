@@ -3668,13 +3668,21 @@
         };
         
         this.screenResize = function(){
-            //this.appMLResize();
            
-            if(window.history.pushState != undefined) 
-            	location.href="index.html?initial_loading_fake_delay=20&forcedStartingPage="+this.getCurrentPageId();
-            else{
-            	location.href="index.html";
-            }
+          
+          	if(appMLconf.refreshOnOrientationChange){
+          		if(window.history.pushState != undefined) {
+            	 location.href="index.html?initial_loading_fake_delay=20&forcedStartingPage="+this.getCurrentPageId();
+	            }
+	            else{
+	            	location.href="index.html";
+	            }
+          	}
+          	else{
+          		 this.appMLResize();
+          	}
+          
+            
         };
         
         this.appMLResize = function(){

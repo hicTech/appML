@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
-<title>FishInItaly</title>
+<title>appML</title>
 
 <link href="packaging/favicon.ico" rel="shortcut icon">
 <meta content="yes" name="apple-mobile-web-app-capable">
@@ -65,6 +65,7 @@ function appMLReady() {
 		var id = $(this).attr("id");
 		if(appMLconf.forcedStartingPage){
 			setTimeout(function(){
+				animateContentPage();
 				executeAutomaticScroll(id);
 			},1300)
 		}
@@ -93,16 +94,13 @@ function appMLReady() {
 		
 		if ( !_.include(scrollableRegister, page_id) ){
 			appML.appManagerShowLoading();
+			
+			
 			setTimeout(function(){
-				
 				executeAutomaticScroll(page_id)
 				setTimeout(function(){
 					appML.goTo("#"+page_id);
-					downloadImages(appML.getCurrentPage());
-					bindButtonClick(appML.getCurrentPage());
-					executeAutomaticCarousel(appML.getCurrentPage());
-					executeAutomaticMap(appML.getCurrentPage());
-					
+					animateContentPage();
 				},150);
 				setTimeout(function(){
 					appML.appManagerHideLoading();
@@ -112,6 +110,14 @@ function appMLReady() {
 		else{
 			appML.goTo("#"+page_id);
 		}
+	}
+	
+	function animateContentPage(){
+		var $page = appML.getCurrentPage();
+		downloadImages($page);
+		bindButtonClick($page);
+		executeAutomaticCarousel($page);
+		executeAutomaticMap($page);
 	}
 	
 	function executeAutomaticScroll(page_id){

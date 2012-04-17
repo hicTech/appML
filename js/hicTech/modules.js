@@ -1,7 +1,7 @@
 
 function getSiteMap(obj){
-	//if(! wellFormattedData(obj) )
-		//return false
+	if(appMLconf.dataValidation && ! wellFormattedData(obj) )
+		return false
 	var html = '<navigation height="44px"></navigation>';
 			for(i in obj.panels)
 				html += getPanel(obj.panels[i]);
@@ -106,7 +106,6 @@ function getParagraph(obj){
 }
 
 function getButton(obj){
-	alert("we")
 	return '<p><br><a href="#" data-linked_page_id="'+obj.linked_page_id+'" class="whiteButton">'+obj.label+'</a><br></p>';	
 }
 

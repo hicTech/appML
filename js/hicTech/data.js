@@ -21,18 +21,51 @@ appMLjson = {
 			"contents": [
 				{
 				"type": "paragraph",
-				"text": "<div style='min-height:90px'><img style='float:left; margin:0px 10px 0px 0px' src='themes/fishInItaly/img/stand.png'><b>Fish in Italy</b> è una partnership di sviluppo tra imprese che appartengono a due territori del sud:la Calabria e la Sicilia.</div>"
+				"text": "<div style='min-height:90px'><img style='float:left; margin:0px 10px 0px 0px' src='packaging/apple-touch-icon-57x57.png'><b>Fish in Italy</b> è una partnership di sviluppo tra imprese che appartengono a due territori del sud:la Calabria e la Sicilia.</div>"
+				},
+				{
+				"type": "button",
+				"label": " vedi su mappa",
+				"linked_page_id": "cala"
 			},
 				{
 				"type": "menu",
 				"className": "arrow_list",
 				"title": "Aziende in Italia",
 				"items": [
-					
+							{
+								"className": "arrow",
+								"linked_page_id": "cala",
+								"label": "Calabria"
+							}	
+						]
+				},
+				{
+				"type": "carousel",
+				"items_type": "foto",
+				"prePath": "http://www.fishinitaly.eu/app/aziende/calabria/stocco",
+				"sizes": {
+					"tablet": {
+						"width": "580",
+						"height": "386"
+					},
+					"desktop": {
+						"width": "700",
+						"height": "465"
+					},
+					"smartphone": {
+						"width": "310",
+						"height": "206"
+					}
+				},
+				"items": [
 					{
-					"className": "arrow",
-					"linked_page_id": "cala",
-					"label": "Calabria"
+					"url": "1.jpg",
+					"caption": "Relax Chair"
+				},
+					{
+					"url": "2.jpg",
+					"caption": "Stool"
 				}
 				]
 			}
@@ -44,7 +77,7 @@ appMLjson = {
 			"contents": [
 				{
 				"type": "paragraph",
-				"text": "<div style='min-height:110px'><img style='float:left; margin:0px 10px 0px 0px' src='themes/fishInItaly/img/regioni/calabria.png'><b>pagina Calabria</b> è una partnership di sviluppo tra imprese che appartengono a due territori del sud:la Calabria e la Sicilia.</div>"
+				"text": "<div style='min-height:110px'><img style='float:left; margin:0px 10px 0px 0px' src='packaging/apple-touch-icon-57x57.png'><b>pagina Calabria</b> è una partnership di sviluppo tra imprese che appartengono a due territori del sud:la Calabria e la Sicilia.</div>"
 			},
 				{
 				"type": "menu",
@@ -73,7 +106,7 @@ appMLjson = {
 				"type": "paragraph",
 				"text": "<div style='min-height:110px'><b>Fish in Italy</b> è una partnership di sviluppo tra imprese che appartengono a due territori del sud:la Calabria e la Sicilia.</div>"
 			},
-				{
+			{
 				"type": "button",
 				"label": " vedi su mappa",
 				"linked_page_id": "map_ross_2000"
@@ -81,7 +114,7 @@ appMLjson = {
 				{
 				"type": "carousel",
 				"items_type": "foto",
-				"prePath": "http://www.fishinitaly.eu/app/aziende/calabria/ross_2000",
+				"prePath": "immGallery/interior",
 				"sizes": {
 					"tablet": {
 						"width": "580",
@@ -298,7 +331,9 @@ var options = {
 		initial_loading_fake_delay:(!! urlParameters.initial_loading_fake_delay) ? urlParameters.initial_loading_fake_delay : 150,
 		sidebar:(!! urlParameters.sidebar) ? urlParameters.sidebar : "26%",
 		sidebarScrollable:false,
+		dataValidation: true, // check for id duplications, link consistency etc...
 		add2HomeTooltip: true,
+		refreshOnOrientationChange: true,
 		forcedStartingPage: (!! urlParameters.forcedStartingPage) ? urlParameters.forcedStartingPage : null
 	};
 

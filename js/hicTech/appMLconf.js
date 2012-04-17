@@ -28,6 +28,8 @@ var appMLconf = {
 	data_json_path:"js/hicTech/data.js",//'http://www.hictech.com/hostatiDaHicTech/appMLproxy/deckmatisData.js',
 	loading_timeout : 25000, // milliseconds after force overlay hidding
 	initial_loading_fake_delay:2200,
+	dataValidation: true, // check for id duplications, link consistency etc...
+	refreshOnOrientationChange: true,
 	sidebar:"32%",
 	sidebarScrollable:false,
 	add2HomeTooltip: false,
