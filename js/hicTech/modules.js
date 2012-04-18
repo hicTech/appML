@@ -112,7 +112,6 @@ function getButton(obj){
 function getCarousel(obj){
 
 	var device = (appML.getEnviroment().isDesktop) ? "desktop" : (appML.getEnviroment().isSmartphone) ? "smartphone" : "tablet";
-	//var size = (!!size && appML.getEnviroment().isDesktop) ? obj.sizes["desktop"] : (!!size && appML.getEnviroment().isSmartphone) ? obj.sizes["smartphone"] : (!!size) ? obj.sizes["tablet"] : undefined; 
 	
 	var width,height;
 	

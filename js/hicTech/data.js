@@ -43,7 +43,7 @@ appMLjson = {
 				{
 				"type": "carousel",
 				"items_type": "foto",
-				"prePath": "http://www.fishinitaly.eu/app/aziende/calabria/stocco",
+				"prePath": "img/interior",
 				"sizes": {
 					"tablet": {
 						"width": "580",
@@ -253,12 +253,12 @@ appMLjson = {
 				},
 					{
 					"className": "arrow",
-					"linked_page_id": "ricettario",
+					"linked_page_id": "eventi",
 					"label": "Il Ricettario"
 				},
 					{
 					"className": "arrow",
-					"linked_page_id": "uff_stampa",
+					"linked_page_id": "eventi",
 					"label": "L'ufficio Stampa"
 				}
 				]
@@ -267,26 +267,6 @@ appMLjson = {
 		},
 			{
 			"id": "eventi",
-			"title": "Titolo pag1",
-			"contents": [
-				{
-				"type": "paragraph",
-				"text": "<div style='min-height:90px'><img style='float:left; margin:0px 10px 0px 0px' src='themes/fishInItaly/img/regioni/calabria.png'><b>Fish in Italy</b> è una partnership di sviluppo tra imprese che appartengono a due territori del sud:la Calabria e la Sicilia.</div>"
-			}
-			]
-		},
-			{
-			"id": "ricettario",
-			"title": "Titolo pag1",
-			"contents": [
-				{
-				"type": "paragraph",
-				"text": "<div style='min-height:90px'><img style='float:left; margin:0px 10px 0px 0px' src='themes/fishInItaly/img/regioni/calabria.png'><b>Fish in Italy</b> è una partnership di sviluppo tra imprese che appartengono a due territori del sud:la Calabria e la Sicilia.</div>"
-			}
-			]
-		},
-			{
-			"id": "uff_stampa",
 			"title": "Titolo pag1",
 			"contents": [
 				{
