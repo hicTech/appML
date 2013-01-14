@@ -3292,8 +3292,13 @@
 					success: function(data) {
 						
 						
-						if(appML.getEnviroment().language.indexOf("en") != -1){
-							$("content").html( getSiteMap(appMLjson_en) );
+						if(appMLconf.localization){
+							if(appML.getEnviroment().language.indexOf("en") != -1){
+								$("content").html( getSiteMap(appMLjson_en) );
+							}
+							else{
+								$("content").html( getSiteMap(appMLjson) );
+							}
 						}
 						else{
 							$("content").html( getSiteMap(appMLjson) );
@@ -3616,13 +3621,15 @@
         };
         
         function ifYouCanShowAdd2Home(){
-        	if(!appMLconf.add2HomeTooltip)
-        		return false;
-			$("script").each(function(){
-				if($(this).attr("src"))
-					if($(this).attr("src").indexOf("add2home.js")!=-1)
-						showAdd2Home();
-			});
+        	
+        	if(appMLconf.add2HomeTooltip){
+        		$("script").each(function(){
+					if($(this).attr("src"))
+						if($(this).attr("src").indexOf("add2home.js")!=-1)
+							showAdd2Home();
+				});
+        	}
+			
 		}
 		
 		function inizializeLoading(){
@@ -4705,14 +4712,5 @@ $(document).ready(function(){
 	    
 	
 })
-
-
-
-
-
-
-
-
-
 
 

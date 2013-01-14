@@ -156,7 +156,7 @@ appMLjson = {
 					"description": "Informazioni primo punto",
 					"lat": "42.85734888",
 					"lon": "9.2678847"
-				}
+					}
 				]
 			}
 			]
@@ -312,7 +312,7 @@ var options = {
 		sidebar:(!! urlParameters.sidebar) ? urlParameters.sidebar : "26%",
 		sidebarScrollable:false,
 		dataValidation: true, // check for id duplications, link consistency etc...
-		add2HomeTooltip: true,
+		add2HomeTooltip: false,
 		refreshOnOrientationChange: true,
 		forcedStartingPage: (!! urlParameters.forcedStartingPage) ? urlParameters.forcedStartingPage : null
 	};
