@@ -91,7 +91,7 @@
             }
     
     
-            //addPageToHistory(_this.currentPage);    cioè:
+            //addPageToHistory(_this.currentPage);    cio√®:
             var pageId = _this.currentPage.attr('id');
             var pageTitle = _this.currentPage.attr('data-title');
             
@@ -195,7 +195,7 @@
 
             // Set viewport
             if (jQTSettings.fixedViewport) {
-                hairextensions += '<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;"/>';
+                hairextensions += '<meta name="viewport" content="user-scalable=0, initial-scale=1.0" />';
             }
             // Set full-screen
             if (jQTSettings.fullScreen) {
