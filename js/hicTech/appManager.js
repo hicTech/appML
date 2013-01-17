@@ -89,7 +89,7 @@
             }
     
     
-            //addPageToHistory(_this.currentPage);    cioè:
+            //addPageToHistory(_this.currentPage);    cio‚àö¬Æ:
             var pageId = _this.currentPage.attr('id');
             var pageTitle = _this.currentPage.attr('data-title');
             
@@ -188,7 +188,7 @@
 
             // Set viewport
             if (jQTSettings.fixedViewport) {
-                hairextensions += '<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;"/>';
+            	hairextensions += '<meta name="viewport" content="user-scalable=0, initial-scale=1.0" />';
             }
             // Set full-screen
             if (jQTSettings.fullScreen) {
@@ -3284,13 +3284,12 @@
         }
         
         function translateAppML(){
-        
-	        if(!! appMLconf.data_json_path ){
+        	
+	        if(!! appMLconf.data_json_path){
 		        $.ajax({
 					url: appMLconf.data_json_path,
 					dataType:'script',
 					success: function(data) {
-						
 						
 						if(appMLconf.localization){
 							if(appML.getEnviroment().language.indexOf("en") != -1){

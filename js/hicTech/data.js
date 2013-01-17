@@ -21,7 +21,7 @@ appMLjson = {
 			"contents": [
 				{
 				"type": "paragraph",
-				"text": "<div style='min-height:90px'><img style='float:left; margin:0px 10px 0px 0px' src='packaging/apple-touch-icon-57x57.png'><b>Fish in Italy</b> è una partnership di sviluppo tra imprese che appartengono a due territori del sud:la Calabria e la Sicilia.</div>"
+				"text": "<div style='min-height:90px'><img style='float:left; margin:0px 10px 0px 0px' src='packaging/apple-touch-icon-57x57.png'><b>Fish in Italy</b> ‚àö¬Æ una partnership di sviluppo tra imprese che appartengono a due territori del sud:la Calabria e la Sicilia.</div>"
 				},
 				{
 				"type": "button",
@@ -77,7 +77,7 @@ appMLjson = {
 			"contents": [
 				{
 				"type": "paragraph",
-				"text": "<div style='min-height:110px'><img style='float:left; margin:0px 10px 0px 0px' src='packaging/apple-touch-icon-57x57.png'><b>pagina Calabria</b> è una partnership di sviluppo tra imprese che appartengono a due territori del sud:la Calabria e la Sicilia.</div>"
+				"text": "<div style='min-height:110px'><img style='float:left; margin:0px 10px 0px 0px' src='packaging/apple-touch-icon-57x57.png'><b>pagina Calabria</b> ‚àö¬Æ una partnership di sviluppo tra imprese che appartengono a due territori del sud:la Calabria e la Sicilia.</div>"
 			},
 				{
 				"type": "menu",
@@ -104,7 +104,7 @@ appMLjson = {
 			"contents": [
 				{
 				"type": "paragraph",
-				"text": "<div style='min-height:110px'><b>Fish in Italy</b> è una partnership di sviluppo tra imprese che appartengono a due territori del sud:la Calabria e la Sicilia.</div>"
+				"text": "<div style='min-height:110px'><b>Fish in Italy</b> ‚àö¬Æ una partnership di sviluppo tra imprese che appartengono a due territori del sud:la Calabria e la Sicilia.</div>"
 			},
 			{
 				"type": "button",
@@ -143,31 +143,12 @@ appMLjson = {
 			]
 		},
 			{
-			"id": "map_ross_2000",
-			"title": "Mappa",
-			"scrollable": "false",
-			"contents": [
-				{
-				"type": "map",
-				"points_menu": "true",
-				"points": [
-					{
-					"label": "Un punto",
-					"description": "Informazioni primo punto",
-					"lat": "42.85734888",
-					"lon": "9.2678847"
-					}
-				]
-			}
-			]
-		},
-			{
 			"id": "stocco",
 			"title": "Stocco & Stocco",
 			"contents": [
 				{
 				"type": "paragraph",
-				"text": "<div style='min-height:110px'><b>Fish in Italy</b> è una partnership di sviluppo tra imprese che appartengono a due territori del sud:la Calabria e la Sicilia.</div>"
+				"text": "<div style='min-height:110px'><b>Fish in Italy</b> ‚àö¬Æ una partnership di sviluppo tra imprese che appartengono a due territori del sud:la Calabria e la Sicilia.</div>"
 			},
 				{
 				"type": "button",
@@ -248,17 +229,17 @@ appMLjson = {
 				"items": [
 					{
 					"className": "arrow",
-					"linked_page_id": "eventi",
+					"linked_page_id": "map_stocco",
 					"label": "Gli Eventi"
 				},
 					{
 					"className": "arrow",
-					"linked_page_id": "eventi",
+					"linked_page_id": "home_page",
 					"label": "Il Ricettario"
 				},
 					{
 					"className": "arrow",
-					"linked_page_id": "eventi",
+					"linked_page_id": "altro_pagina_2",
 					"label": "L'ufficio Stampa"
 				}
 				]
@@ -271,7 +252,7 @@ appMLjson = {
 			"contents": [
 				{
 				"type": "paragraph",
-				"text": "<div style='min-height:90px'><img style='float:left; margin:0px 10px 0px 0px' src='themes/fishInItaly/img/regioni/calabria.png'><b>Fish in Italy</b> è una partnership di sviluppo tra imprese che appartengono a due territori del sud:la Calabria e la Sicilia.</div>"
+				"text": "<div style='min-height:90px'><img style='float:left; margin:0px 10px 0px 0px' src='themes/fishInItaly/img/regioni/calabria.png'><b>Fish in Italy</b> ‚àö¬Æ una partnership di sviluppo tra imprese che appartengono a due territori del sud:la Calabria e la Sicilia.</div>"
 			}
 			]
 		}
@@ -312,7 +293,7 @@ var options = {
 		sidebar:(!! urlParameters.sidebar) ? urlParameters.sidebar : "26%",
 		sidebarScrollable:false,
 		dataValidation: true, // check for id duplications, link consistency etc...
-		add2HomeTooltip: false,
+		add2HomeTooltip: true,
 		refreshOnOrientationChange: true,
 		forcedStartingPage: (!! urlParameters.forcedStartingPage) ? urlParameters.forcedStartingPage : null
 	};

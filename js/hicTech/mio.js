@@ -47,7 +47,7 @@ function wellFormattedData(obj){
 		if(! _.include(arrPanelId,obj.panels[i].id))
 			arrPanelId.push(obj.panels[i].id);
 		else{
-			alert("ATTENZIONE!\n\n il panel 'id:"+obj.panels[i].id+"'\n\n è presente più di una volta");
+			alert("ATTENZIONE!\n\n il panel 'id:"+obj.panels[i].id+"'\n\n ‚Äö√†√∂¬¨√Ü presente pi‚Äö√†√∂≈ì√Ñ di una volta");
 			return false;		
 		}
 		
@@ -61,7 +61,7 @@ function wellFormattedData(obj){
 				}
 			}
 			else{
-				alert("ATTENZIONE!\n\n la page 'id:"+obj.panels[i].pages[j].id+"'\n\n è presente più di una volta");
+				alert("ATTENZIONE!\n\n la page 'id:"+obj.panels[i].pages[j].id+"'\n\n ‚Äö√†√∂¬¨√Ü presente pi‚Äö√†√∂≈ì√Ñ di una volta");
 				return false;		
 			}
 			
@@ -75,7 +75,7 @@ function wellFormattedData(obj){
 	}
 	
 	if( _.difference(arrPageId , arrLink) != ""){
-		console.log("WARNING!! non esistono link per le pagine :\n"+  _.difference(arrPageId , arrLink));
+		console.log("WARNING!! Non esistono link per le pagine :\n"+  _.difference(arrPageId , arrLink));
 	}
 	
 	return true;
@@ -142,34 +142,7 @@ function getCarousel(obj){
 	return html;
 	
 }
-
-
-/*
- * RANDOM
- */
-
-/*
-for(var i=0;i<20;i++){
-						appMLjson.panels[0].pages[1].contents[1].items.push({
-														className:"arrow",
-														linked_page_id:"home_pagina_"+i,
-														label:"vai a pag "+i
-												});
-												
-						appMLjson.panels[0].pages.push({
-										id:"home_pagina_"+i,
-										title:"vai a pag"+i,
-										contents:[
-											{
-												type: "paragraph",
-												text: "<b>Ben venuto a pag "+i+"</b><br>I'm wait for you!!!!Some text long, very long... too long!<b>Titolo pag 2</b><br>Some text long,Some text long, very long... too long!<b>Titolo pag 2</b><br>Some text long,Some text long, very long... too long!<b>Titolo pag 2</b><br>Some text long,Some text long, very long... too long!<b>Titolo pag 2</b><br>Some text long,"
-											}
-										]
-								});
-					}
-					
-*/					
-					
+				
 					
 
 
