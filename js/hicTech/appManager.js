@@ -91,7 +91,7 @@
             }
     
     
-            //addPageToHistory(_this.currentPage);    cio√®:
+            //addPageToHistory(_this.currentPage);    cio‚àö¬Æ:
             var pageId = _this.currentPage.attr('id');
             var pageTitle = _this.currentPage.attr('data-title');
             

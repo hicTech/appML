@@ -2,12 +2,40 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<meta name="viewport" content="initial-scale=1.0">
+
+<meta content="yes" name="apple-mobile-web-app-capable">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
 <title>appML 1.0</title>
 
 
 <link rel="apple-touch-startup-image" href="packaging/iPad_spalshScreen.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px)" />
-<link rel="apple-touch-startup-image" href="packaging/iPhone_spalshScreen.png"  />
+
+
+<!-- iPhone ICON -->
+<link href="packaging/iPhone-retina" sizes="57x57" rel="apple-touch-icon">
+<!-- iPad ICON-->
+<link href="packaging/apple-touch-icon-72x72.png" sizes="72x72" rel="apple-touch-icon">
+<!-- iPhone (Retina) ICON-->
+<link href="packaging/apple-touch-icon-114x114.png" sizes="114x114" rel="apple-touch-icon">
+<!-- iPad (Retina) ICON-->
+<link href="packaging/apple-touch-icon-144x144.png" sizes="144x144" rel="apple-touch-icon">
+
+
+<!-- iPhone SPLASHSCREEN-->
+<link href="packaging/iPhone/apple-touch-startup-image-320x460.png" media="(device-width: 320px)" rel="apple-touch-startup-image">
+<!-- iPhone (Retina) SPLASHSCREEN-->
+<link href="packaging/iPhone-retina/apple-touch-startup-image-640x920.png" rel="apple-touch-startup-image" media="(max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2)" />
+<!-- iPhone5-->
+<link href="packaging/iPhone5/apple-touch-startup-image-640x1096.png" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image">
+<!-- iPad (portrait) SPLASHSCREEN-->
+<link href="packaging/iPad-portrait/apple-touch-startup-image-768x1004.png" media="(device-width: 768px) and (orientation: portrait)" rel="apple-touch-startup-image">
+<!-- iPad (landscape) SPLASHSCREEN-->
+<link href="packaging/iPad-landscape/apple-touch-startup-image-748x1024.png" media="(device-width: 768px) and (orientation: landscape)" rel="apple-touch-startup-image">
+<!-- iPad (Retina, portrait) SPLASHSCREEN-->
+<link href="packaging/apple-touch-startup-image-1536x2008.png" media="(device-width: 1536px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image">
+<!-- iPad (Retina, landscape) SPLASHSCREEN-->
+<link href="packaging/apple-touch-startup-image-1496x2048.png" media="(device-width: 1536px)  and (orientation: landscape) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image">
 
 
 
@@ -181,7 +209,15 @@ function appMLReady() {
 	
 	$("#snapTo3").click(function (event) {
 		appML.snapTo("dynamic_carousel", 2, 0);
-	})
+	});
+	
+	
+	setInterval(function(){
+		//appML.scrollable($("#list"), 'alert("fatto")', appML.getPageWidth(), appML.getPageHeight())
+
+	},3000);
+	
+	
 }
 
 </script>
@@ -195,7 +231,7 @@ function appMLReady() {
 	<loading></loading>
 	
 	<add2home></add2home>
-
+	<sidebar></sidebar>
 	<content>
 	
 		<navigation height="44px"></navigation>
@@ -204,7 +240,7 @@ function appMLReady() {
 			<panel id="features" title="appML" icon="appML.png" >
 				
 			
-			<page id="list" title="homeTitle" scrollable="true" >
+			<page id="list" title="homeTitle" scrollable="true">
 				<ul class="arrow_list">
 					<li class="box_title">appML features</li>
 					<li class="arrow"><a href="#" id="load_indicator">Loading (5 sec.)</a></li>
@@ -281,26 +317,28 @@ function appMLReady() {
 				<div id="dyn_page_content">
 				<ul class="arrow_list">
 					<div class="info" style='text-align:left'>
-						<b>You can dynamically append content to HTML element and create an iScroll with a specific width and height and callback </br></br></b>
-						<code style='font-size:10px'>
-							
-							
-							
-							$.ajax({</br>
-			  					&nbsp;url: 'LICENSE.txt',</br>
-			  					&nbsp;success: function(data) {</br>
-			    					&nbsp;ajax_result="This is a local txt file"+data;</br>	 		
-							 		&nbsp;$("#dyn_page").find("code").append(ajax_result);</br>
-							 		&nbsp;appML.goTo("#dyn_page");</br>
-		 							&nbsp;appML.makeScrollable( // make an HTML element scrollable </br> 
-		 							&nbsp;&nbsp;&nbsp;$("#dyn_page_content"),</br>
-		 							&nbsp;&nbsp;&nbsp;'appML.appManagerHideLoading()',</br>
-		 							&nbsp;&nbsp;&nbsp; appML.getPageWidth(),</br>
-		 							&nbsp;&nbsp;&nbsp; appML.getPageHeight()</br>
-		 						&nbsp;&nbsp;);</br>
-								}</br>
-							});</br></br>
-						</code>
+						<div>
+							<b>You can dynamically append content to HTML element and create an iScroll with a specific width and height and callback </br></br></b>
+							<code style='font-size:10px'>
+								
+								
+								
+								$.ajax({</br>
+				  					&nbsp;url: 'LICENSE.txt',</br>
+				  					&nbsp;success: function(data) {</br>
+				    					&nbsp;ajax_result="This is a local txt file"+data;</br>	 		
+								 		&nbsp;$("#dyn_page").find("code").append(ajax_result);</br>
+								 		&nbsp;appML.goTo("#dyn_page");</br>
+			 							&nbsp;appML.makeScrollable( // make an HTML element scrollable </br> 
+			 							&nbsp;&nbsp;&nbsp;$("#dyn_page_content"),</br>
+			 							&nbsp;&nbsp;&nbsp;'appML.appManagerHideLoading()',</br>
+			 							&nbsp;&nbsp;&nbsp; appML.getPageWidth(),</br>
+			 							&nbsp;&nbsp;&nbsp; appML.getPageHeight()</br>
+			 						&nbsp;&nbsp;);</br>
+									}</br>
+								});</br></br>
+							</code>
+						</div>
 					</div>
 				</ul>					
 				</div>
@@ -451,7 +489,7 @@ function appMLReady() {
 			
 		
 			<panel id="carousel" title="Carousel" icon="carousel.png">
-				<page id="carousel_page" title="Carousel"> 
+				<page id="carousel_page" title="Carousel" scrollable="true"> 
 					<div style="padding:0px 0px 0px 0px">
 						<div class="info" style="text-align:justify">
 						<div style="width:100%">
