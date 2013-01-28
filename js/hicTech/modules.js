@@ -40,6 +40,8 @@ function getGenericContent(obj){
 		return getMap(obj);
 	if(obj.type == "button")
 		return getButton(obj);
+	if(obj.type == "test")
+		return getTest(obj);
 }
 
 
@@ -52,7 +54,7 @@ function wellFormattedData(obj){
 		if(! _.include(arrPanelId,obj.panels[i].id))
 			arrPanelId.push(obj.panels[i].id);
 		else{
-			alert("ATTENZIONE!\n\n il panel 'id:"+obj.panels[i].id+"'\n\n è presente più di una volta");
+			alert("ATTENZIONE!\n\n il panel 'id:"+obj.panels[i].id+"'\n\n ‚Äö√Ñ√∂‚àö√ë‚àö‚àÇ‚Äö√†√∂‚Äö√Ñ‚Ä†‚Äö√†√∂‚Äö√†√á¬¨¬®¬¨¬Æ‚Äö√†√∂‚àö√∫ presente pi‚Äö√Ñ√∂‚àö√ë‚àö‚àÇ‚Äö√†√∂‚Äö√Ñ‚Ä†‚Äö√†√∂‚Äö√†√á‚Äö√¢√†‚àö¬®‚Äö√†√∂‚àö√´ di una volta");
 			return false;		
 		}
 		
@@ -66,7 +68,7 @@ function wellFormattedData(obj){
 				}
 			}
 			else{
-				alert("ATTENZIONE!\n\n la page 'id:"+obj.panels[i].pages[j].id+"'\n\n è presente più di una volta");
+				alert("ATTENZIONE!\n\n la page 'id:"+obj.panels[i].pages[j].id+"'\n\n ‚Äö√Ñ√∂‚àö√ë‚àö‚àÇ‚Äö√†√∂‚Äö√Ñ‚Ä†‚Äö√†√∂‚Äö√†√á¬¨¬®¬¨¬Æ‚Äö√†√∂‚àö√∫ presente pi‚Äö√Ñ√∂‚àö√ë‚àö‚àÇ‚Äö√†√∂‚Äö√Ñ‚Ä†‚Äö√†√∂‚Äö√†√á‚Äö√¢√†‚àö¬®‚Äö√†√∂‚àö√´ di una volta");
 				return false;		
 			}
 			
@@ -188,6 +190,73 @@ function getMap(obj){
 					'</div> ';
 	return html;
 }
+
+
+
+
+
+function getTest(obj){
+	var ret = "<div class='skillTest' >" ;
+			var test = obj.test;
+			var tot_questions = _.keys(test).length;
+			_.each(test,function(question,index){
+				ret += getQuestion(question,index,tot_questions);
+			});	
+		ret += "</div>" ;
+	return ret;
+}
+
+
+function getQuestion(q,i,tot_questions){
+	var ret  ="<div class='single_question' id='question_number_"+i+"'>"
+			ret +="<div class='timer'><div class='timer_bg'>&nbsp;</div></div>";
+			ret += '<ul class="form question" data-time="'+q.time+'">';
+					ret += '<li class="box_title">'+i+'/'+tot_questions+' - '+ q.question +' </li>';
+					var answers = q.answers;
+					_.each(answers,function(answer,index){
+						ret += getAnswer(answer,i,index);
+					});
+			
+			ret +='<li>';
+				ret +='<div>';
+					ret += '<div class="confirm"><a href="#"  style="font-size:14px" class="blueButton">Conferma</a></div>';
+				ret +='</div>';
+			ret +='</li>';
+			ret +='<li>'
+				ret +='<div class="confirm_buttons" style="display:none">';
+					ret += '<div class="deny"><a href="#" style="font-size:14px" class="redButton">Annulla</a></div>';
+				ret +='</div>';
+			ret +='</li>';
+			
+			ret += '</ul>';
+			ret +='<div class="info" style="text-align:center"><font style="font-size:14px">Area Tematica: </font> '+q.thematic_area+' &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font style="font-size:14px">Complessit√†: </font> '+q.complexity+'</div>';
+		ret +="</div>";
+	return ret;
+}
+
+function getAnswer(a,i,j){
+	return '<li class="question_li">'+
+				'<div class="question_li_table" style="display:table; width:100%">'+
+					'<div class="question_li_row" style="display:table-row">'+
+						'<div class="question_li_cell toggle_text" >'+ a +'</div>'+
+						'<div class="question_li_cell toggle_container">'+
+							'<div class="toggle">'+
+								'<input type="checkbox" name="toggle" value="'+ i +'_'+ j +'">'+
+							'</div>'+
+						'</div>'+
+					'</div>'+
+				'</div>'+
+			'</li>';
+}
+
+
+
+
+
+
+
+
+
 
 
 /*

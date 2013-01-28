@@ -10,6 +10,98 @@
 
 appMLjson = {
 	"panels": [
+	           
+		{
+			"id": "skillTestPanel",
+			"title": "Skill Test",
+			"icon": "altro.png",
+			"pages": [
+				{
+					"id": "skillTestHomePage",
+					"title": "Titolo pag3",
+					"contents": [
+						{
+							"type": "paragraph",
+							"text": "<b>we</b><br>we!!!!"
+						},
+						{
+							"type": "button",
+							"label": "avvia skill test",
+							"linked_page_id": "skillTest"
+						}
+						
+					]
+				},
+				{
+					"id": "skillTest",
+					"scrollable" : "false",
+					"title": "Skill Test",
+					"contents": [
+						{
+							"type": "test",
+							"test":	{
+									    1:{
+									        	"question" : "√à necessario che l'autobus sia in orario affinch√© Alessandra arrivi in tempo all'appuntamento‚Äù:",
+									        	"time" : 10,
+									        	"thematic_area" : "Problem solving",
+									        	"complexity" : "Alta",
+									            "answers" :  {
+									                	1: "Quantificare (in termini di livelli potenziali di fatturato o di numero di unit√† di prodotto vendibili) ",
+									                    2: "Quantificare (in termini di livelli potenziali di fatturato o di numero di unit√† di prodotto vendibili) ",
+									                    3: "Quantificare (in termini di livelli potenziali di fatturato o di numero di unit√† di prodotto vendibili) ",
+									                    4: "Quantificare (in termini di livelli potenziali di fatturato o di numero di unit√† di prodotto vendibili) "
+									            }
+									    },
+									    2:{
+									        	"question" : "Quanti omicidi hai commesso?",
+									        	"time" : 45,
+									        	"thematic_area" : "Menaging",
+									        	"complexity" : "Media",
+									            "answers" :  {
+									                	1: "10",
+									                    2: "2",
+									                    3: "Nessuno"   
+									            }
+									    },
+									    3:{
+								        	"question" : "Se io sono io e tu sei tu, chi ‚àö¬Æ pi‚àöœÄ fesso io o tu?",
+								        	"time" : 22,
+								        	"thematic_area" : "Bobbino",
+								        	"complexity" : "Alta",
+								            "answers" :  {
+								                	1: "io",
+								                    2: "tu",
+								                    3: "tu e mammata"   
+								            }
+									    },
+									    4:{
+								        	"question" : "A chi vuoi pi‚àöœÄ bene, a mamma o pap‚àö‚Ä†?",
+								        	"time" : 33,
+								        	"thematic_area" : "Salame",
+								        	"complexity" : "Bassa",
+								            "answers" :  {
+								                	1: "mamma",
+								                    2: "pap‚àö‚Ä†",
+								                    3: "a suarta"   
+								            }
+									    }
+									}
+
+						}
+						
+					]
+				}
+			]
+		},      
+	           
+	           
+	           
+	           
+	           
+	           
+	           
+	           
+	           
 		{
 		"id": "home",
 		"title": "Home",
@@ -21,7 +113,7 @@ appMLjson = {
 			"contents": [
 				{
 				"type": "paragraph",
-				"text": "<div style='min-height:90px'><img style='float:left; margin:0px 10px 0px 0px' src='packaging/apple-touch-icon-57x57.png'><b>Fish in Italy</b> ‚àö¬Æ una partnership di sviluppo tra imprese che appartengono a due territori del sud:la Calabria e la Sicilia.</div>"
+				"text": "<div style='min-height:90px'><img style='float:left; margin:0px 10px 0px 0px' src='packaging/apple-touch-icon-57x57.png'><b>Fish in Italy</b> ‚Äö√Ñ√∂‚àö√ë‚àö‚àÇ‚Äö√†√∂‚àö√´‚Äö√†√∂‚Äö√†√á‚Äö√Ñ√∂‚àö‚Ä†‚àö‚àÇ‚Äö√Ñ√∂‚àö√ë‚Äö√Ñ‚Ä†‚Äö√Ñ√∂‚àö‚Ä†‚àö‚àÇ‚Äö√Ñ√∂‚àö‚Ä†‚àö√°¬¨¬®¬¨¬Æ¬¨¬®¬¨√Ü‚Äö√Ñ√∂‚àö‚Ä†‚àö‚àÇ‚Äö√†√∂‚àö‚à´ una partnership di sviluppo tra imprese che appartengono a due territori del sud:la Calabria e la Sicilia.</div>"
 				},
 				{
 				"type": "button",
@@ -77,7 +169,7 @@ appMLjson = {
 			"contents": [
 				{
 				"type": "paragraph",
-				"text": "<div style='min-height:110px'><img style='float:left; margin:0px 10px 0px 0px' src='packaging/apple-touch-icon-57x57.png'><b>pagina Calabria</b> ‚àö¬Æ una partnership di sviluppo tra imprese che appartengono a due territori del sud:la Calabria e la Sicilia.</div>"
+				"text": "<div style='min-height:110px'><img style='float:left; margin:0px 10px 0px 0px' src='packaging/apple-touch-icon-57x57.png'><b>pagina Calabria</b> ‚Äö√Ñ√∂‚àö√ë‚àö‚àÇ‚Äö√†√∂‚àö√´‚Äö√†√∂‚Äö√†√á‚Äö√Ñ√∂‚àö‚Ä†‚àö‚àÇ‚Äö√Ñ√∂‚àö√ë‚Äö√Ñ‚Ä†‚Äö√Ñ√∂‚àö‚Ä†‚àö‚àÇ‚Äö√Ñ√∂‚àö‚Ä†‚àö√°¬¨¬®¬¨¬Æ¬¨¬®¬¨√Ü‚Äö√Ñ√∂‚àö‚Ä†‚àö‚àÇ‚Äö√†√∂‚àö‚à´ una partnership di sviluppo tra imprese che appartengono a due territori del sud:la Calabria e la Sicilia.</div>"
 			},
 				{
 				"type": "menu",
@@ -104,7 +196,7 @@ appMLjson = {
 			"contents": [
 				{
 				"type": "paragraph",
-				"text": "<div style='min-height:110px'><b>Fish in Italy</b> ‚àö¬Æ una partnership di sviluppo tra imprese che appartengono a due territori del sud:la Calabria e la Sicilia.</div>"
+				"text": "<div style='min-height:110px'><b>Fish in Italy</b> ‚Äö√Ñ√∂‚àö√ë‚àö‚àÇ‚Äö√†√∂‚àö√´‚Äö√†√∂‚Äö√†√á‚Äö√Ñ√∂‚àö‚Ä†‚àö‚àÇ‚Äö√Ñ√∂‚àö√ë‚Äö√Ñ‚Ä†‚Äö√Ñ√∂‚àö‚Ä†‚àö‚àÇ‚Äö√Ñ√∂‚àö‚Ä†‚àö√°¬¨¬®¬¨¬Æ¬¨¬®¬¨√Ü‚Äö√Ñ√∂‚àö‚Ä†‚àö‚àÇ‚Äö√†√∂‚àö‚à´ una partnership di sviluppo tra imprese che appartengono a due territori del sud:la Calabria e la Sicilia.</div>"
 			},
 			{
 				"type": "button",
@@ -148,7 +240,7 @@ appMLjson = {
 			"contents": [
 				{
 				"type": "paragraph",
-				"text": "<div style='min-height:110px'><b>Fish in Italy</b> ‚àö¬Æ una partnership di sviluppo tra imprese che appartengono a due territori del sud:la Calabria e la Sicilia.</div>"
+				"text": "<div style='min-height:110px'><b>Fish in Italy</b> ‚Äö√Ñ√∂‚àö√ë‚àö‚àÇ‚Äö√†√∂‚àö√´‚Äö√†√∂‚Äö√†√á‚Äö√Ñ√∂‚àö‚Ä†‚àö‚àÇ‚Äö√Ñ√∂‚àö√ë‚Äö√Ñ‚Ä†‚Äö√Ñ√∂‚àö‚Ä†‚àö‚àÇ‚Äö√Ñ√∂‚àö‚Ä†‚àö√°¬¨¬®¬¨¬Æ¬¨¬®¬¨√Ü‚Äö√Ñ√∂‚àö‚Ä†‚àö‚àÇ‚Äö√†√∂‚àö‚à´ una partnership di sviluppo tra imprese che appartengono a due territori del sud:la Calabria e la Sicilia.</div>"
 			},
 				{
 				"type": "button",
@@ -209,7 +301,7 @@ appMLjson = {
 			]
 	},
 		
-		{
+	{
 		"id": "altro",
 		"title": "Altro",
 		"icon": "altro.png",
@@ -252,7 +344,7 @@ appMLjson = {
 			"contents": [
 				{
 				"type": "paragraph",
-				"text": "<div style='min-height:90px'><img style='float:left; margin:0px 10px 0px 0px' src='themes/fishInItaly/img/regioni/calabria.png'><b>Fish in Italy</b> ‚àö¬Æ una partnership di sviluppo tra imprese che appartengono a due territori del sud:la Calabria e la Sicilia.</div>"
+				"text": "<div style='min-height:90px'><img style='float:left; margin:0px 10px 0px 0px' src='themes/fishInItaly/img/regioni/calabria.png'><b>Fish in Italy</b> ‚Äö√Ñ√∂‚àö√ë‚àö‚àÇ‚Äö√†√∂‚àö√´‚Äö√†√∂‚Äö√†√á‚Äö√Ñ√∂‚àö‚Ä†‚àö‚àÇ‚Äö√Ñ√∂‚àö√ë‚Äö√Ñ‚Ä†‚Äö√Ñ√∂‚àö‚Ä†‚àö‚àÇ‚Äö√Ñ√∂‚àö‚Ä†‚àö√°¬¨¬®¬¨¬Æ¬¨¬®¬¨√Ü‚Äö√Ñ√∂‚àö‚Ä†‚àö‚àÇ‚Äö√†√∂‚àö‚à´ una partnership di sviluppo tra imprese che appartengono a due territori del sud:la Calabria e la Sicilia.</div>"
 			}
 			]
 		}
@@ -293,7 +385,7 @@ var options = {
 		sidebar:(!! urlParameters.sidebar) ? urlParameters.sidebar : "26%",
 		sidebarScrollable:false,
 		dataValidation: true, // check for id duplications, link consistency etc...
-		add2HomeTooltip: true,
+		add2HomeTooltip: false,
 		refreshOnOrientationChange: true,
 		forcedStartingPage: (!! urlParameters.forcedStartingPage) ? urlParameters.forcedStartingPage : null
 	};

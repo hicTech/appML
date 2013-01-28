@@ -38,6 +38,9 @@
 <script type="text/javascript" charset="utf-8" src="js/hicTech/modules.js"></script>
 <script type="text/javascript" charset="utf-8" src="js/hicTech/appMLconf.js"></script>
 
+<!-- SKILL TEST -->
+<script type="text/javascript" charset="utf-8" src="js/hicTech/skillTestManager.js"></script>
+
 <!-- Plugins -->
 <script type="text/javascript" charset="utf-8" src="js/plugins/add2home/add2home.js"></script>
 <script type="text/javascript" charset="utf-8" src="js/plugins/_.js"></script>
@@ -325,6 +328,7 @@ function appMLReady() {
 		bindButtonClick($page);
 		executeAutomaticCarousel($page);
 		executeAutomaticMap($page);
+
 	}
 	
 	function executeAutomaticScroll(page_id){
@@ -335,6 +339,7 @@ function appMLReady() {
 		}
 		
 	}
+
 	
 	function executeAutomaticCarousel($elem){
 		var caros = $elem.find(".auto_Carousel");
@@ -409,6 +414,13 @@ function appMLReady() {
 		window.history.pushState("", "", "index.html");
 	
 	
+	
+	
+	
+	
+	appML.onPage("skillTest", function (page_id) {
+		startSkillTest(0);
+	});
 	
 }
 

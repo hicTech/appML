@@ -713,36 +713,7 @@ ul.individual li a {
 
 /* @end */
 
-/* @group Toggle */
 
-.toggle {
-    width: 94px;
-    position: relative;
-    height: 27px;
-    display: block;
-    overflow: hidden;
-    float: right;
-}
-.toggle input[type="checkbox"]:checked {
-    left: 0px;
-}
-.toggle input[type="checkbox"] {
-    -webkit-appearance: textarea;
-    -webkit-border-radius: 5px;
-    -webkit-tap-highlight-color: rgba(0,0,0,0);
-    -webkit-transition: left .15s;
-    background-color: transparent;
-    background: #fff url(img/on_off.png) 0 0 no-repeat;
-    border: 0;
-    height: 27px;
-    left: -55px;
-    margin: 0;
-    overflow: hidden;
-    position: absolute;
-    top: 0;
-    width: 149px;
-}
-/* @end */
 /* @group Info */
 .info {
     background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#ccc), to(#aaa), color-stop(.6,#CCCCCC));
@@ -812,3 +783,221 @@ ul.metal li.arrow a small {
 /* @end */
 
 
+
+
+
+
+
+
+
+/* QUESTION */
+.single_question{
+	display:none;
+}
+
+
+.question .box_title{
+	font-size:13px;
+	color:#222;
+	text-shadow: none;
+	text-align:left;
+}
+
+.question .box_title .question_number{
+	font-size: 16px;
+	color: #222;
+	margin: 0px 10px 0px 0px;
+	text-shadow: none;
+	background-color: #fff;
+	padding: 4px 4px 4px 3px;
+	border-radius: 14px;
+}
+
+.question_li{
+	padding:6px;
+}
+
+.question .question_li_table{
+	display:table;
+	width:100%;
+}
+
+.question .question_li_row{
+	display:table-row
+}
+
+
+.question .question_li_cell{
+	display:table-cell;
+	vertical-align: middle;
+}
+
+.question .toggle_text{
+	color:#fff;
+	font-size: 11px;
+	padding:0px 10px 0px 0px
+	
+}
+
+.question .toggle_container{
+	width:70px;
+	alignment-adjust:right;
+}
+
+/* TOGGLE */
+
+
+.toggle{
+	background: #f6f8f9;
+	background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2Y2ZjhmOSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjUwJSIgc3RvcC1jb2xvcj0iI2U1ZWJlZSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjUxJSIgc3RvcC1jb2xvcj0iI2Q3ZGVlMyIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNmNWY3ZjkiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+	background: -moz-linear-gradient(top, #f6f8f9 0%, #e5ebee 50%, #d7dee3 51%, #f5f7f9 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f6f8f9), color-stop(50%,#e5ebee), color-stop(51%,#d7dee3), color-stop(100%,#f5f7f9));
+	background: -webkit-linear-gradient(top, #f6f8f9 0%,#e5ebee 50%,#d7dee3 51%,#f5f7f9 100%);
+	background: -o-linear-gradient(top, #f6f8f9 0%,#e5ebee 50%,#d7dee3 51%,#f5f7f9 100%);
+	background: -ms-linear-gradient(top, #f6f8f9 0%,#e5ebee 50%,#d7dee3 51%,#f5f7f9 100%);
+	background: linear-gradient(to bottom, #f6f8f9 0%,#e5ebee 50%,#d7dee3 51%,#f5f7f9 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f6f8f9', endColorstr='#f5f7f9',GradientType=0 );
+		
+	 -khtml-border-radius: 30px;
+	   -moz-border-radius: 30px;
+	    -ms-border-radius: 30px;
+	     -o-border-radius: 30px;
+	-webkit-border-radius: 30px;
+	        border-radius: 30px;
+	
+	-khtml-box-shadow: 0 1px 0 #fff, inset 0 0 2px #3f4c6b, inset 0 1px 0 #d7dee3, inset 0 1px 5px #d7dee3;
+	   -moz-box-shadow: 0 1px 0 #fff, inset 0 0 2px #3f4c6b, inset 0 1px 0 #d7dee3, inset 0 1px 5px #d7dee3;
+	    -ms-box-shadow: 0 1px 0 #fff, inset 0 0 2px #3f4c6b, inset 0 1px 0 #d7dee3, inset 0 1px 5px #d7dee3;
+	     -o-box-shadow: 0 1px 0 #fff, inset 0 0 2px #3f4c6b, inset 0 1px 0 #d7dee3, inset 0 1px 5px #d7dee3;
+	-webkit-box-shadow: 0 1px 0 #fff, inset 0 0 2px #d7dee3, inset 0 1px 0 #d7dee3, inset 0 1px 5px #d7dee3;
+	        box-shadow: 0 1px 0 #fff, inset 0 0 2px #d7dee3, inset 0 1px 0 #d7dee3, inset 0 1px 5px #d7dee3;
+	
+	display: block; /* ...So that we can set a height and width */
+	float: left; /* ...So that it doesn't take up the full width of the page */
+	height: 30px; /* You can change this later if you want */
+	position: relative; /* Required to allow the switch to move around */
+	width: 70px; /* This can be changed later as well */
+
+}
+
+
+.true_or_false{
+	height: 18px; 
+	position: absolute;
+	top:6px;
+	left:7px; 
+	width: 58px; 
+	background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADoAAAASCAYAAAAKRM1zAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAnpJREFUeNrkl12ITVEUx51pGF+JhgcPRhpRZNREeFA8uEWNfEQ8zNQQmlAzXkhhZIq3q0iN8pXJKDLI9wMPmpmkJBIpCnmR1Jg0V+H6rVqnlt3e99ZM59wyq36tzj57n33+Z+2z19pRPp8fMRysfIjjZ8Bi6EzqBY9ns1twVVABL5tbWi4V6T8bNxMG6Pswbi8b5PwRTIXrsCnhYPTBIdgHHQipKyByGa4XbsFNe69skCKr4S7UQH/CQj84c3ciaIVH5CpcF0zSpj9DFVqjX2y+74EJ2Cv9qLGNk5WEsIwRmVGRE02/fyIa6WY0B97CryKTLoBrMM20XYSGJJUiZCzuMthl+wMyus/chvHmXjs08Y/mXaE/YYc+LBeYbyGcg7lOu4zZnPSuidjRuBsqLrYBXZUVpu0sAre64+OlO0pFrIGRnnnkJ7/gESn2Po30wMtLANbqioptjCOy3SfSRjSnA+QLyXZ+BX5rn9VwQrd4147BUfieZk4kuvedyIp1IXJdaEwc0Zz5QuehXq/rAiJlqbcqaYtcipvn2z+4tySYKjSi/c7P/BWewnTdqNy8th9OpV3dqJB7MCHQ5RssJ7IvQkI/awEQFZnrC+zVqKctshYnS3ayac7qdb1p+yTLGrFvfEt3g5OYQ4l7Z4lELtJIWpFtiNkDDc47Seq7w5hZPqE9IJXFs8Bcr2E7XC2ByCrNk1NM80EEHjA7ciPutFODd4QqIxGzEbqduZ5rJB+U6OAhEao014cRdsSTfqQOOGmaqguVgO9gvSm5RPQ2eFTCE9ZHPR1JytuFoNYCuXa3Fv/S94xvM3JNCoOV8AQe/w/n0Wi4HLz/CjAA1ja5uZ79T3kAAAAASUVORK5CYII=);
+}
+
+.toggle input{
+	height: 30px;
+	left: 0;
+	margin: 0; /* Reset the margins and padding */
+	opacity: 0; /* Invisible! */
+	padding: 0;
+	position: absolute;
+	top: 0;
+	width: 70px;
+	z-index: 2; /* We want the input to be over the span.switch, which we'll give a z-index of 1 */
+		/*IE*/
+		zoom: 1;
+		filter: alpha(opacity=0);
+}
+
+
+
+
+.toggleSwitch{
+	background: #ffffff;
+	background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPHJhZGlhbEdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgY3g9IjUwJSIgY3k9IjUwJSIgcj0iNzUlIj4KICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiNmZmZmZmYiIHN0b3Atb3BhY2l0eT0iMSIvPgogICAgPHN0b3Agb2Zmc2V0PSI1MCUiIHN0b3AtY29sb3I9IiNmZWZlZmUiIHN0b3Atb3BhY2l0eT0iMSIvPgogICAgPHN0b3Agb2Zmc2V0PSI1MSUiIHN0b3AtY29sb3I9IiNmZGZkZmQiIHN0b3Atb3BhY2l0eT0iMSIvPgogICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjZmZmZmZmIiBzdG9wLW9wYWNpdHk9IjEiLz4KICA8L3JhZGlhbEdyYWRpZW50PgogIDxyZWN0IHg9Ii01MCIgeT0iLTUwIiB3aWR0aD0iMTAxIiBoZWlnaHQ9IjEwMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+	background: -moz-radial-gradient(center, ellipse cover, #ffffff 0%, #fefefe 50%, #fdfdfd 51%, #ffffff 100%);
+	background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,#ffffff), color-stop(50%,#fefefe), color-stop(51%,#fdfdfd), color-stop(100%,#ffffff));
+	background: -webkit-radial-gradient(center, ellipse cover, #ffffff 0%,#fefefe 50%,#fdfdfd 51%,#ffffff 100%);
+	background: -o-radial-gradient(center, ellipse cover, #ffffff 0%,#fefefe 50%,#fdfdfd 51%,#ffffff 100%);
+	background: -ms-radial-gradient(center, ellipse cover, #ffffff 0%,#fefefe 50%,#fdfdfd 51%,#ffffff 100%);
+	background: radial-gradient(ellipse at center, #ffffff 0%,#fefefe 50%,#fdfdfd 51%,#ffffff 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ffffff',GradientType=1 );
+	/* gradient generated by http://www.colorzilla.com/gradient-editor/ */
+
+	 -khtml-border-radius: 30px;
+	   -moz-border-radius: 30px;
+	    -ms-border-radius: 30px;
+	     -o-border-radius: 30px;
+	-webkit-border-radius: 30px;
+	        border-radius: 30px;
+	
+	
+	 -khtml-box-shadow: 0 1px 1px #65727b, 0 0 1px #b6bdc2;
+	   -moz-box-shadow: 0 1px 1px #65727b, 0 0 1px #b6bdc2;
+	    -ms-box-shadow: 0 1px 1px #65727b, 0 0 1px #b6bdc2;
+	     -o-box-shadow: 0 1px 1px #65727b, 0 0 1px #b6bdc2;
+	-webkit-box-shadow: 0 1px 1px #65727b, 0 0 1px #b6bdc2;
+	        box-shadow: 0 1px 1px #65727b, 0 0 1px #b6bdc2;
+	
+	display: block;
+	float: left;
+	height: 30px;
+	left: 0px; /* This is the starting point. When adding a border radius, a small bit of the background is shown if we use left: 0;, so -1px is best.*/
+	position: relative;
+	top: 0; /* ...To keep it centered vertically */
+	
+	 -khtml-transition: left .2s ease;
+	   -moz-transition: left .2s ease;
+	    -ms-transition: left .2s ease;
+	     -o-transition: left .2s ease;
+	-webkit-transition: left .2s ease;
+	        transition: left .2s ease;
+	
+	width: 30px;
+	z-index: 1; /* Remember, it must be below the invisible inputs */
+}
+
+.toggle.checked .toggleSwitch{
+	left:41px;
+}
+
+.toggle.checked{
+	background: #f9d781; /* Old browsers */
+	background: -moz-linear-gradient(top, #f9d781 0%, #f9c339 50%, #f8b500 51%, #f9c131 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f9d781), color-stop(50%,#f9c339), color-stop(51%,#f8b500), color-stop(100%,#f9c131)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top, #f9d781 0%,#f9c339 50%,#f8b500 51%,#f9c131 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, #f9d781 0%,#f9c339 50%,#f8b500 51%,#f9c131 100%); /* Opera11.10+ */
+	background: -ms-linear-gradient(top, #f9d781 0%,#f9c339 50%,#f8b500 51%,#f9c131 100%); /* IE10+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#F9D781', endColorstr='#F9C131',GradientType=0 ); /* IE6-9 */
+	background: linear-gradient(top, #f9d781 0%,#f9c339 50%,#f8b500 51%,#f9c131 100%); /* W3C */
+	
+	-khtml-box-shadow: none;
+	   -moz-box-shadow: none;
+	    -ms-box-shadow: none;
+	     -o-box-shadow: none;;
+	-webkit-box-shadow: none;
+	        box-shadow: none;
+}
+
+
+
+
+
+/* timer */
+
+.timer{
+	padding:5px
+}
+
+.timer_bg{
+	width:100%;
+	margin:0px auto;
+	padding:1px 0px;
+	border-radius:8px;
+	text-align:center;
+	font-size: 12px;
+	font-weight: bold;
+	background: rgb(226,226,226); /* Old browsers */
+	border:solid 1px #aaa;
+	text-shadow:1px 1px 2px #fff;
+	box-shadow: inset 0px 0px 3px rgba(0,0,0,0.3);
+	
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(252,234,187,1)), color-stop(50%,rgba(252,205,77,1)), color-stop(51%,rgba(248,181,0,1)), color-stop(100%,rgba(251,223,147,1))) 0px 0px no-repeat,
+	 			-webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(246,248,249,1)), color-stop(50%,rgba(229,235,238,1)), color-stop(51%,rgba(215,222,227,1)), color-stop(100%,rgba(245,247,249,1))) 0 0 no-repeat
+}

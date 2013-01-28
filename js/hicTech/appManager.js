@@ -89,7 +89,7 @@
             }
     
     
-            //addPageToHistory(_this.currentPage);    cio‚àö¬Æ:
+            //addPageToHistory(_this.currentPage);    cio‚Äö√†√∂¬¨√Ü:
             var pageId = _this.currentPage.attr('id');
             var pageTitle = _this.currentPage.attr('data-title');
             
@@ -3511,14 +3511,16 @@
             // input managment
             
            $("input:visible, textarea:visible").livequery(function(){
-		        var input=$(this);
-		        var eraser_offset=parseInt(input.width()-10);
-		        (input.next().get(0)) ? input.next().remove() : "";
-		        if(input.attr("type")!="checkbox" && input.attr("type")!="radio"){
-		            if(input.attr("type")!="textarea")
-		            	input.parent().append('<div class="input_eraser" style="left:'+eraser_offset+'px"></div>');
-		            
-		        }
+        	   if(!$(this).is("input[type='checkbox']") && !$(this).is("input[type='radio']")){
+			        var input=$(this);
+			        var eraser_offset=parseInt(input.width()-10);
+			        (input.next().get(0)) ? input.next().remove() : "";
+			        if(input.attr("type")!="checkbox" && input.attr("type")!="radio"){
+			            if(input.attr("type")!="textarea")
+			            	input.parent().append('<div class="input_eraser" style="left:'+eraser_offset+'px"></div>');
+			            
+			        }
+        	   }
 		    });
            
             $(".input_eraser").livequery("click",function(){
@@ -4685,7 +4687,8 @@ $(document).ready(function(){
 
 		// this prevent native scroll if scrolling gesture start from an input (this bug was fixed in iOS5)
 		$("input:visible, textarea:visible").livequery(function(){
-	        var input=$(this);
+			if(!$(this).is("input[type='checkbox']") && !$(this).is("input[type='radio']")){
+	        	var input=$(this);
 				var filter_height=parseInt(input.height()+2);
 				var eraser_offset=parseInt(input.width()-10);
 				(input.next().get(0)) ? input.next().remove() : "";
@@ -4694,6 +4697,7 @@ $(document).ready(function(){
 					if(input.attr("type")!="textarea") input.parent().append('<div class="input_eraser" style="left:'+eraser_offset+'px"></div>');
 					input.parent().prepend("<div class='input_filter' style='height:"+filter_height+"px'></div>");
 				}
+			}
 	    });
 	    
 	    $(".input_filter").livequery("click",function(e){
