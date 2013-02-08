@@ -4710,6 +4710,6 @@ $(document).ready(function(){
 	    
 	    
 	
-})
+});
 
 
