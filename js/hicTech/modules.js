@@ -42,6 +42,8 @@ function getGenericContent(obj){
 		return getButton(obj);
 	if(obj.type == "test")
 		return getTest(obj);
+	if(obj.type == "skillTestsStatusPanel")
+		return skillTestsStatusPanel(obj);
 }
 
 
@@ -222,14 +224,9 @@ function getQuestion(q,i,tot_questions){
 					ret += '<div class="confirm"><a href="#"  style="font-size:14px" class="blueButton">Conferma</a></div>';
 				ret +='</div>';
 			ret +='</li>';
-			ret +='<li>'
-				ret +='<div class="confirm_buttons" style="display:none">';
-					ret += '<div class="deny"><a href="#" style="font-size:14px" class="redButton">Annulla</a></div>';
-				ret +='</div>';
-			ret +='</li>';
 			
 			ret += '</ul>';
-			ret +='<div class="info" style="text-align:center"><font style="font-size:14px">Area Tematica: </font> '+q.thematic_area+' &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font style="font-size:14px">Complessit√†: </font> '+q.complexity+'</div>';
+			ret +='<div class="info" style="text-align:center"><font style="font-size:14px">Area Tematica: </font> '+q.thematic_area+' &nbsp;&nbsp;&nbsp;&nbsp;<font style="font-size:14px">Complessità: </font> '+q.complexity+'</div>';
 		ret +="</div>";
 	return ret;
 }
@@ -239,14 +236,45 @@ function getAnswer(a,i,j){
 				'<div class="question_li_table" style="display:table; width:100%">'+
 					'<div class="question_li_row" style="display:table-row">'+
 						'<div class="question_li_cell toggle_text" >'+ a +'</div>'+
-						'<div class="question_li_cell toggle_container">'+
-							'<div class="toggle">'+
-								'<input type="checkbox" name="toggle" value="'+ i +'_'+ j +'">'+
-							'</div>'+
-						'</div>'+
+						'<div class="question_li_cell" style="width:40px"><div class="checker"></div></div>'
+						//'<div class="question_li_cell toggle_container">'+
+							//'<div class="toggle">'+
+								//'<input type="checkbox" name="toggle" value="'+ i +'_'+ j +'">'+
+							//'</div>'+
+						//'</div>'+
 					'</div>'+
 				'</div>'+
 			'</li>';
+}
+
+
+
+
+function skillTestsStatusPanel(obj){
+	var ret ='<div class="skillTestsStatusPanel">';
+		var skillTests = obj.skillTests;
+		_.each(skillTests,function(test){
+			ret +='<div class="skillTestsStatusPanel row" data-skillTestId="'+test.id+'">'+
+				        '<div class="skillTestsStatusPanel row header">'+
+				            '<div>Nome</div>'+
+				            '<div>Difficoltà</div>'+
+				            '<div style="text-align:center">Domande</div>'+
+				        '</div>'+
+				        '<div>'+
+				            '<div>'+test.name+'</div>'+
+				            '<div>'+test.difficulty+'</div>'+
+				            '<div style="text-align:center">'+test.questions+'</div>'+
+				        '</div>'+
+				    '</div>';
+		});
+		
+    
+		    
+		    
+		   
+		    
+     ret +='</div>';
+	return ret;
 }
 
 

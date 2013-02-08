@@ -2991,12 +2991,12 @@
   			
 			$(".darkOverlay").html("");
 
-  			var ok_button='<div class="dialog_button ok">ok</div>';
+  			var ok_button='<div class="dialog_button ok">Continua</div>';
   			var deny_button="";
   			var confirm_html="";
   			var select_html="";
   			
-  			(settings.type=="confirm") ? deny_button+='<div class="dialog_button deny">no</div>' : "";
+  			(settings.type=="confirm") ? deny_button+='<div class="dialog_button deny">Abbandona</div>' : "";
 
   			if(settings.type=="confirm" || settings.type=="alert"){
   				 confirm_html+='<div class="dialog_header alert">'+settings.title+'</div><div class="dialog_body alert" id="dialog_scroller_wrapper"><div style="text-align:center" class="iscroll_dialog" id="dialog_scoller">'+settings.message+'</div></div>'+ok_button+''+deny_button;
@@ -3353,16 +3353,12 @@
                 
             var body_html=$("<div class='appml_root_div'></div>");
             body_html.append($("<div id='appML_size_tester' style='position:absolute; z-index:-1; opacity:0;filter:alpha(opacity=0);'></div>"));
+            
             if(loading_html!=null){
-              body_html.append(loading_html);
-              
-              
-           		setTimeout(function(){
-            	 $(".overlay_loading").spin(appMLconf.spinning_loading_options);
+            	body_html.append(loading_html);
+            	setTimeout(function(){
+            		$(".overlay_loading").spin(appMLconf.spinning_loading_options);
             	},200);
-            	
-            	
-            	
             }
             
             
@@ -3476,7 +3472,7 @@
         jQT.init();
         
        
-       	$(".appML_panel > *, body").addClass("bodyApp")
+       	$(".appML_panel > *, body").addClass("bodyApp");
         
         setTimeout(function(){
         	appML.start();
@@ -3680,7 +3676,7 @@
           
           	if(appMLconf.refreshOnOrientationChange){
           		if(window.history.pushState != undefined) {
-            	 location.href="index.html?initial_loading_fake_delay=20&forcedStartingPage="+this.getCurrentPageId();
+          			location.href="index.html?initial_loading_fake_delay=20&forcedStartingPage="+this.getCurrentPageId();
 	            }
 	            else{
 	            	location.href="index.html";

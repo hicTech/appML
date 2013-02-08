@@ -1,136 +1,78 @@
 	
-	function startSkillTest(question_number){
+	function startSkillTest(question_number,page_id){
+		var $page = $("#"+page_id);
 		var current_question = question_number;
 		var current_interval;
 		
-		if($(".single_question").size() == question_number){
+		lockBars(page_id);
+		
+		
+		if($page.find(".single_question").size() == question_number){
 			alert("test finito");
 		}
-		$(".single_question").hide();
-		$(".single_question").each(function(index){
+		
+		$page.find(".single_question").hide();
+		$page.find(".single_question").each(function(index){
 			var question;
 			if(index == question_number){
 				question = $(this);
 				question.show();
-				bindAnswersClick(question);
+				bindAnswersClick(question,page_id);
 				bindConfirmClick(question);
 				startCountdown(question);
-				appML.scrollable($(".skillTest") ,"null", appML.getPageWidth(), appML.getPageHeight());
+				appML.scrollable($page.find(".skillTest") ,"null", appML.getPageWidth(), appML.getPageHeight());
 			}
 				
 		});	
 		
 		function bindConfirmClick($el){
-			$el.find(".deny").click(function(){
-				$el.find("li.question_li").each(function(){
-					if($(this).is(":visible"))
-						$(this).trigger("click")
-				})
-				
-			});
-			
 			$el.find(".confirm").click(function(){
 				clearInterval(current_interval);
 				current_interval = null;
-				startSkillTest(current_question+1);
+				startSkillTest(current_question+1,page_id);
 			});
 		}
 		
 		function bindAnswersClick($el){
 			$el.find(".question").each(function(){
-				var $toggles = $(this).find(".toggle");
-				var $inputs = $toggles.find(".checked input");
-				var $lis = $(this).find(".question_li");
-				var $confirm_buttons = $(this).find(".confirm_buttons");
-				
-				$toggles.append("<div class='toggleSwitch'></div><div class='true_or_false'></div>")
-				$inputs.attr("checked","checked");
-				
-				$lis.click(function(event){
-					event.stopPropagation();
-					toggleClicked($(this).find(".toggle"));
-				})
-				
-				var in_esecution = false;
-				function toggleClicked(el){
-					if(el.find("input").attr("disabled"))
-						return false;
-					
-					if(in_esecution)
-						return false;	
-					in_esecution = true;
-					
-					if(el.is(".checked")){
-						uncheckIt(el);
-						anbleTheOthers(el);
-					}
-					else{
-						checkIt(el);
-						disableTheOthers(el);
-					}
-					setTimeout(function(){in_esecution = false},500)
+				if($(this).is(".processed"))
+					return false;
+				else{
+					$(this).addClass("processed");
+					thisClicked($el);	
 				}
 				
-				function disableTheOthers(el){
-					/*
-					$toggles.each(function(){
-						if( $(this).find("input").val() != el.find("input").val() )
-							disableIt($(this));
-					});
-					*/
-					$confirm_buttons.show();
-					$lis.each(function(){
-						if( $(this).find("input").val() != el.find("input").val() )
-							$(this).hide();
-						
-					});
-					
-				}
-				
-				function disableIt(el){
-					el.css("opacity","0.6");
-					el.find("input").attr("disabled", true);
-				}
-				
-				function anableIt(el){
-					el.css("opacity","1");
-					el.find("input").removeAttr("disabled");
-				}
-				
-				function anbleTheOthers(el){
-					$confirm_buttons.hide();
-					$toggles.each(function(){
-						if(el.html() != $(this).html())
-							$(this).parents(".question_li").show();
-							//anableIt($(this));
-					});
-				}
-				
-				function disableAll(){
-					$toggles.each(function(){
-						disableIt($(this));
-					});
-				}
-				
-				function checkIt(el){
-					var s = el.find(".toggleSwitch");
-					var input = el.find("input");
-					s.css({"left" : "41px"});
-					el.addClass("checked");
-					input.addClass("checked");
-					el.parents("li.question_li").find(".toggle_text").css("color","#f8b606");
-				}
-				
-				function uncheckIt(el){
-					var s = el.find(".toggleSwitch");
-					var input = el.find("input");
-					s.css({"left" : "0px"});
-					el.removeClass("checked");
-					input.removeClass("checked");
-					el.parents("li.question_li").find(".toggle_text").css("color","#fff")
-				}
 				
 			});
+			
+			function thisClicked($el){
+
+					
+					$el.find(".question_li").click(function(event){
+						if($(this).is(".selected")){
+							resetAll();
+						}
+						else{
+							uncheckAll();
+							$(this).addClass("selected").removeClass("unselected");
+						}
+					});
+				
+			}
+			
+			function uncheckAll(){
+				$el.find(".question_li").each(function(){
+					$(this).removeClass("selected").addClass("unselected");
+					
+				});
+			}
+			
+			function resetAll(){
+				$el.find(".question_li").each(function(){
+					$(this).removeClass("selected").removeClass("unselected");
+					
+				});
+			}
 		}
 		
 		
@@ -163,7 +105,44 @@
 			}
 		}
 
+
 		
+	}
+	
+	
+	
+	
+	
+	
+
+	
+	function lockBars(page_id){
+		$("#appML_navigation_bar").append('<div class="lockBG navBarLock" onClick="blockThisSkillTest('+page_id+')"><div class="layer layer1"></div><div class="layer layer2"></div><div class="layer layer3"></div><div class="lockBG_text">Il test è partito, sfiora questa barra per interromperlo</div></div>');
+		       $("#appML_toolbar").append('<div class="lockBG toolBarLock" onClick="blockThisSkillTest('+page_id+')"><div class="layer layer1"></div><div class="layer layer2"></div><div class="layer layer3"></div><div class="lockBG_text">Il test è partito, sfiora questa barra per interromperlo</div></div>');
+		
+	}
+	
+	function unlockBars(){
+		$("#appML_navigation_bar").find(".lockBG").remove();
+		$("#appML_toolbar").find(".lockBG").remove();
+	}
+	
+	function blockThisSkillTest(page_id){
+		var opt = {
+				type                   : "confirm", 
+  				confirmCallback		   : function(){return true},
+  				denyCallback		   : function(){leaveThisSkillTest(page_id)},
+  				title				   : "Attenzione",
+  				message				   : "Abbandonando il test verranno confermate le sole domande a cui hai risposto fino qui. Le altre domande verranno sottomesse senza alcune risposta",
+  				select_options	       : "no options in this select"
+		};
+		
+		appML.appManagerShowDialog(opt);
+		
+		function leaveThisSkillTest(page_id){
+			unlockBars();
+			appML.goTo("#skillTestHomePage","flip");
+		}
 	}
 	
 

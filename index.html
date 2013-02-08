@@ -273,15 +273,7 @@ function appMLReady() {
 	
 	$("#appML_content").find(".appML_page:visible").livequery(function(){
 		var id = $(this).attr("id");
-		if(appMLconf.forcedStartingPage){
-			setTimeout(function(){
-				animateContentPage();
-				executeAutomaticScroll(id);
-			},1300)
-		}
-		else{
-			automaticScroll(id);
-		}
+		automaticScroll(id);
 	})
 	
 	
@@ -327,7 +319,9 @@ function appMLReady() {
 		downloadImages($page);
 		bindButtonClick($page);
 		executeAutomaticCarousel($page);
+		executeAutomaticSkilltest($page);
 		executeAutomaticMap($page);
+		
 
 	}
 	
@@ -382,20 +376,22 @@ function appMLReady() {
 	}
 	
 	function bindButtonClick($elem){
-		
 		$elem_button = $elem.find(".whiteButton");
 		
-		var linked_page = $elem_button.attr("data-linked_page_id");
-		if(appML.getEnviroment().isIDevice){
-			$elem_button.bind("tap",function(){
-				appML.goTo("#"+linked_page,"flip");
-			})
-		}
-		else{
-			$elem_button.click(function(){
-				appML.goTo("#"+linked_page,"slide");
-			})
-		}
+		$elem_button.each(function(){
+			var linked_page = $(this).attr("data-linked_page_id");
+			if(appML.getEnviroment().isIDevice){
+				$(this).bind("tap",function(){
+					appML.goTo("#"+linked_page,"flip");
+				})
+			}
+			else{
+				$(this).click(function(){
+					appML.goTo("#"+linked_page,"slide");
+				})
+			}
+		})
+		
 		
 	}
 
@@ -415,13 +411,18 @@ function appMLReady() {
 	
 	
 	
-	
-	
-	
-	appML.onPage("skillTest", function (page_id) {
-		startSkillTest(0);
-	});
-	
+	function executeAutomaticSkilltest($page){
+		$page.find(".row").click(function(){
+			var page_id = $(this).attr("data-skillTestId");
+			appML.goTo("#"+page_id);
+			appML.onPage(page_id, function (page_id) {
+				startSkillTest(0,page_id);
+			});
+		})
+	}
+
+		
+
 }
 
 </script>

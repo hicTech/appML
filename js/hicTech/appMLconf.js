@@ -1,11 +1,4 @@
-/* url parameters request*/
-var urlParameters = [], hash;
-var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
-for(var i = 0; i < hashes.length; i++){
-    hash = hashes[i].split('=');
-    urlParameters.push(hash[0]);
-    urlParameters[hash[0]] = hash[1];
-}
+
     
 /* default options */
 var appMLconf = {
@@ -37,3 +30,50 @@ var appMLconf = {
 	forcedStartingPage: false
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* url parameters request*/
+
+/*
+var urlParameters = [], hash;
+var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+for(var i = 0; i < hashes.length; i++){
+    hash = hashes[i].split('=');
+    urlParameters.push(hash[0]);
+    urlParameters[hash[0]] = hash[1];
+}
+
+per la gestione dei parametri passati come url era prevista questa ulteriore funzione
+nell'appMLReady nell'index
+
+$("#appML_content").find(".appML_page:visible").livequery(function(){
+		var id = $(this).attr("id");
+		if(appMLconf.forcedStartingPage){
+			setTimeout(function(){
+				animateContentPage();
+				executeAutomaticScroll(id);
+			},1300)
+		}
+		else{
+			automaticScroll(id);
+		}
+	})
+
+
+
+*/
