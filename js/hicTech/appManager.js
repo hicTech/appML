@@ -1962,7 +1962,7 @@
 
             if(isAppMLAutoFilled("appML_toolbar")){
                 var html_toolbar="<div class='appML_toolbar_content' data-href='"+url+"' style='width:"+width+"%'>"+                    
-                                    "<div class='appML_toolbar_icon'><img style='margin:2px 0px 0px 0px;' src='"+toolbar_icon_path+"/toolbar_icons/icons_off/"+icon+"' /></div>"+
+                                    "<div class='appML_toolbar_icon'><img style='margin:-2px 0px 0px 0px; width:30px; height:30px' src='"+toolbar_icon_path+"/toolbar_icons/icons_off/"+icon+"' /></div>"+  /*  */
                                     "<div class='appML_toolbar_label'><font>"+title+"</font></div>"+  
                                 "</div>";
                 $("#appML_toolbar").append($(html_toolbar));
@@ -3227,10 +3227,10 @@
 	    		nav_div+=""//"<div class='carousel_prev'>&larr; prev</div>";
 	    		
 		    	if(elems.length<18){
-		    		nav_div+="<ul class='carousel_indicator white' style='margin: 0px auto;width: "+elems.length*15+"px'>";
+		    		nav_div+="<ul class='carousel_indicator white' style='margin: 12px auto;width: "+elems.length*13+"px'>";
 		    	}
 		    	else{
-		    		nav_div+="<ul class='carousel_indicator white' style='margin: 0px auto;width: "+elems.length*7+"px'>";
+		    		nav_div+="<ul class='carousel_indicator white' style='margin: 12px auto;width: "+elems.length*7+"px'>";
 		    	}
 		    	var sel_index=1;
 		    	for(i=1;i<=elems.length;i++)

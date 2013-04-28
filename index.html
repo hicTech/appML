@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
-<title>appML</title>
+<title>TM - mobile</title>
 
 <link href="packaging/favicon.ico" rel="shortcut icon">
 <meta content="yes" name="apple-mobile-web-app-capable">
@@ -21,7 +21,7 @@
 <!-- iPhone SPLASHSCREEN-->
 <link href="packaging/iPhone/apple-touch-startup-image-320x460.png" media="(device-width: 320px)" rel="apple-touch-startup-image">
 <!-- iPhone (Retina) SPLASHSCREEN-->
-<link href="packaging/iPhone-retina/apple-touch-startup-image-320x460.png" media="(device-width: 320px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image">
+<link href="packaging/iPhone-retina/apple-touch-startup-image-640x1096.png" media="(device-width: 320px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image">
 <!-- iPad (portrait) SPLASHSCREEN-->
 <link href="packaging/iPad-portrait/apple-touch-startup-image-768x1004.png" media="(device-width: 768px) and (orientation: portrait)" rel="apple-touch-startup-image">
 <!-- iPad (landscape) SPLASHSCREEN-->
@@ -29,7 +29,7 @@
 
 
 <link rel="stylesheet" href="css/general/appML.css"/>
-<style type="text/css" media="all">@import "css/themes/ht/theme.css";</style>
+<style type="text/css" media="all">@import "css/themes/tm/theme.css";</style>
 
 <script type="text/javascript" charset="utf-8" src="js/jquery/jquery-1.7.1-appMLversion.js"></script>
 <script type="text/javascript" charset="utf-8" src="js/plugins/livequery/jquery.livequery-1.0.3.js"></script>
@@ -74,28 +74,7 @@ function appMLReady() {
 	
 	
 	
-	
-	
-	$('#overlay_alert').bind('click', function (e, data) {
-		appML.appManagerShowDialog({
-			message: "<div style='padding:3px 10px 3px 10px'>This is a custom scrollable alert box!<br/><font style='font-size:17px'>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</font></div>",
-			title: "Alert"
-		});
-	});
-	
-	$('#overlay_confirm').bind('click', function (e, data) {
-		appML.appManagerShowDialog({
-			message: "<div style='text-align:center'>This is a custom confirm box with callbacks and scroll area</div>",
-			type: "confirm",
-			denyCallback: function () {
-				alert("denyCallback")
-			},
-			confirmCallback: function () {
-				alert("confirmCallback")
-			},
-			title: "Confirm"
-		});
-	});
+
 	
 	$("#mapContainer:visible").livequery(function () {
 		$('#map').css("width", appML.getPageWidth());
@@ -117,45 +96,7 @@ function appMLReady() {
 		});
 	});
 	
-	$('#load_indicator').bind('click', function (e, data) {
-		appML.appManagerShowLoading();
-		setTimeout(function () {
-			appML.appManagerHideLoading();
-		}, 5000)
-	});
-
-	function printEnviromentData() {
-		var env = appML.getEnviroment();
-		var enviroment_html = "<div id='enviroment_page' style='padding:10px 8px'>" + "<ul class='plastic'>" + "<li><div>orientation</div><div>" + appML.getOrientation() + "</div></li>" + "<li><div>is apple device</div><div>" + env.isIDevice + "</div></li>" + "<li><div>is iPad</div><div>" + env.isIPad + "</div></li>" + "<li><div>has retina display</div><div>" + env.isRetina + "</div></li>" + "<li><div>is stand alone</div><div>" + env.isStandalone + "</div></li>" + "<li><div>iOS version</div><div>" + env.OSVersion + "</div></li>" + "<li><div>has homescreen</div><div>" + env.hasHomescreen + "</div></li>" + "<li><div>platform</div><div>" + env.platform + "</div></li>" + "<li><div>language</div><div>" + env.language + "</div></li>" + "<li><div>Current width</div><div>" + env.windowWidth + "</div></li>" + "<li><div>Current height</div><div>" + env.windowHeight + "</div></li>" + "<li><div>Has consolebar</div><div>" + env.hasConsolebar + "</div></li>" + "<li><div>Accelerometer X</div><div><span id=accelerationX></span></div></li>" + "<li><div>Accelerometer Y</div><div><span id=accelerationY></span></div></li>" + "<li><div>Accelerometer Z</div><div><span id=accelerationZ></span></div></li>" + "</ul>" + "</div>";
-		$("#enviroment_data_c").html(enviroment_html);
-		$("#refreshData").click(function () {
-			printEnviromentData();
-		});
-		if (window.DeviceMotionEvent != undefined) {
-			var x_display = $("#accelerationX");
-			var y_display = $("#accelerationY");
-			var z_display = $("#accelerationZ");
-			window.ondevicemotion = function (e) {
-				x_display.html(e.accelerationIncludingGravity.x)
-				y_display.html(e.accelerationIncludingGravity.y)
-				z_display.html(e.accelerationIncludingGravity.z)
-				//console.log("we")
-			}
-		}
-	}
 	
-	appML.onPage("enviroment", function () {
-		printEnviromentData();
-		appML.scrollable($("#enviroment_page"), "null", appML.getPageWidth(), appML.getPageHeight())
-	});
-	
-	appML.onPage("page_listener", function (page_id) {
-		alert("this is an onPage listener");
-	});
-	
-	appML.offPage("page_listener", function (page_id) {
-		alert("this is a offPage listener");
-	});
 	
 	$('#dyn_page_button').bind('click', function () {
 		appML.appManagerShowLoading();
@@ -178,82 +119,6 @@ function appMLReady() {
 			});
 		}, 2500)
 	});
-	
-	
-	
-	appML.addPullListener("pull_down_container", function () {
-		alert("pulldown")
-	}, true, null, 100);
-	
-	$('#searchbar_button').bind('click', function (e, data) {
-		appML.appManagerShowSearchBar();
-	});
-	
-	$("#ok_search").click(function (event) {
-		alert("implement your search function for '" + $("#search").val() + "'")
-	});
-	
-	$("#make_carousel").click(function (event) {
-		appML.makeCarousel($("#dynamic_carousel"), "console.log('fatto carousel!')", 260, 130, false);
-		appML.addCarouselListener(function (id, position, selected_elem, horizontal, other_position) {
-			if (id == "dynamic_carousel") {
-				var mess = "Carousel " + id + " snapped to position " + position;
-				if (horizontal) mess += " (horizontally)";
-				else mess += " (vertically)";
-				console.log(mess);
-			}
-		});
-	});
-	
-	$("#add_item").click(function (event) {
-		$("#dynamic_carousel").find("ul").append($("<li>new item</li>"));
-		appML.refreshCarousel("#dynamic_carousel", "console.log('refreshato carousel!');");
-	});
-	
-	$("#snapNext").click(function (event) {
-		appML.snapToNext("dynamic_carousel")
-	});
-	
-	$("#snapPrev").click(function (event) {
-		appML.snapToPrev("dynamic_carousel");
-	});
-	
-	$("#snapTo3").click(function (event) {
-		appML.snapTo("dynamic_carousel", 2, 0);
-	});
-	
-	
-	setInterval(function(){
-		//appML.scrollable($("#list"), 'alert("fatto")', appML.getPageWidth(), appML.getPageHeight())
-
-	},3000);
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	

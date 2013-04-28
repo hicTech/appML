@@ -95,7 +95,7 @@ function getMenu(obj){
 	var html = '<ul class="arrow_list">'+
 				'<li class="box_title">'+ obj.title +'</li>';
 				for(i in obj.items)
-					html += '<li class="'+ obj.items[i].className +'" data-page-link="'+obj.items[i].linked_page_id+'"><a>'+ obj.items[i].label +'</a></li>'
+					html += '<li class="'+ obj.items[i].className +'" data-page-link="'+obj.items[i].linked_page_id+'" ><img style="float:left; width:55px" src="'+obj.items[i].icon_path+'" /><a style="float:left; margin:6px; width:70%">'+ obj.items[i].label +'</a></li>'
 		  html += '</ul>';
 	return html;
 }
@@ -106,7 +106,9 @@ function getParagraph(obj){
 }
 
 function getButton(obj){
-	return '<p><br><a href="#" data-linked_page_id="'+obj.linked_page_id+'" class="whiteButton">'+obj.label+'</a><br></p>';	
+	var button_class = (obj.classButton != undefined ) ? obj.classButton : "whiteButton";
+	var href = (obj.telTo != undefined) ? "tel:"+obj.telTo : (obj.mailTo != undefined) ? "mailto:"+obj.mailTo : "#";
+	return '<p><br><a href="'+href+'" data-linked_page_id="'+obj.linked_page_id+'" class="'+button_class+'">'+obj.label+'</a><br></p>';	
 }
 
 function getCarousel(obj){

@@ -60,7 +60,7 @@ background: -webkit-linear-gradient(top, rgba(246,248,249,1) 0%,rgba(229,235,238
 	width:100%;
 	height:5%;
 	color:#eee;
-	font-size:20px;
+	font-size:15px;
 	text-align:center;
 	height:45px;
 	padding-top:10px;
@@ -68,7 +68,7 @@ background: -webkit-linear-gradient(top, rgba(246,248,249,1) 0%,rgba(229,235,238
 
 #appML_navigation_bar div {
 	width:100%;
-	margin:0px auto;
+	margin:1px auto;
 	color:#f3f3f3;
 	text-decoration:none;
 	font-weight:bold;
@@ -77,7 +77,7 @@ background: -webkit-linear-gradient(top, rgba(246,248,249,1) 0%,rgba(229,235,238
 
 #appML_navigation_bar div div {
 	position:absolute;
-	overflow: hidden
+	overflow: hidden;
 }
 
 
@@ -103,7 +103,7 @@ background: -webkit-linear-gradient(top, rgba(246,248,249,1) 0%,rgba(229,235,238
 }
 
 .appML_toolbar_label{
-	margin:-4px 0px 0px 4px;
+	margin:0px 0px 0px 6px;
 	color:#999;
 	text-shadow:0 -1px 0 #000;
 	text-align:center
@@ -1182,27 +1182,27 @@ a {
 
 .carousel_indicator > li {
 	text-indent:-9999em;
-	width:6px; height:6px;
-	-webkit-border-radius:3px;
+	width:8px; height:8px;
+	-webkit-border-radius:4px;
 	background:#999;
 	overflow:hidden;
 	margin-right:4px;
 }
 
 .carousel_indicator > li.selected {
-	background:#444;
+	background:#f73c3c;
 }
 
 
 
 .carousel_indicator > li:last-child {
 	
-	-webkit-border-radius:3px;
+	-webkit-border-radius:4px;
 }
 .carousel_indicator > li:first-child {
 	text-indent:-9999em;
-	width:6px; height:6px;
-	-webkit-border-radius:3px;
+	width:8px; height:8px;
+	-webkit-border-radius:4px;
 	overflow:hidden;
 	margin-right:4px;
 	margin-left:10px
